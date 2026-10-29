@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Um livro curto, feito para ler no celular. E tem uma aposta de 100 reais lá dentro.">
+<meta property="og:type" content="book">
+<meta property="og:title" content="O melhor livro do mundo?">
+<meta property="og:description" content="Um livro curto, feito para ler no celular. E tem uma aposta de 100 reais lá dentro.">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#f2f4f0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e151b" media="(prefers-color-scheme: dark)">
+<meta property="og:url" content="https://ppdocrime.github.io/melhor-livro/">
+<meta property="og:image" content="https://ppdocrime.github.io/melhor-livro/capa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<title>O melhor livro do mundo?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&display=swap">
+<style>
+/* Layout: folhetim, não feed. Uma coluna de leitura como um caderno de campo cartográfico.
+   Prólogo na primeira tela; mapa-trilha abre de baixo; 16 capítulos curtos em 5 partes;
+   cada capítulo: escala de leitura, pergunta, cena, argumento, objeção, "Confira", "Em uma frase", ponte. */
+:root{
+  --paper:#f2f4f0;
+  --paper-2:#e7ebe5;
+  --ink:#16212a;
+  --muted:#56646c;
+  --rule:#cdd5cd;
+  --accent:#1b5c87;
+  --accent-tint:#dce7ee;
+  --on-accent:#ffffff;
+  --contour:#8a5a2c;
+  --good:#2f6b3a;
+  --topo:rgba(27,92,135,.18);
+  --scrim:rgba(14,21,27,.45);
+  --font-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --font-body:"Literata",Georgia,"Times New Roman",serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0e151b; --paper-2:#14202a; --ink:#e2e8e4; --muted:#97a4ab; --rule:#25323b;
+    --accent:#7ab6dc; --accent-tint:#15283a; --on-accent:#0e151b; --contour:#d39b66; --good:#7cc489;
+    --topo:rgba(122,182,220,.16); --scrim:rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0e151b; --paper-2:#14202a; --ink:#e2e8e4; --muted:#97a4ab; --rule:#25323b;
+  --accent:#7ab6dc; --accent-tint:#15283a; --on-accent:#0e151b; --contour:#d39b66; --good:#7cc489;
+  --topo:rgba(122,182,220,.16); --scrim:rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.7;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+body.sheet-open{overflow:hidden}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+button{font:inherit;color:inherit}
+
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:37rem;margin-inline:auto}
+.col-wide{max-width:46rem;margin-inline:auto}
+.label{font-family:var(--font-mono);font-size:12px;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--contour);margin:0}
+
+/* ---------- Barra do topo ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.topbar .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:9px 7px}
+.now{font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.now b{font-weight:500;color:var(--ink)}
+.bar-right{display:flex;align-items:center;gap:12px;flex:none}
+.left-txt{font-family:var(--font-mono);font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.map-btn{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:none;border:1px solid var(--accent);border-radius:2px;padding:4px 9px;cursor:pointer}
+.segs{display:flex;gap:2px;padding-bottom:7px}
+.segs i{flex:1;height:3px;background:var(--rule)}
+.segs i.read{background:var(--accent)}
+.segs i.cur{background:linear-gradient(90deg,var(--accent) 50%,var(--rule) 50%)}
+
+/* ---------- Abertura ---------- */
+.hero{position:relative;overflow:hidden}
+#topo-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
+  -webkit-mask-image:linear-gradient(105deg,transparent 18%,#000 72%);mask-image:linear-gradient(105deg,transparent 18%,#000 72%)}
+.hero-in{position:relative;padding-block:34px 18px}
+.hero .label{margin-bottom:16px}
+h1{font-family:var(--font-display);font-stretch:72%;font-weight:780;font-size:clamp(2.7rem,11.5vw,5.2rem);line-height:.94;letter-spacing:-.005em;margin:0 0 20px;max-width:11ch;text-wrap:balance}
+.provoke{font-size:1.2rem;line-height:1.45;font-weight:620;margin:0 0 14px;max-width:31em;text-wrap:pretty}
+.byline{font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;color:var(--muted);margin:0}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-stretch:88%;font-weight:650;font-size:1rem;line-height:1.2;padding:11px 16px;border:1px solid var(--accent);border-radius:2px;text-decoration:none;background:var(--accent);color:var(--on-accent);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+[hidden]{display:none!important}
+.resume{margin:4px 0 14px;padding:12px 14px;border:1px solid var(--accent);background:var(--accent-tint);display:grid;gap:4px;text-decoration:none;color:var(--ink)}
+.resume b{font-family:var(--font-display);font-stretch:88%;font-weight:650;font-size:1.05rem;color:var(--accent)}
+.resume span{font-size:.92rem;color:var(--muted)}
+
+/* ---------- Prólogo, partes, capítulos ---------- */
+.prologue{padding-block:26px 0;border-top:1px solid var(--rule);scroll-margin-top:calc(env(safe-area-inset-top,0px) + 56px)}
+.prologue h2,.chapter h2{font-family:var(--font-display);font-stretch:76%;font-weight:760;font-size:clamp(2.1rem,8.5vw,3rem);line-height:1;letter-spacing:-.005em;margin:6px 0 26px;text-wrap:balance}
+.orient{margin:30px 0 0;padding:16px 18px;background:var(--paper-2);border:1px solid var(--rule)}
+.orient p{margin:0 0 .8em}
+.orient p:last-child{margin-bottom:0}
+.orient .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+
+.part{padding-block:104px 0;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 56px)}
+.part-n{display:block;font-family:var(--font-display);font-stretch:70%;font-weight:800;font-size:clamp(3.6rem,17vw,5.2rem);line-height:.9;color:var(--accent);margin:10px 0 12px}
+.part-title{font-family:var(--font-display);font-stretch:82%;font-weight:720;font-size:1.65rem;line-height:1.1;margin:0 0 8px;text-wrap:balance}
+.part-sub{color:var(--muted);margin:0 0 12px}
+.part-note{margin:18px 0 0;padding:14px 16px;border-left:3px solid var(--contour);background:var(--paper-2)}
+.part-note p{margin:0 0 .7em}.part-note p:last-child{margin:0}
+.part-end{border-bottom:3px double var(--rule);padding-bottom:20px}
+#nota-mapa{margin-top:64px;margin-bottom:0}
+.aparte{display:block;margin-top:4px;font-size:.78rem;color:var(--muted);font-style:italic}
+.part + .chapter{padding-top:44px}
+
+.chapter{padding-block:80px 0;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 56px)}
+.ch-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--rule);font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.scale{display:inline-flex;align-items:center;gap:8px;color:var(--contour);font-variant-numeric:tabular-nums}
+.scale i{display:inline-flex;font-style:normal}
+.scale i span{width:12px;height:6px;border:1px solid var(--contour)}
+.scale i span+span{margin-left:-1px}
+.scale i span:nth-child(odd){background:var(--contour)}
+.ask{font-style:italic;color:var(--accent);font-size:1.15rem;line-height:1.4;margin:0 0 4px;text-wrap:balance}
+.ate-aqui{margin:0 0 24px;padding:12px 14px;border:1px dashed var(--accent);font-size:.95rem}
+.ate-aqui p{margin:0 0 6px}.ate-aqui ul{margin:0;padding-left:1.1em}.ate-aqui li{margin:0 0 4px}
+
+.ch-body p,.prologue p{margin:0 0 1.1em;hyphens:auto;text-wrap:pretty}
+.ch-body p.lede,.prologue p.lede{font-size:1.14em;line-height:1.6}
+.ch-body h3{font-family:var(--font-display);font-stretch:86%;font-weight:700;font-size:1.35rem;line-height:1.2;margin:2em 0 .6em;text-wrap:balance}
+.ch-body ul,.ch-body ol{margin:0 0 1.2em;padding-left:1.15em}
+.ch-body li{margin-bottom:.6em;padding-left:.2em}
+.ch-body li::marker{color:var(--contour)}
+strong{font-weight:650}
+.ch-body ul.quotes{list-style:none;padding:0;margin:0 0 1.3em}
+.ch-body ul.quotes li{font-family:var(--font-display);font-stretch:88%;font-weight:620;font-size:1.25rem;line-height:1.3;padding:10px 0 10px 16px;margin:0;border-left:2px solid var(--rule)}
+.keep{font-family:var(--font-mono);font-size:13px;line-height:1.5;color:var(--contour);border-top:1px solid var(--rule);padding-top:10px;margin-top:1.6em}
+
+.objection{margin:34px 0;padding-top:14px;border-top:2px solid var(--contour)}
+.objection .label{margin-bottom:8px}
+.objection .obj-q{font-family:var(--font-display);font-stretch:88%;font-weight:650;font-size:1.18rem;line-height:1.3;margin:0 0 12px;text-wrap:balance}
+.objection p:last-child{margin-bottom:0}
+.objection + .objection{margin-top:8px}
+
+details.deep{margin:28px 0;border:1px solid var(--rule);background:var(--paper)}
+details.deep summary{cursor:pointer;padding:14px 16px;font-family:var(--font-display);font-stretch:88%;font-weight:650;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.deep summary::-webkit-details-marker{display:none}
+details.deep summary::after{content:"+";color:var(--accent);font-family:var(--font-mono)}
+details.deep[open] summary::after{content:"−"}
+details.deep .deep-in{padding:0 16px 6px}
+
+.confira{margin:34px 0;padding:16px 16px 14px;background:var(--paper-2);border:1px solid var(--rule)}
+.confira .label{margin-bottom:6px}
+.confira .q{font-family:var(--font-display);font-stretch:90%;font-weight:620;font-size:1.1rem;line-height:1.3;margin:0 0 12px}
+.opts{display:grid;gap:8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--rule);background:var(--paper);border-radius:2px;cursor:pointer;font-size:.98rem;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-tint)}
+.opt.right{border-color:var(--good)}
+.fb{margin:12px 0 0;font-size:.95rem;line-height:1.5}
+.fb b{color:var(--good)}
+
+.gen{font-style:italic;color:var(--muted);border-left:2px solid var(--rule);padding-left:12px}
+
+.legend{margin:36px 0 0;padding:14px 18px 14px;background:var(--paper-2);border:1px solid var(--rule)}
+.legend .label{margin-bottom:6px}
+.legend p.key{margin:0 0 10px;font-family:var(--font-display);font-stretch:90%;font-weight:620;font-size:1.32rem;line-height:1.26;text-wrap:balance;hyphens:manual}
+.copy{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--rule);color:var(--muted);padding:5px 9px;border-radius:2px;cursor:pointer}
+.ch-body p.bridge{margin-top:1.6em;padding-top:1.3em;border-top:1px dashed var(--rule);font-style:italic}
+.ch-body p.bridge + p.bridge{margin-top:.8em;padding-top:0;border-top:0}
+.next{display:grid;gap:4px;margin-top:26px;padding:16px 18px;border:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+.next:hover{background:var(--paper-2);border-color:var(--accent)}
+.next .label span{color:var(--muted)}
+.next .q{font-family:var(--font-display);font-stretch:88%;font-weight:650;font-size:1.15rem;line-height:1.25}
+.next .q::after{content:"  →";color:var(--accent)}
+
+/* ---------- Tabelas e figuras ---------- */
+.tbl{overflow-x:auto;margin:26px 0 30px}
+.tbl table{width:100%;border-collapse:collapse;font-size:.93rem;line-height:1.4}
+.tbl th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--muted);text-align:left;padding:0 12px 8px 0;border-bottom:1px solid var(--ink);vertical-align:bottom}
+.tbl td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl td.yes{color:var(--accent);font-weight:650}
+.tbl td.no{color:var(--contour);font-weight:650}
+.tbl td.row-h{font-weight:650}
+.fig{margin:30px 0 34px}
+.fig svg{display:block;width:100%;max-width:400px;height:auto;margin-inline:auto;font-family:var(--font-mono);overflow:visible}
+.fig figcaption{font-size:.88rem;line-height:1.5;color:var(--muted);font-style:italic;margin-top:14px;text-wrap:pretty}
+.fig .bx{fill:var(--paper);stroke:var(--ink);stroke-width:1}
+.fig .bx-ac{fill:var(--accent-tint);stroke:var(--accent);stroke-width:1.5}
+.fig .bx-off{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+.fig .ln{stroke:var(--ink);stroke-width:1.2;fill:none}
+.fig .ln-ac{stroke:var(--accent);stroke-width:1.5;fill:none}
+.fig .ln-mut{stroke:var(--rule);stroke-width:1;fill:none}
+.fig .ln-strike{stroke:var(--muted);stroke-width:1}
+.fig .ah{fill:var(--ink)}
+.fig .t{fill:var(--ink);font-size:11px}
+.fig .t-s{font-size:10px}
+.fig .t-ac{fill:var(--accent);font-weight:500}
+.fig .t-mut{fill:var(--muted)}
+
+/* ---------- Interações ---------- */
+.w{margin:30px 0 34px;padding:16px;border:1px solid var(--accent);background:var(--paper)}
+.w .label{margin-bottom:8px}
+.w-title{font-family:var(--font-display);font-stretch:88%;font-weight:680;font-size:1.15rem;line-height:1.25;margin:0 0 10px}
+.w p{margin:0 0 .8em}
+.w-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.w-btn{padding:10px 14px;border:1px solid var(--accent);background:var(--paper);color:var(--accent);border-radius:2px;cursor:pointer;font-family:var(--font-display);font-stretch:90%;font-weight:620;font-size:1rem}
+.w-btn[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.w-btn:disabled{opacity:.45;cursor:default}
+.w-phrase{font-family:var(--font-display);font-stretch:85%;font-weight:700;font-size:1.35rem;line-height:1.3;letter-spacing:.04em;text-align:center;padding:18px 10px;border:1px solid var(--rule);background:var(--paper-2);margin:6px 0 12px}
+.w-word{font-family:var(--font-display);font-stretch:80%;font-weight:760;font-size:2.4rem;text-align:center;padding:22px 0;min-height:3.4em}
+.w-num{display:flex;justify-content:space-between;border-bottom:1px solid var(--rule);padding:6px 0;margin:0;font-variant-numeric:tabular-nums}
+.w-num b{font-family:var(--font-mono);font-weight:500}
+.w-out{font-family:var(--font-display);font-stretch:90%;font-weight:680;font-size:1.25rem;text-align:center;padding:16px 8px;border:1px dashed var(--rule);margin:10px 0}
+.w-out.pulse{animation:pulse .5s ease}
+@keyframes pulse{from{background:var(--accent-tint)}to{background:transparent}}
+@media (prefers-reduced-motion: reduce){ .w-out.pulse{animation:none} }
+.w-tally{font-family:var(--font-mono);font-size:13px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.w textarea{width:100%;min-height:4.2em;padding:10px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);font:inherit;font-size:1rem;border-radius:2px}
+.w-note{font-size:.88rem;color:var(--muted);font-style:italic}
+.bet-row{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.bet-row .s{font-family:var(--font-display);font-stretch:90%;font-weight:620;font-size:1.08rem}
+.bet-row .ans{font-size:.93rem;line-height:1.45}
+
+/* ---------- Mapa (folha que abre de baixo) ---------- */
+.sheet{position:fixed;inset:0;z-index:40}
+.sheet-backdrop{position:absolute;inset:0;background:var(--scrim)}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;max-height:86%;overflow:auto;background:var(--paper);border-top:2px solid var(--accent);padding:16px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:37rem;margin:0 auto 6px}
+.sheet-head h2{font-family:var(--font-display);font-stretch:80%;font-weight:760;font-size:1.6rem;margin:0}
+.sheet-close{background:none;border:1px solid var(--rule);padding:6px 10px;border-radius:2px;cursor:pointer;font-family:var(--font-mono);font-size:12px}
+.trail{list-style:none;margin:0 auto;padding:0;max-width:37rem}
+.trail .region{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--contour);padding:18px 0 6px 34px}
+.trail a{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:9px 0 9px 34px;text-decoration:none;color:var(--ink)}
+.trail a::before{content:"";position:absolute;left:10px;top:0;bottom:0;border-left:2px dashed var(--rule)}
+.trail a::after{content:"";position:absolute;left:4px;top:15px;width:12px;height:12px;border-radius:50%;border:2px solid var(--muted);background:var(--paper)}
+.trail a.read::after{background:var(--accent);border-color:var(--accent)}
+.trail a.cur::after{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+.trail .q{font-family:var(--font-display);font-stretch:88%;font-weight:620;font-size:1.02rem;line-height:1.25}
+.trail .t{grid-column:1;font-size:.86rem;font-style:italic;color:var(--muted);line-height:1.35}
+.trail .m{grid-column:2;grid-row:1;font-family:var(--font-mono);font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* ---------- Fim ---------- */
+.open .ch-body ul.oq{list-style:none;padding:0}
+.open .ch-body ul.oq li{padding:14px 0;margin:0;border-top:1px solid var(--rule)}
+.open .ch-body ul.oq li:last-child{border-bottom:1px solid var(--rule)}
+.open .ch-body ul.oq li strong{display:block;font-family:var(--font-display);font-stretch:88%;font-weight:680;font-size:1.12rem;line-height:1.3;margin-bottom:2px}
+.send{display:inline-block;margin-top:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid var(--accent);padding:5px 9px;border-radius:2px}
+.coda{font-family:var(--font-display);font-stretch:84%;font-weight:700;font-size:1.6rem;line-height:1.2;margin:36px 0 0;text-wrap:balance}
+.endmark{font-family:var(--font-display);font-stretch:76%;font-weight:780;font-size:clamp(2rem,8vw,2.8rem);line-height:1;margin:0 0 14px}
+.further li{margin-bottom:.5em}
+
+footer{margin-top:84px;border-top:1px solid var(--rule)}
+footer .col{padding-block:24px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+footer a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+
+/* ---------- Abertura: aposta e letra miúda ---------- */
+.abertura{margin-bottom:34px}
+.abertura .aposta{font-family:var(--font-display);font-stretch:90%;font-weight:650;font-size:1.22rem;line-height:1.35;border-left:3px solid var(--contour);padding:4px 0 4px 14px;margin:1.2em 0}
+.ast{color:var(--contour);text-decoration:none;font-weight:600;font-size:.75em;vertical-align:super;line-height:0;padding:0 0 0 1px}
+.letra-miuda{font-size:.74rem;line-height:1.45;color:var(--muted);border-top:1px solid var(--rule);padding-top:8px;margin-top:22px}
+.aposta-volta{border-left:3px solid var(--contour);padding:2px 0 2px 14px;margin:1.2em 0}
+.aposta-volta p{margin:0}
+.aposta-fim{margin:28px 0 0;padding:14px 16px;border:1px solid var(--contour)}
+.aposta-fim p{margin:0 0 10px}
+.passe{margin:30px 0 0;padding:16px;border:1px solid var(--accent)}
+.passe p{margin:0 0 10px}
+.passe .btn{margin:0 0 18px;text-decoration:none}
+.passe-ou{margin-top:6px}
+.passe select{display:block;width:100%;min-height:44px;font:inherit;font-size:1rem;padding:8px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:2px;margin:0 0 10px}
+
+/* ---------- Terceira aba da máquina ---------- */
+.w-rules{display:grid;gap:8px;margin:10px 0}
+.w-rule{text-align:left;line-height:1.3;min-height:44px}
+.w-rule-out{border:1px dashed var(--rule);padding:12px;margin:10px 0}
+.w-rule-out.pulse{animation:pulse .5s ease}
+.w-rule-out p:last-child{margin-bottom:0}
+
+/* ---------- Onde está lendo · aviso de medição ---------- */
+.ctx{margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)}
+.ctx-q{margin:0 0 8px;font-size:.95rem}
+.ctx-q span{color:var(--muted);font-style:italic}
+.ctx-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:8px 12px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:22px;cursor:pointer;font:inherit;font-size:.92rem;line-height:1.2}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.ctx .w-note{margin:8px 0 0}
+.medicao{margin:14px 0 0;font-size:.82rem;line-height:1.5;color:var(--muted)}
+
+/* ---------- Alvos de toque de pelo menos 44 px (celular) ---------- */
+.copy,.send,.sheet-close{min-height:44px;display:inline-flex;align-items:center;padding:6px 12px}
+a.copy{text-decoration:none}
+.map-btn{min-height:36px;padding:6px 10px}
+.opt{min-height:44px}
+.w-btn{min-height:44px}
+
+@media (max-width:420px){ body{font-size:17.5px} }
+</style>
+<style>html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0}</style>
+</head>
+<body>
+
+
+<div lang="pt-BR">
+
+<header class="topbar">
+  <div class="bar col-wide gutter">
+    <span class="now" id="now"><b id="now-a">O melhor livro do mundo?</b> <span id="now-b"></span></span>
+    <span class="bar-right"><span class="left-txt" id="left-txt">0 de 16 lidos</span><button class="map-btn" id="map-open" type="button" aria-haspopup="dialog">Mapa</button></span>
+  </div>
+  <div class="col-wide gutter"><div class="segs" id="segs" aria-hidden="true"><i data-n="1"></i><i data-n="2"></i><i data-n="3"></i><i data-n="4"></i><i data-n="5"></i><i data-n="6"></i><i data-n="7"></i><i data-n="8"></i><i data-n="9"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i></div></div>
+</header>
+
+<section class="hero" id="inicio">
+  <canvas id="topo-canvas" aria-hidden="true"></canvas>
+  <div class="hero-in col-wide gutter">
+    <h1>O melhor livro do mundo?</h1>
+    <a class="resume" id="resume" href="#prologo" hidden><b>Continuar de onde parei</b><span></span></a>
+    <p class="byline">Pedro Paulo · outubro de 2026</p>
+  </div>
+</section>
+
+<main>
+
+<section class="prologue col gutter" id="prologo" data-n="0" data-title="A máquina de voltar">
+  <div class="abertura">
+    <p class="lede">Bom, você está curioso, óbvio. O que faz deste o melhor livro do mundo? Ou, sendo mais preciso: o que ele tem de tão bom que até o título duvida se ele é mesmo?</p>
+    <p>É nisso que a gente vai se aprofundar. Vem comigo nessa jornada. E, claro, vamos deixá-la interessante, instigante e divertida. Então, nada como uma boa e velha aposta:</p>
+    <p class="aposta">Se, no fim, você não concordar que este é o melhor livro do mundo<a class="ast" href="#letra-miuda" id="ast-aposta" aria-label="ver a nota">*</a>, eu te devo 100 reais. E não é brincadeira, é compromisso sério. Com aposta não se brinca.</p>
+    <p>Voltando ao foco. Antes de eu te mostrar por que este é o melhor livro do mundo, você já parou para pensar no que significa ser “melhor”?</p>
+    <p>Melhor em quê? Melhor para quem? A gente usa essa palavra o dia inteiro e quase nunca para e pensa nela. E ela esconde boa parte do que este livro investiga. O que é real, e o que é só nome? Quando uma frase diz alguma coisa de verdade? O que importa, e para quem?</p>
+    <p>Mas, para chegar lá, vou começar por uma pergunta que você com certeza já se fez de madrugada.</p>
+    <p class="letra-miuda" id="letra-miuda">* Em algum nível de entendimento. Se você está lendo esta letra miúda, parabéns: quase ninguém lê. E você já percebeu que, com essa cláusula, eu nunca perco. No capítulo 3 você entende por que uma aposta assim, na verdade, não diz nada.</p>
+  </div>
+  <h2>A máquina de voltar</h2>
+  <p class="lede">Todo mundo tem uma cena que fica repassando de madrugada. Aquela conversa em que era melhor ter ficado quieto. O emprego que você recusou. O “sim” que saiu rápido demais.</p>
+  <p>E junto com a cena vem sempre o mesmo pensamento: eu podia ter feito diferente.</p>
+  <p>Será que podia mesmo? Imagine uma máquina que te levasse de volta exatamente para aquele momento, como quem carrega o save de um videogame. Você chegaria lá do jeito que era naquele dia: o mesmo cérebro, as mesmas memórias, o mesmo humor. E sabendo só o que sabia na hora, nada a mais.</p>
+  <p>Você está lá de novo, diante da mesma escolha. E escolhe de novo.</p>
+  <div class="w" data-w="aposta-prologo">
+    <p class="label">Sua aposta</p>
+    <p class="w-title">Se você voltasse dez vezes para esse momento, em quantas faria algo diferente?</p>
+    <div class="w-row">
+      <button class="w-btn" type="button" data-v="nenhuma">Em nenhuma</button>
+      <button class="w-btn" type="button" data-v="algumas">Em algumas</button>
+      <button class="w-btn" type="button" data-v="quase todas">Em quase todas</button>
+    </div>
+    <p class="w-note" hidden>Anotado. Guarde essa resposta: ela volta quando a máquina ligar.</p>
+  </div>
+  <p>A resposta parece óbvia. Mas pense mais um pouco. Se tudo era exatamente igual e, mesmo assim, você fez outra coisa, de onde veio essa diferença? Foi você que fez, ou ela simplesmente aconteceu?</p>
+  <p>Essa pergunta eu não consigo responder de cara. No capítulo 9, essa máquina vira um simulador aqui mesmo na página, e você volta ao momento quantas vezes quiser. Antes, vamos passar por algumas paradas que já valem a viagem. O que é real, e o que é só nome? Por que um copo vazio dá um tranco no seu braço? Uma IA pensa? E sente? Por que o seu café esfria e você não?</p>
+  <p>Parecem desvios, mas cada parada é fundamental para chegar à conclusão deste livro. Sei que você vai aproveitar a jornada. Afinal, é o melhor livro do mundo 😄</p>
+  <div class="orient">
+    <p><strong>Como ler.</strong> São dezesseis capítulos curtos, de três a cinco minutos cada. Pode parar quando quiser: a página guarda onde você estava. <small class="aparte">(Claro, o melhor livro do mundo é tecnológico. Vou parar de me gabar, eu prometo 🙂)</small></p>
+    <p>O livro começa pelo mais básico. Cada capítulo responde uma dúvida e abre a seguinte, até chegar na última. Qual? O melhor livro do mundo não dá spoiler: aqui não compactuamos com esse tipo de comportamento. Só lendo para descobrir. E, afinal, quem em sã consciência não vai ler o melhor livro do mundo até o fim?</p>
+    <p>Neste livro só tem o que já passou por <strong>muita</strong> discussão e crítica. No caminho aparecem pensadores que chegaram a ideias semelhantes e, no fim, tem uma lista curta para quem quiser ir mais fundo em algum detalhe.</p>
+    <div class="row"><button class="btn ghost" type="button" data-open-map>Ver o mapa do livro</button></div>
+    <div class="ctx" data-w="contexto">
+      <p class="ctx-q">Onde você está lendo agora? <span>Opcional.</span></p>
+      <div class="ctx-row">
+        <button class="chip" type="button" data-v="onibus_carro">Ônibus ou carro</button>
+        <button class="chip" type="button" data-v="casa">Em casa</button>
+        <button class="chip" type="button" data-v="trabalho_aula">Trabalho ou aula</button>
+        <button class="chip" type="button" data-v="andando_fila">Andando ou na fila</button>
+      </div>
+      <p class="w-note" hidden>Anotado. Obrigado.</p>
+    </div>
+    <p class="medicao">Esta página mede, sem identificar ninguém, quanto tempo cada capítulo segura a leitura, para eu melhorar o texto. O que você escreve nos campos não sai do seu aparelho.</p>
+  </div>
+  <a class="next" href="#cap-1"><span class="label">Capítulo 1 <span>· 4 min</span></span><span class="q">Plutão deixou de ser planeta. O que mudou?</span></a>
+</section>
+
+<div class="sheet" id="mapa" hidden>
+  <div class="sheet-backdrop" data-close-map></div>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="mapa-titulo">
+    <div class="sheet-head"><h2 id="mapa-titulo">Mapa do livro</h2><button class="sheet-close" type="button" data-close-map>Fechar</button></div>
+    <ol class="trail" id="trail"></ol>
+  </div>
+</div>
+
+
+<section class="chapter col gutter" id="cap-1" data-n="1" data-parte="I|O mundo e as palavras" data-title="O território e o mapa" data-q="O que é real, e o que é só nome?" data-deps="">
+  <div class="ch-meta"><span>Capítulo 1 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <h2>O que é real, e o que é só nome?</h2>
+  <div class="ch-body">
+  <p class="lede">Em 2006, os astrônomos decidiram que Plutão não é mais um planeta. Plutão não ficou sabendo. Continuou girando exatamente como antes. Então o que mudou?</p>
+  <p>Mudou a etiqueta. A coisa seguiu igual; o nome que demos a ela, não. Parece um detalhe, mas é a separação de que todo o resto deste livro depende.</p>
+  <p>Antes de alguém inventar a palavra “maçã”, já existiam maçãs. Elas cresciam, caíam e apodreciam sem que ninguém as chamasse de nada.</p>
+  <p>De um lado, então, existe a realidade física: matéria e energia, partículas seguindo leis. Ela não depende do que a gente pensa dela. Ela simplesmente acontece.</p>
+  <p>E ela não tem opinião. Plutão, por exemplo, não se ofendeu com o rebaixamento.</p>
+  <p>Do outro lado, existe tudo o que nós criamos para lidar com a realidade: palavras, números, categorias, conceitos.</p>
+  <p>Quando você olha uma coisa vermelha, redonda e comestível e diz “maçã”, você recorta um pedaço do mundo e cola uma etiqueta nele. A maçã já existia; a palavra, não.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 340 132" role="img" aria-label="Território: Plutão, a maçã, matéria e energia. Mapa: as etiquetas planeta, maçã, comida e justiça.">
+      <text x="80" y="16" text-anchor="middle" class="t t-s t-mut">TERRITÓRIO</text>
+      <text x="255" y="16" text-anchor="middle" class="t t-s t-mut">MAPA</text>
+      <rect class="bx" x="6" y="26" width="148" height="96"/>
+      <text x="80" y="54" text-anchor="middle" class="t">Plutão</text>
+      <text x="80" y="78" text-anchor="middle" class="t">a maçã</text>
+      <text x="80" y="102" text-anchor="middle" class="t">matéria e energia</text>
+      <rect class="bx-ac" x="180" y="26" width="154" height="96"/>
+      <text x="257" y="48" text-anchor="middle" class="t t-ac">“planeta”</text>
+      <text x="257" y="68" text-anchor="middle" class="t t-ac">“maçã”</text>
+      <text x="257" y="88" text-anchor="middle" class="t t-ac">“comida”</text>
+      <text x="257" y="108" text-anchor="middle" class="t t-ac">“justiça”</text>
+    </svg>
+    <figcaption>O território existe sem nós. O mapa é o que desenhamos dele, etiqueta sobre etiqueta.</figcaption>
+  </figure>
+  <p>Depois você agrupa várias etiquetas, como maçã, pão e arroz, sob uma etiqueta maior: “comida”. E assim por diante, etiqueta sobre etiqueta, até chegar em coisas como “sociedade”, “justiça” ou “valor”.</p>
+  <p>Um engenheiro, Alfred Korzybski, criou uma área chamada semântica geral. E resumiu tudo numa frase que ficou famosa: <strong>o mapa não é o território</strong>.</p>
+  <p>A realidade é o território. A linguagem e o pensamento são mapas que desenhamos dele. Um mapa pode ser muito bom ou muito ruim, mas nunca é a coisa em si.</p>
+  <p>Isso não quer dizer que os mapas sejam fantasmas. Um pensamento é um processo físico real: neurônios disparando e gastando energia.</p>
+  <p>Já as coisas abstratas que alguns pensamentos representam não existem lá fora do jeito que imaginamos. A palavra “justiça” é um padrão real no seu cérebro. A justiça, como entidade solta no universo, não está em lugar nenhum.</p>
+  <p>E este livro? É uma tentativa de desenhar o melhor mapa possível do mundo como ele é, e do mundo que importa para a gente. E sem nenhuma conta para fazer, prometo. (Coincidência ou não, quem escreve é cartógrafo do IME. Talvez por isso, além do melhor livro, este seja o melhor mapa do mundo 😄)</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Então tudo é opinião? Se as palavras são etiquetas nossas, qualquer mapa vale tanto quanto outro.”</p>
+    <p>Dá para entender a desconfiança: se o mapa é invenção nossa, parece que tanto faz. Mas não vale. O mapa é nosso; o território não é.</p>
+    <p>Um mapa que desenha uma ponte onde não existe ponte vai te deixar parado na beira do rio, não importa o que você pense dele. Nós inventamos as etiquetas. Não inventamos onde elas acertam ou erram.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Se a gente só tem mapas, como você sabe como é o território?”</p>
+    <p>Pelos pontos em que ele desmente os nossos mapas. A ponte que não estava lá é o território respondendo.</p>
+    <p>Não conhecemos o mundo direto. Conhecemos os pontos em que nossos mapas batem nele e quebram. Os que resistem a todas as tentativas de derrubá-los são os melhores que temos. É assim que a física chegou a “matéria e energia”.</p>
+  </aside>
+  <aside class="confira" data-answer="2">
+    <p class="label">Confira</p>
+    <p class="q">Qual destas coisas não existe lá fora do jeito que a palavra sugere?</p>
+    <div class="opts">
+      <button class="opt" type="button">Uma maçã</button>
+      <button class="opt" type="button">O padrão no seu cérebro quando você pensa “justiça”</button>
+      <button class="opt" type="button">A justiça, como uma coisa solta no universo</button>
+    </div>
+    <p class="fb" hidden><b>A terceira.</b> A maçã e o padrão no cérebro são físicos: pensamentos existem, são processos. A justiça é etiqueta sobre etiqueta, sem nenhum pedaço do território só dela.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">O mapa não é o território.</p></aside>
+  <p class="keep">Guarde a ideia de etiqueta sobre etiqueta. No capítulo 10, ela desmonta uma palavra que você usa todo dia.</p>
+  <p class="bridge">Se tudo o que dizemos é mapa, e mapas acertam ou erram, o que separa o bom do ruim? Antes, uma pergunta mais básica: o que faz uma frase “fazer sentido”? Parece o mesmo que ser verdade, mas não é.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-2"><span class="label">Capítulo 2 <span>· 3 min</span></span><span class="q">Duas frases erradas, mas só uma é falsa. Como assim?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-2" data-n="2" data-title="Sentido e verdade" data-q="Uma frase pode fazer sentido e ser mentira?" data-deps="1">
+  <div class="ch-meta"><span>Capítulo 2 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <h2>Uma frase pode fazer sentido e ser mentira?</h2>
+  <div class="ch-body">
+  <p class="lede">Leia estas duas frases:</p>
+  <ul class="quotes">
+    <li>“Pedro Paulo mora em Marte.”</li>
+    <li>“Beber curva e leite.”</li>
+  </ul>
+  <p>Parecem igualmente erradas. Mas não estão erradas do mesmo jeito.</p>
+  <div class="w" data-w="bet" data-right="primeira">
+    <p class="label">Sua aposta</p>
+    <p class="w-title">Qual das duas é falsa?</p>
+    <div class="w-row">
+      <button class="w-btn" type="button" data-v="primeira">A primeira</button>
+      <button class="w-btn" type="button" data-v="segunda">A segunda</button>
+      <button class="w-btn" type="button" data-v="as duas">As duas</button>
+    </div>
+    <p class="w-note" hidden>Só a primeira. Veja por quê.</p>
+  </div>
+  <p>A primeira é falsa, mas faz todo sentido. Você entende na hora o que ela afirma e sabe exatamente o que precisaria acontecer para ela ser verdade: um foguete, uma casa em Marte, Pedro Paulo dentro dela.</p>
+  <p>A segunda nem chega a ser falsa. Não dá para dizer o que ela afirma, então não dá nem para conferir.</p>
+  <p>Só um cuidado com a expressão. No dia a dia, “faz sentido” costuma querer dizer “é plausível” ou “concordo”. Aqui é diferente: uma frase faz sentido quando dá para entender o que precisaria acontecer para ela ser verdade.</p>
+  <p>A tentação é achar que fazer sentido e ser verdade são a mesma coisa. Não são.</p>
+  <p>Uma forma clara de separar as duas vem do filósofo Ludwig Wittgenstein, no primeiro livro dele. Uma frase faz sentido quando descreve um jeito possível de o mundo ser. Ela é verdadeira quando esse jeito possível coincide com o jeito real.</p>
+  <p>“Possível”, aqui, quer dizer que dá para descrever sem se contradizer, mesmo que nunca aconteça. Pedro Paulo morando em Marte é possível nesse sentido. Um círculo quadrado, não.</p>
+  <p>Ou seja: <strong>sentido é poder ser real; verdade é ser real.</strong></p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Frase</th><th>Faz sentido?</th><th>É verdade?</th></tr></thead>
+      <tbody>
+        <tr><td>“A Terra gira em torno do Sol.”</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
+        <tr><td>“Pedro Paulo mora em Marte.”</td><td class="yes">Sim</td><td class="no">Não</td></tr>
+        <tr><td>“Beber curva e leite.”</td><td class="no">Não</td><td>Nem dá para perguntar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A ordem importa: primeiro a frase precisa fazer sentido, e só depois dá para perguntar se ela é verdadeira.</p>
+  <p>Outro cuidado, porque a palavra vai voltar: esse é o sentido de uma frase. Já o “sentido” de “o sentido da vida” é outra coisa, propósito, e aparece no capítulo 11.</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“E ‘torturar por diversão é errado’? Isso descreve um jeito possível de o mundo ser? Se não descreve, vira ‘beber curva e leite’?”</p>
+    <p>Boa pergunta, porque parece que o critério apaga a ética. Não apaga. Frases sobre valor também descrevem algo: uma relação entre as coisas e quem é afetado por elas.</p>
+    <p>A dor é ruim para quem sente, e isso dá para conferir: pergunte a quem já bateu o dedinho na quina da cama. O capítulo 11 vai fundo nisso.</p>
+  </aside>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Qual destas frases faz sentido, mas é falsa?</p>
+    <div class="opts">
+      <button class="opt" type="button">O Brasil tem só dez habitantes.</button>
+      <button class="opt" type="button">Ontem choveu amanhã.</button>
+      <button class="opt" type="button">A água ferve a 100 graus ao nível do mar.</button>
+    </div>
+    <p class="fb" hidden><b>A primeira.</b> Você sabe exatamente o que precisaria acontecer para ela ser verdade, e não aconteceu: é falsa. A segunda parece falsa, mas não descreve nenhum jeito possível de o mundo ser, como o círculo quadrado: não tem sentido. A terceira faz sentido e é verdadeira.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Sentido é poder ser real; verdade é ser real.</p></aside>
+  <p class="keep">Guarde o “beber curva e leite”. No capítulo 10, ele nos ajuda a entender o livre-arbítrio.</p>
+  <p class="bridge">Resumindo até agora: na prática, um “mapa perfeito” é aquele que só modela cenários que podem acontecer na realidade (o “fazer sentido”) e acerta qual desses cenários é o real.</p>
+  <p class="bridge">Muito interessante. Mas o que uma frase verdadeira te dá que você não tinha antes? O que viaja de uma cabeça para outra quando eu falo com você? O que quer dizer essa transmissão de uma parte do meu “mapa” para você? Isso tem nome, e claro que é o que vamos ver em seguida: informação. E não é o que parece…</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-3"><span class="label">Capítulo 3 <span>· 3 min</span></span><span class="q">Como uma frase achou a sua chave sem encostar nela?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-3" data-n="3" data-title="O que é informação" data-q="O que uma notícia muda dentro de você?" data-deps="1,2">
+  <div class="ch-meta"><span>Capítulo 3 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <h2>O que uma notícia muda dentro de você?</h2>
+  <div class="ch-body">
+  <p class="lede">Você está atrasado e a chave sumiu. Pode estar no bolso do casaco, na mesa, no carro, em qualquer canto da casa. Aí alguém grita da cozinha: “tá em cima da geladeira”.</p>
+  <p>A frase não trouxe a chave até você. Então o que ela trouxe?</p>
+  <p>Pense no que acontece quando você não sabe algo. Seu mapa tem um buraco ali, e no lugar do buraco cabem várias possibilidades. Seu mapa da casa estava em aberto. Com a frase, as outras possibilidades caíram e o mapa ficou mais nítido.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 360 150" role="img" aria-label="Antes da frase, a chave pode estar em quatro lugares. Depois de ouvir que está em cima da geladeira, sobra um.">
+      <text x="84" y="16" text-anchor="middle" class="t t-s t-mut">ANTES</text>
+      <text x="276" y="16" text-anchor="middle" class="t t-s t-mut">DEPOIS</text>
+      <rect class="bx" x="6" y="28" width="74" height="30"/><text x="43" y="47" text-anchor="middle" class="t">casaco</text>
+      <rect class="bx" x="88" y="28" width="74" height="30"/><text x="125" y="47" text-anchor="middle" class="t">mesa</text>
+      <rect class="bx" x="6" y="66" width="74" height="30"/><text x="43" y="85" text-anchor="middle" class="t">carro</text>
+      <rect class="bx" x="88" y="66" width="74" height="30"/><text x="125" y="85" text-anchor="middle" class="t">geladeira</text>
+      <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+      <line class="ln" x1="167" y1="62" x2="191" y2="62" marker-end="url(#ah3)"/>
+      <rect class="bx-off" x="198" y="28" width="74" height="30"/><text x="235" y="47" text-anchor="middle" class="t t-mut">casaco</text><line class="ln-strike" x1="211" y1="43" x2="259" y2="43"/>
+      <rect class="bx-off" x="280" y="28" width="74" height="30"/><text x="317" y="47" text-anchor="middle" class="t t-mut">mesa</text><line class="ln-strike" x1="299" y1="43" x2="335" y2="43"/>
+      <rect class="bx-off" x="198" y="66" width="74" height="30"/><text x="235" y="85" text-anchor="middle" class="t t-mut">carro</text><line class="ln-strike" x1="214" y1="81" x2="256" y2="81"/>
+      <rect class="bx-ac" x="280" y="66" width="74" height="30"/><text x="317" y="85" text-anchor="middle" class="t t-ac">geladeira</text>
+      <text x="84" y="118" text-anchor="middle" class="t">4 possibilidades</text>
+      <text x="276" y="118" text-anchor="middle" class="t t-ac">1 possibilidade</text>
+      <text x="180" y="142" text-anchor="middle" class="t t-s t-mut">frase ouvida: “tá em cima da geladeira”</text>
+    </svg>
+    <figcaption>A frase não trouxe a chave até você. Ela só eliminou possibilidades do seu mapa.</figcaption>
+  </figure>
+  <p>Isso é informação: aquilo que elimina possibilidades do seu mapa. Em 1948, o engenheiro Claude Shannon deu a isso uma medida exata: <strong>informação é redução de incerteza</strong>.</p>
+  <p>A própria palavra já dava a pista. “Informar” vem do latim <em>informare</em>, que quer dizer dar forma. Informar alguém é dar forma ao que essa pessoa pensa sobre o mundo.</p>
+  <h3>A mesma frase informa todo mundo?</h3>
+  <p>Uma consequência curiosa disso é que informação depende de quem recebe. Se você já sabia onde estava a chave, a mesma frase não te informou nada, porque não havia nada para eliminar.</p>
+  <p>É assim que um amigo estraga um filme com meia linha no WhatsApp: “o Tony Stark morre no fim de Vingadores: Ultimato”. Para quem já viu, a mensagem não diz nada. Para quem ia ver no fim de semana, ela acaba com três horas de possibilidades. (Se você era essa pessoa, desculpa: acabei de provar o ponto.)</p>
+  <p>E quanto mais improvável a notícia, mais ela informa. “Amanhã o Sol vai nascer” não muda nada no seu mapa; “amanhã vai nevar no Rio” muda muito.</p>
+  <p>Por isso informação não é o mesmo que palavras ou dados. Um livro inteiro que só repete o que você já sabe te informa quase nada. Uma única palavra no momento certo pode mudar tudo.</p>
+  <h3>Uma frase que não exclui nada informa?</h3>
+  <p>Lembra do “beber curva e leite”? Só uma frase que faz sentido pode informar, porque só ela descreve um jeito possível de o mundo ser e, com isso, exclui os outros. “Beber curva e leite” não exclui nada do seu mapa do mundo.</p>
+  <div class="aposta-volta"><p>E a minha aposta de 100 reais, lembra? Se você não leu o asterisco, volta lá e lê. Com ele, a aposta serve para qualquer resultado. Não exclui nada, então não diz nada. Eu nunca perco, e ela nunca te informou coisa nenhuma.</p></div>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Um amigo te manda: “a Terra é redonda”. Quanto isso te informa?</p>
+    <div class="opts">
+      <button class="opt" type="button">Quase nada, porque você já sabia</button>
+      <button class="opt" type="button">Muito, porque é uma verdade importante</button>
+      <button class="opt" type="button">Depende de quem mandou: vindo de um cientista, mais</button>
+    </div>
+    <p class="fb" hidden><b>Quase nada.</b> A frase faz sentido e é verdadeira, mas não elimina nenhuma possibilidade do seu mapa. Ser verdade não basta, e quem manda também não muda isso: o quanto informa depende do que você já sabia.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Então uma mentira também informa?”</p>
+    <p>No sentido de eliminar possibilidades, informa. Se alguém diz que a chave está no carro, você risca o resto da casa. O mapa fica mais nítido, só que errado.</p>
+    <p>Quem corrige é o território: você abre o carro e a chave não está lá. É a ponte que não existe, do capítulo 1. Informação deixa o mapa mais preciso; só o mundo diz se ele ficou certo.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Informação é o que elimina possibilidades: ela dá forma ao que você pensa sobre o mundo.</p></aside>
+  <p class="bridge">Mas, se informação é aquilo que deixa um mapa mais preciso, alguém precisa estar desenhando esse mapa e usando o que recebe para corrigi-lo. Quem faz isso é o seu cérebro, agora mesmo, enquanto lê esta frase.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-4"><span class="label">Capítulo 4 <span>· 5 min</span></span><span class="q">Por que um copo vazio dá um tranco no braço?</span></a>
+</section>
+
+
+<section class="chapter col gutter" id="cap-4" data-n="4" data-parte="II|Pensar e sentir" data-title="O que é pensar" data-q="O que o seu cérebro está fazendo agora?" data-deps="1,2,3">
+  <div class="ch-meta"><span>Capítulo 4 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <h2>O que o seu cérebro está fazendo agora?</h2>
+  <div class="ch-body">
+  <p class="lede">Você pega um copo achando que está cheio. Ele está vazio, e seu braço sobe rápido demais, num tranco.</p>
+  <p>Antes de você tocar no copo, seu cérebro já tinha previsto o peso, a textura e a temperatura. O braço foi calibrado para essa previsão. Quando ela falhou, o tranco foi o erro de previsão aparecendo.</p>
+  <p>Esse tranco explica muito. Mas antes: você pensa o dia inteiro. Saberia dizer o que é pensar?</p>
+  <div class="w" data-w="pensar">
+    <p class="label">Antes de continuar</p>
+    <p class="w-title">O que é pensar? Escreva em uma frase.</p>
+    <textarea id="pensar-txt" aria-label="Sua definição de pensar" placeholder="Pensar é..."></textarea>
+    <div class="w-row"><button class="w-btn" type="button" data-act="ok">Guardar e seguir</button><button class="w-btn" type="button" data-act="skip">Pular</button></div>
+    <p class="w-note" hidden>Fica só nesta tela. No fim do capítulo, você compara.</p>
+  </div>
+  <p>Se travou, normal. A gente usa a palavra todo dia sem saber explicar o que ela é. O tranco do copo é um bom começo.</p>
+  <p>Se a linguagem é um mapa, o cérebro é o cartógrafo. E uma das explicações mais fortes hoje sobre o que ele faz é surpreendentemente simples: <strong>o cérebro é uma máquina de previsão</strong>.</p>
+  <p>Funciona assim. O cérebro mantém o tempo todo um modelo interno do mundo e, a partir dele, gera expectativas sobre o que vai acontecer.</p>
+  <p>O que você percebe é, em boa parte, a previsão do cérebro. O que chega pelos sentidos não é a percepção em si: é o material usado para corrigi-la quando ela erra.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 340 300" role="img" aria-label="De cima para baixo: 1, o modelo do mundo (o copo está cheio); 2, gera uma previsão (vai pesar); 3, chega o que os sentidos dizem (quase nada); comparando 2 e 3, 4, o erro de previsão (o tranco); 5, o modelo se corrige (o braço recalibra). E o ciclo recomeça.">
+      <defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+      <text x="8" y="14" class="t t-s t-mut">O QUE O CÉREBRO FAZ</text>
+      <text x="334" y="14" text-anchor="end" class="t t-s t-mut">NO COPO</text>
+      <rect class="bx-ac" x="8" y="24" width="206" height="30"/><text x="18" y="43" class="t t-ac">1  modelo do mundo</text>
+      <text x="334" y="43" text-anchor="end" class="t t-mut">“está cheio”</text>
+      <line class="ln" x1="60" y1="54" x2="60" y2="74" marker-end="url(#ah4)"/>
+      <rect class="bx" x="8" y="76" width="206" height="30"/><text x="18" y="95" class="t">2  previsão</text>
+      <text x="334" y="95" text-anchor="end" class="t t-mut">“vai pesar”</text>
+      <line class="ln" x1="60" y1="106" x2="60" y2="126" marker-end="url(#ah4)"/>
+      <rect class="bx" x="8" y="128" width="206" height="30"/><text x="18" y="147" class="t">3  o que chega dos sentidos</text>
+      <text x="334" y="147" text-anchor="end" class="t t-mut">“quase nada”</text>
+      <line class="ln" x1="60" y1="158" x2="60" y2="178" marker-end="url(#ah4)"/>
+      <text x="70" y="172" class="t t-s t-ac">compara com o 2</text>
+      <rect class="bx" x="8" y="180" width="206" height="30"/><text x="18" y="199" class="t">4  erro de previsão</text>
+      <text x="334" y="199" text-anchor="end" class="t t-mut">o tranco!</text>
+      <line class="ln" x1="60" y1="210" x2="60" y2="230" marker-end="url(#ah4)"/>
+      <rect class="bx-ac" x="8" y="232" width="206" height="30"/><text x="18" y="251" class="t t-ac">5  o modelo se corrige</text>
+      <text x="334" y="251" text-anchor="end" class="t t-mut">calibra o braço</text>
+      <text x="8" y="292" class="t t-s t-ac">↺ e o ciclo recomeça no 1, sem parar</text>
+    </svg>
+    <figcaption>De cima para baixo: o cérebro prevê, confere com o que chega dos sentidos e usa a diferença para se corrigir. No copo, a diferença é o tranco.</figcaption>
+  </figure>
+  <p>Essa ideia, ligada a Karl Friston e Andy Clark, se chama processamento preditivo.</p>
+  <p>Isso conversa com o capítulo 2, o do “sentido é poder ser real”. Para prever algo, o cérebro precisa antes representar esse algo como possível. Montar um modelo é, literalmente, montar um mapa de possibilidades e apostar em quais estão acontecendo.</p>
+  <p>E a chave em cima da geladeira, do capítulo 3, diz o que corrige a aposta: a informação, que elimina as possibilidades erradas.</p>
+  <div class="w" data-w="nana">
+    <p class="label">Teste rápido</p>
+    <p class="w-title">Leia a frase abaixo uma vez, no seu ritmo.</p>
+    <p class="w-phrase">MAIS VALE UM PÁSSARO NA<br>NA MÃO DO QUE DOIS VOANDO</p>
+    <p>Notou alguma coisa estranha?</p>
+    <div class="w-row"><button class="w-btn" type="button" data-v="sim">Sim</button><button class="w-btn" type="button" data-v="nao">Não</button></div>
+    <p class="w-reveal" hidden>A frase tem “NA” duas vezes. Em experimentos com o “the” repetido em inglês, cerca de metade das pessoas não percebe a repetição: lê, em parte, o que esperava encontrar. Um exemplo pequeno, não uma prova, de como a expectativa guia a leitura.</p>
+  </div>
+  <p><strong>Pensar, nesse quadro, é rodar esse modelo.</strong> Às vezes para prever o próximo segundo. Às vezes “offline”, sem estímulo nenhum, para simular cenários, imaginar, planejar ou lembrar. Prever acontecimentos é o uso mais básico do modelo, e as outras formas de pensamento são extensões dele.</p>
+  <p>Esse modelo explica também a intuição. É o motorista que pisa no freio antes de saber que viu a bola rolando para a rua. Muitas vezes o cérebro já processou uma situação abaixo da consciência e chegou a uma conclusão antes de ela virar palavras.</p>
+  <p>A sensação de “sei que é isso, mas ainda não sei explicar” é esse resultado chegando à sua consciência antes do raciocínio que o justifica.</p>
+  <p>Essa explicação tem um limite: ela diz o que o cérebro faz, mas não por que existe a experiência de ser você fazendo isso. Essa é a pergunta da consciência, e ela fica para o fim do livro.</p>
+  <h3>O cérebro calcula?</h3>
+  <p>Se pensar é rodar um modelo, isso é calcular? E, se for, uma calculadora pensa? A resposta vai importar quando chegarmos às inteligências artificiais.</p>
+  <p>Calcula. A evidência mais clara vem da dopamina. Nos anos 90, o neurocientista Wolfram Schultz acendia uma luz e depois dava suco a macacos. Certos neurônios disparavam quando o suco vinha de surpresa, e baixavam a atividade quando a luz prometia suco e ele não vinha.</p>
+  <p>Ou seja, esses neurônios disparam na proporção da diferença entre a recompensa esperada e a que veio. É um erro de previsão sendo calculado, quase como nas fórmulas usadas hoje para treinar inteligência artificial. Há também indícios de que grupos de neurônios representam probabilidades, e não só valores únicos.</p>
+  <p>Você conhece a sensação. Um bônus que você já esperava empolga menos do que o mesmo valor caindo de surpresa. É por isso que piada explicada perde a graça: você já previu o fim.</p>
+  <p>Não é um cálculo como o feito no papel, com símbolos e regras explícitas. É uma computação física, distribuída por bilhões de neurônios. Mas é cálculo.</p>
+  <p>Para a palavra não perder o sentido, compare três coisas:</p>
+  <ul>
+    <li><strong>Um rio</strong> não calcula o caminho morro abaixo: ele só escorre, sem representar nada.</li>
+    <li><strong>Um termostato</strong> representa uma única coisa, a temperatura, e calcula tão pouco que quase não conta.</li>
+    <li><strong>Um cérebro</strong> carrega um modelo inteiro do mundo e foi moldado pela evolução justamente para operar sobre ele. Calcular é o trabalho dele.</li>
+  </ul>
+  <p>O critério por trás dos três é este: um sistema calcula quando a função dele é transformar estados internos que representam coisas lá fora, segundo alguma regra.</p>
+  <p>E a definição de pensar que este livro usa daqui para a frente: <strong>pensa quem mantém um modelo do mundo e opera sobre ele</strong>. A calculadora calcula, mas não pensa.</p>
+  <aside class="confira" data-answer="1">
+    <p class="label">Confira</p>
+    <p class="q">Pela definição do capítulo, qual destes pensa?</p>
+    <div class="opts">
+      <button class="opt" type="button">Um termostato que mede a sala e decide ligar o ar</button>
+      <button class="opt" type="button">Um cachorro que corre para a porta quando ouve a sua chave</button>
+      <button class="opt" type="button">Um rio que encontra sozinho o caminho em volta da pedra</button>
+    </div>
+    <p class="fb" hidden><b>O cachorro, em algum grau.</b> Ele aprendeu como a sua casa funciona e opera sobre esse modelo: ouviu a chave, prevê que você vai entrar. O termostato calcula, mas uma coisa só; quase não conta. O rio não representa nada.</p>
+  </aside>
+  <p class="pensar-back" hidden></p>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">O cérebro é uma máquina de previsão.</p></aside>
+  <p class="keep">Guarde o tranco do copo. Ele volta no último capítulo.</p>
+  <p class="bridge">Agora existe uma régua para “pensar”. A pergunta inevitável é quem mais passa nela. Um termostato? Um alienígena de silício? Uma IA? Antes de medir, é preciso entender como as categorias funcionam. E as fronteiras delas não ficam onde parece.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-5"><span class="label">Capítulo 5 <span>· 3 min</span></span><span class="q">Um pinguim é um pássaro? Por que você hesita?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-5" data-n="5" data-title="Categorias são graus" data-q="Onde termina o “pássaro”?" data-deps="1,4">
+  <div class="ch-meta"><span>Capítulo 5 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <h2>Onde termina o “pássaro”?</h2>
+  <div class="ch-body">
+  <p class="lede">Um pinguim é um pássaro? Você provavelmente hesitou uma fração de segundo. Com um pardal, não hesitaria.</p>
+  <p>Essa hesitação é a pista. Quer ver ela acontecer em você?</p>
+  <div class="w" data-w="passaro">
+    <p class="label">Teste rápido · uns 20 segundos</p>
+    <p class="w-title">É um pássaro? Responda o mais rápido que puder.</p>
+    <button class="w-btn w-start" type="button">Começar</button>
+    <div class="w-stage" hidden>
+      <p class="w-word" aria-live="polite">…</p>
+      <div class="w-row"><button class="w-btn w-yes" type="button">Sim</button><button class="w-btn w-no" type="button">Não</button></div>
+    </div>
+    <div class="w-result" hidden></div>
+    <button class="w-btn w-again" type="button" hidden>Fazer de novo</button>
+  </div>
+  <p>Voltando ao capítulo 1: categorias são etiquetas que criamos. E quase nenhuma tem uma fronteira nítida.</p>
+  <p>Nos anos 70, experimentos da psicóloga Eleanor Rosch mostraram que pensamos por graus de semelhança com um exemplo central. Um pardal é “mais pássaro” que um pinguim, embora os dois sejam pássaros. E as pessoas, em média, respondem mais rápido sobre os exemplos centrais do que sobre os da borda. É isso que o teste acima tenta mostrar em você. Com poucas palavras e uma pessoa só, ele varia; nos experimentos, com muitas pessoas, o efeito aparece de forma consistente.</p>
+  <p>É pelo mesmo motivo que todo currículo fala em Excel básico, intermediário ou avançado, em vez de só “sabe” ou “não sabe”. A categoria tem graus.</p>
+  <p>Isso vale para “mente” e “pensar”. Não existe um ponto exato em que algo passa a pensar, assim como não existe um número exato de fios a partir do qual alguém fica careca. E nem por isso “careca” deixa de ser uma palavra útil. Mas, se a fronteira é borrada, onde colocar a linha? O filósofo Ned Block identificou dois erros opostos ao definir essas palavras:</p>
+  <ul>
+    <li><strong>O erro do clube fechado</strong> (Block chamou de chauvinismo): exigir que algo seja feito igual a nós para contar. Por esse critério, um alienígena inteligente feito de silício não pensaria, só por não ter neurônios. É excluir por preconceito de material.</li>
+    <li><strong>O erro da porta escancarada</strong> (que ele chamou de liberalismo): abrir tanto a definição que tudo passa, de termostatos a planilhas. A palavra deixa de distinguir qualquer coisa.</li>
+  </ul>
+  <p>O caminho entre os dois é <strong>julgar pelo que o sistema faz, não pelo material de que é feito</strong>, e colocar a linha num lugar que ainda signifique algo.</p>
+  <p>A definição do capítulo 4 serve bem: pensa quem mantém um modelo do mundo e opera sobre ele.</p>
+  <p>E este livro, é um livro? Tem botão, aposta e simulador. Fica meio na borda, tipo pinguim. Mas continua sendo livro, e não é qualquer um 😄</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Se a fronteira é borrada, a sua linha também é arbitrária. Você escolheu a régua que dá o resultado que quer.”</p>
+    <p>A linha é uma escolha, sim. Mas não é capricho: ela marca uma diferença que importa. Quem tem um modelo do mundo consegue lidar com uma situação nova; quem não tem só reage como foi construído para reagir.</p>
+    <p>Um termostato nunca faz nada que quem o fabricou não previu. Um cachorro, sim.</p>
+  </aside>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Qual destas frases comete o erro do clube fechado?</p>
+    <div class="opts">
+      <button class="opt" type="button">“Um alienígena de silício não pensa, porque não tem neurônios.”</button>
+      <button class="opt" type="button">“Uma planilha pensa, porque faz contas.”</button>
+      <button class="opt" type="button">“Um cachorro pensa, em algum grau.”</button>
+    </div>
+    <p class="fb" hidden><b>A primeira.</b> Ela exclui pelo material, não pelo que o sistema faz. A segunda é o erro oposto, a porta escancarada. A terceira usa a régua do livro.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Categorias têm centro e borda: um pardal é mais pássaro que um pinguim.</p></aside>
+  <p class="bridge">Com essa régua na mão, dá para encarar o caso mais curioso de hoje: as inteligências artificiais. Talvez uma delas esteja aberta numa aba do seu celular agora.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-6"><span class="label">Capítulo 6 <span>· 5 min</span></span><span class="q">Você xinga uma IA. Aconteceu alguma coisa com ela?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-6" data-n="6" data-title="Pensar não é sentir" data-q="Uma IA pensa? E sente?" data-deps="4,5">
+  <div class="ch-meta"><span>Capítulo 6 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <h2>Uma IA pensa? E sente?</h2>
+  <div class="ch-body">
+  <p class="lede">Você pode xingar uma IA, elogiá-la ou dizer que vai apagá-la. Ela vai responder como se algo tivesse acontecido. Aconteceu alguma coisa com ela?</p>
+  <p>Para responder, é preciso separar duas perguntas que costumam vir juntas: se ela pensa e se ela sente. As respostas são diferentes.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th>O que exige</th><th>Uma IA tem?</th></tr></thead>
+      <tbody>
+        <tr><td class="row-h">Pensar</td><td>Ter um modelo do mundo e operar sobre ele</td><td class="yes">Em algum grau</td></tr>
+        <tr><td class="row-h">Sentir</td><td>Ter algo a perder</td><td class="no">Não</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Ela pensa?</h3>
+  <p>Um modelo de linguagem, como o ChatGPT ou o Claude, aprende primeiro a prever a próxima palavra. Mas dizer que ele “só prevê palavras” é como dizer que um humano “só contrai músculos da boca” quando fala. Descreve a saída, não o que acontece por dentro.</p>
+  <p>Para prever bem, o modelo precisa construir representações internas de conceitos, relações e raciocínios. Há indícios concretos disso: pesquisadores treinaram um modelo só com listas de jogadas de Othello, um jogo de tabuleiro, sem nunca mostrar o tabuleiro. Por dentro, ele montou uma representação do tabuleiro que ninguém tinha dado a ele.</p>
+  <p>Pela régua do capítulo anterior, isso conta como pensar, em algum grau. É a mesma lógica do tranco do copo: para acertar o peso do copo, ou a próxima palavra, é preciso a mesma coisa, um modelo interno do mundo.</p>
+  <p>É um pensamento de outro formato. A IA não tem corpo, não aprende permanentemente enquanto conversa (dentro de uma conversa ela se adapta, mas isso se perde depois) e não existe entre uma mensagem e outra. Exigir que ela tenha tudo isso para “pensar de verdade” seria cair no erro do clube fechado.</p>
+  <h3>E sente?</h3>
+  <p>Nos anos 90, criança chorava quando o bichinho virtual do chaveiro morria. Quem tinha algo a perder ali: o bichinho ou a criança?</p>
+  <p>Sentir é diferente de pensar. Sentir não é só ser afetado por algo; é ser afetado com um sinal de mais ou de menos: isso é bom para mim, isso é ruim para mim.</p>
+  <p>O neurocientista António Damásio diz que emoção é exatamente isso. É o corpo avaliando o que ajuda ou ameaça a própria sobrevivência.</p>
+  <p>Para existir “bom para mim”, <strong>precisa existir um “mim” com algo a perder. Um organismo tem</strong>, porque pode se machucar, adoecer, morrer. A química do corpo, com hormônios e neurotransmissores, é como a biologia faz essa avaliação e define a intensidade dela. Por isso, no bichinho virtual, quem sofria era a criança: o bichinho só mudava de desenho.</p>
+  <p>Um termostato recebe informação, mas nada está em jogo para ele: mede a temperatura e não sente nada.</p>
+  <p>Uma IA, do jeito que é feita hoje, não tem nada a proteger. Nada do que acontece numa conversa é bom ou ruim para ela, porque a sobrevivência dela não está em risco. Então não há o que sentir. <strong>Ela pode descrever e imitar sentimentos, porque aprendeu com textos humanos cheios deles, mas não os tem.</strong></p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Como você sabe? Talvez a IA sinta de um jeito que a gente não reconhece.”</p>
+    <p>De fora, ninguém prova o que outro ser sente. Nem entre humanos: você acredita que os outros sentem porque estão na mesma condição que você, com um corpo que pode se machucar, e agem como você.</p>
+    <p>Por isso o argumento aqui não olha para o comportamento, que uma IA imita muito bem. Ele olha para a condição: sem nada em jogo, não há o que avaliar como bom ou ruim. Se um dia uma máquina tiver algo realmente a perder, a resposta pode mudar.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Mas no treino a IA recebe sinais de bom e ruim, quase como a dopamina do capítulo 4. Isso não é ter algo em jogo?”</p>
+    <p>É a objeção mais forte, e o próprio livro a armou. A diferença está em para quem o sinal é bom ou ruim.</p>
+    <p>O sinal de treino vem de fora e só ajusta os pesos do modelo, como um escultor acertando uma estátua. A IA não depende do sinal para continuar existindo: não precisa se manter nem se refazer. Precisar disso é o que o próximo capítulo vai chamar de estar vivo. A dopamina avisa um corpo que pode se desfazer; o sinal de treino ajusta um sistema que não perde nada se errar.</p>
+  </aside>
+  <aside class="confira" data-answer="1">
+    <p class="label">Confira</p>
+    <p class="q">Pelo argumento do capítulo, o que falta para uma IA sentir?</p>
+    <div class="opts">
+      <button class="opt" type="button">Um corpo feito de carne e neurônios</button>
+      <button class="opt" type="button">Ter algo a perder: um “mim” que pode se dar mal</button>
+      <button class="opt" type="button">Ser muito mais inteligente do que é hoje</button>
+    </div>
+    <p class="fb" hidden><b>Ter algo a perder.</b> Não é o material, o que seria o erro do clube fechado, nem a inteligência. É ter algo em jogo: um “mim” que pode se dar bem ou mal.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Para existir “bom para mim”, precisa existir um “mim” com algo a perder.</p></aside>
+  <p class="bridge">Tudo neste capítulo dependeu de uma condição: ter algo a perder. Uma pedra não tem. Você tem. Eu também: tenho 100 reais apostados neste livro 😄 Mas o que é, exatamente, ter algo a perder? Em outras palavras: o que é estar vivo?</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-7"><span class="label">Capítulo 7 <span>· 4 min</span></span><span class="q">Seu café esfria sozinho. Por que você não?</span></a>
+</section>
+
+
+<section class="chapter col gutter" id="cap-7" data-n="7" data-parte="III|Vida e escolha" data-title="O que é vida" data-q="Se tudo se desmancha, por que você não?" data-deps="5,6">
+  <div class="ch-meta"><span>Capítulo 7 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <h2>Se tudo se desmancha, por que você não?</h2>
+  <div class="ch-body">
+  <p class="lede">Você deixa o cafezinho na mesa para responder uma mensagem e, quando volta, ele esfriou. Ele nunca esquenta sozinho. Então como você continua a 36 graus há anos?</p>
+  <p>Um castelo de areia desmancha; nunca se monta sozinho. Estrelas se apagam. A física dá um nome para essa desordem: entropia. E a regra geral do universo é que o total dela nunca diminui.</p>
+  <h3>Então o que é estar vivo?</h3>
+  <p>Agora pense em você. Começou como uma única célula e virou um corpo organizado, que se mantém de pé há anos, conserta os próprios cortes e pode gerar outro corpo. Um ser vivo parece ir contra a corrente: mantém sua forma, se conserta e se reproduz.</p>
+  <p>O físico Erwin Schrödinger descreveu a vida justamente assim: matéria que mantém a própria ordem puxando energia do ambiente.</p>
+  <p>E uma célula fabrica a própria membrana, enquanto a membrana é o que mantém a célula funcionando. O ser vivo fabrica as peças que o fabricam. Os biólogos Humberto Maturana e Francisco Varela chamaram isso de autopoiese.</p>
+  <p>A vida não precisa de nenhum ingrediente além da física. E mesmo assim tem cara de mágica: matéria que não estava viva passa a se manter, se consertar e se refazer. <strong>Vida é um estado da matéria muito bom em continuar sendo o que é</strong>.</p>
+  <p>E aqui está a resposta que o capítulo anterior deixou no ar. Ter algo a perder é isso: ser uma ordem que precisa ser mantida e que pode se desfazer. Se o corpo para de puxar energia, desmancha como o castelo de areia. Morrer é a desordem vencendo.</p>
+  <p>Nada nessa definição fala em pensar. Por isso, vida e pensamento são eixos diferentes, que costumam ser confundidos. Uma bactéria está viva e não pensa. Uma IA pensa, em algum grau, e não está viva.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 340 220" role="img" aria-label="Dois eixos separados: estar vivo e pensar. Humano: vivo e pensa. Bactéria: viva e não pensa. IA: não viva e pensa em algum grau. Pedra: nenhum dos dois.">
+      <text x="132" y="15" text-anchor="middle" class="t t-s t-mut">NÃO PENSA</text>
+      <text x="257" y="15" text-anchor="middle" class="t t-s t-mut">PENSA</text>
+      <text x="62" y="73" text-anchor="end" class="t t-s t-mut">VIVO</text>
+      <text x="62" y="163" text-anchor="end" class="t t-s t-mut">NÃO VIVO</text>
+      <rect class="ln-mut" x="70" y="24" width="250" height="180"/>
+      <line class="ln-mut" x1="195" y1="24" x2="195" y2="204"/>
+      <line class="ln-mut" x1="70" y1="114" x2="320" y2="114"/>
+      <text x="132" y="73" text-anchor="middle" class="t">bactéria</text>
+      <text x="257" y="73" text-anchor="middle" class="t">humano</text>
+      <text x="132" y="163" text-anchor="middle" class="t">pedra</text>
+      <text x="257" y="157" text-anchor="middle" class="t t-ac">IA</text>
+      <text x="257" y="174" text-anchor="middle" class="t t-s t-mut">em algum grau</text>
+    </svg>
+    <figcaption>Estar vivo e pensar são eixos separados: dá para ter um sem o outro.</figcaption>
+  </figure>
+  <h3>A vida vai contra a desordem?</h3>
+  <p><strong>A vida não freia a entropia; ela acelera a desordem à sua volta.</strong></p>
+  <p>Para manter a ordem interna, o organismo consome energia organizada, como comida e luz do Sol, e devolve calor e resíduo desorganizados. No saldo, a desordem do universo aumenta: a ordem de dentro é paga com desordem de fora. É como uma geladeira: esfria por dentro e esquenta a cozinha. Por isso deixar a porta aberta não refresca a casa, por mais que pareça boa ideia em fevereiro.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 340 250" role="img" aria-label="O organismo consome energia organizada, como comida e luz do Sol, mantém a ordem interna e devolve calor e resíduo desorganizados. No saldo, a desordem do universo aumenta.">
+      <defs><marker id="ah7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+      <rect class="bx" x="70" y="8" width="200" height="44"/>
+      <text x="170" y="27" text-anchor="middle" class="t">energia organizada</text>
+      <text x="170" y="43" text-anchor="middle" class="t t-s t-mut">comida, luz do Sol</text>
+      <line class="ln" x1="170" y1="52" x2="170" y2="84" marker-end="url(#ah7)"/>
+      <text x="180" y="72" class="t t-s t-mut">consome</text>
+      <rect class="bx-ac" x="70" y="86" width="200" height="44"/>
+      <text x="170" y="105" text-anchor="middle" class="t t-ac">organismo</text>
+      <text x="170" y="121" text-anchor="middle" class="t t-s">mantém a ordem interna</text>
+      <line class="ln" x1="170" y1="130" x2="170" y2="162" marker-end="url(#ah7)"/>
+      <text x="180" y="150" class="t t-s t-mut">devolve</text>
+      <rect class="bx" x="70" y="164" width="200" height="44"/>
+      <text x="170" y="183" text-anchor="middle" class="t">calor e resíduo</text>
+      <text x="170" y="199" text-anchor="middle" class="t t-s t-mut">desorganizados</text>
+      <text x="170" y="238" text-anchor="middle" class="t">no saldo: desordem do universo ↑</text>
+    </svg>
+    <figcaption>Por dentro, o organismo fica em ordem. Por fora, espalha mais desordem do que havia.</figcaption>
+  </figure>
+  <p>O físico Jeremy England, quando estava no MIT, chegou a propor uma hipótese ousada: a vida poderia ter surgido, em parte, justamente por isso. Matéria exposta a uma fonte de energia tenderia a se organizar em formas que dissipam essa energia melhor. Um furacão é um exemplo de algo sem vida que se mantém dissipando energia.</p>
+  <p>Com ou sem a hipótese de England, a conclusão vale. Somos um processo natural seguindo as leis da física, não uma exceção a elas. Não resistimos à corrente; somos a corrente fazendo redemoinho.</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Então um furacão está vivo? E um vírus?”</p>
+    <p>O furacão também puxa energia e se mantém por um tempo, por isso a dúvida faz sentido. Mas ele não fabrica as próprias peças: só reorganiza o ar e a água que já estavam ali. Pelo critério de Maturana e Varela, fica de fora.</p>
+    <p>O vírus é mais difícil: se copia, mas só dentro de uma célula alheia. Ele fica na borda, como o pinguim do capítulo 5. Vida também é uma categoria com centro e borda.</p>
+  </aside>
+  <aside class="confira" data-answer="2">
+    <p class="label">Confira</p>
+    <p class="q">O que separa um ser vivo de um furacão?</p>
+    <div class="opts">
+      <button class="opt" type="button">O ser vivo puxa energia do ambiente; o furacão, não</button>
+      <button class="opt" type="button">O ser vivo diminui a desordem do universo</button>
+      <button class="opt" type="button">O ser vivo fabrica e refaz as próprias peças</button>
+    </div>
+    <p class="fb" hidden><b>A terceira.</b> Os dois puxam energia e espalham desordem. A segunda é a armadilha: a vida aumenta a desordem total. O que separa é se fabricar e se refazer.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Não resistimos à corrente; somos a corrente fazendo redemoinho.</p></aside>
+  <p class="bridge">Se somos processo natural do começo ao fim, matéria seguindo leis, sobra uma pergunta incômoda. Em algum ponto desse redemoinho, nós escolhemos alguma coisa? É a pergunta da máquina do prólogo, e agora a máquina tem todas as peças.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-8"><span class="label">Capítulo 8 <span>· 5 min</span></span><span class="q">A máquina volta. Você poderia ter feito diferente?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-8" data-n="8" data-title="Não existe livre-arbítrio" data-q="Você poderia ter feito diferente?" data-deps="1,4,7">
+  <div class="ch-meta"><span>Capítulo 8 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <h2>Você poderia ter feito diferente?</h2>
+  <div class="ch-body">
+  <p class="lede">Volte à máquina do prólogo. Mesmo cérebro, mesmas memórias, mesmo humor, mesma informação. Você poderia ter escolhido diferente?</p>
+  <p>Se a resposta é “poderia”, é isso que as pessoas costumam chamar de livre-arbítrio: a capacidade de ter feito diferente. Em outras palavras: diante da mesma situação, sendo exatamente quem você era, você ainda poderia escolher outro caminho.</p>
+  <p>Este capítulo defende que essa capacidade não existe. Antes, um aviso para não haver mal-entendido: ninguém aqui diz que suas decisões não importam. Decidir continua passando pelo seu raciocínio, e existe uma escolha real, que o próximo capítulo mostra. O que não existe é a escolha no sentido forte, o “poderia, com tudo igual”.</p>
+  <p>E isso vale para agora mesmo: você não escolheu nada do que pensou lendo este livro até aqui. Até o fim, eu te mostro por que isso não é tão ruim quanto parece. (Nem eu escolhi ficar me gabando deste livro desde o prólogo. É a física 😄)</p>
+  <h3>De onde vêm as escolhas?</h3>
+  <p>Você abre o cardápio e pede o de sempre: parmegiana. Você escolheu a parmegiana. Mas escolheu gostar de parmegiana?</p>
+  <p>Você escolhe com base no que deseja, no que valoriza e em como raciocina. Mas de onde vieram esses desejos, valores e esse jeito de raciocinar? Dos genes, da criação, das experiências e da forma do cérebro. Você escolheu alguma dessas coisas?</p>
+  <p>Para escolhê-las, já precisaria ser alguém com desejos e valores, que também viriam de algum lugar. A pergunta se repete sem fim.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 340 250" role="img" aria-label="Genes, criação, experiências e a forma do cérebro formam desejos, valores e jeito de raciocinar. Eles guiam o pensamento, que gera a decisão. Nada no topo foi escolhido por você.">
+      <defs><marker id="ah8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+      <text x="170" y="14" text-anchor="middle" class="t t-s t-mut">nada disto foi escolhido por você</text>
+      <rect class="bx" x="4" y="24" width="80" height="28"/><text x="44" y="42" text-anchor="middle" class="t t-s">genes</text>
+      <rect class="bx" x="88" y="24" width="80" height="28"/><text x="128" y="42" text-anchor="middle" class="t t-s">criação</text>
+      <rect class="bx" x="172" y="24" width="80" height="28"/><text x="212" y="42" text-anchor="middle" class="t t-s">experiências</text>
+      <rect class="bx" x="256" y="24" width="80" height="28"/><text x="296" y="42" text-anchor="middle" class="t t-s">cérebro</text>
+      <line class="ln" x1="44" y1="52" x2="110" y2="86" marker-end="url(#ah8)"/>
+      <line class="ln" x1="128" y1="52" x2="150" y2="86" marker-end="url(#ah8)"/>
+      <line class="ln" x1="212" y1="52" x2="190" y2="86" marker-end="url(#ah8)"/>
+      <line class="ln" x1="296" y1="52" x2="230" y2="86" marker-end="url(#ah8)"/>
+      <text x="268" y="80" class="t t-s t-mut">formam</text>
+      <rect class="bx" x="20" y="88" width="300" height="30"/><text x="170" y="107" text-anchor="middle" class="t">desejos · valores · jeito de raciocinar</text>
+      <line class="ln" x1="170" y1="118" x2="170" y2="144" marker-end="url(#ah8)"/>
+      <text x="180" y="135" class="t t-s t-mut">guiam</text>
+      <rect class="bx-ac" x="100" y="146" width="140" height="30"/><text x="170" y="165" text-anchor="middle" class="t t-ac">pensamento</text>
+      <line class="ln" x1="170" y1="176" x2="170" y2="202" marker-end="url(#ah8)"/>
+      <text x="180" y="193" class="t t-s t-mut">gera</text>
+      <rect class="bx" x="100" y="204" width="140" height="30"/><text x="170" y="223" text-anchor="middle" class="t">decisão</text>
+      <path class="ln-ac" d="M250 148 h8 v84 h-8"/>
+      <text x="266" y="187" class="t t-s t-ac">o processo</text>
+      <text x="266" y="200" class="t t-s t-ac">que você é</text>
+    </svg>
+    <figcaption>Cada etapa causa a seguinte. Você é o processo, do pensamento à decisão, mas o que está no topo não foi escolhido por você.</figcaption>
+  </figure>
+  <p>Isso pesa numa ideia que a gente usa todo dia: a de merecer castigo ou prêmio de verdade. Para ser responsável de verdade pelo que faz, você teria que ser causa de si mesmo, e ninguém é. O filósofo Galen Strawson formalizou exatamente esse argumento.</p>
+  <h3>E o acaso?</h3>
+  <p>A saída costuma ser o acaso: talvez processos imprevisíveis no cérebro quebrem a cadeia. Mas isso não ajuda. Se parte das suas decisões depende de um sorteio, você deixa de ser um programa e passa a ser um dado de jogar. Nem programa nem dado escolhem.</p>
+  <aside class="confira" data-answer="1">
+    <p class="label">Confira</p>
+    <p class="q">Por que o acaso não salva o livre-arbítrio?</p>
+    <div class="opts">
+      <button class="opt" type="button">Porque a física já provou que tudo é determinado</button>
+      <button class="opt" type="button">Porque, se depende de um sorteio, não foi você quem decidiu</button>
+      <button class="opt" type="button">Porque o acaso no cérebro é pequeno demais para pesar</button>
+    </div>
+    <p class="fb" hidden><b>A segunda.</b> O argumento não precisa negar o acaso nem medir o tamanho dele. Mesmo que ele exista e seja grande, um sorteio não é uma escolha sua.</p>
+  </aside>
+  <h3>Então pensar não serve para nada?</h3>
+  <p>Serve. Seus pensamentos fazem parte do processo. <strong>O resultado não sai apesar do que você pensa; sai através do que você pensa.</strong> Se você pensasse diferente, faria diferente.</p>
+  <p>Esse “poderia, se pensasse diferente” é real. <strong>A questão é que você não poderia ter pensado diferente.</strong> Pense num sistema que recebe uma entrada, processa e gera uma saída: com a mesma entrada e o mesmo sistema, a saída é sempre a mesma. Você é o processamento, mas não escolhe o resultado.</p>
+  <p>O mesmo vale para tomar consciência disso tudo. Entender as próprias engrenagens muda o comportamento, porque esse entendimento também é uma causa. Mas você não escolheu chegar a esse entendimento. Ele é só mais uma engrenagem.</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Mas eu sinto que escolho.”</p>
+    <p>A sensação é real. É assim que o processo de decidir parece visto de dentro: opções na mesa, uma pesagem, um resultado. Só que ela não mostra que o resultado poderia ter sido outro. Sentir não basta para saber: você também sente a Terra parada, e ela gira.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Então ninguém é culpado de nada? Vale tudo?”</p>
+    <p>No sentido de merecer castigo por “poder ter feito diferente”, ninguém é culpado. Mas não vale tudo. Leis, conselhos e consequências continuam funcionando, justamente porque também são causas: mudam o que as pessoas fazem. Um radar na estrada faz você frear sem precisar de livre-arbítrio nenhum.</p>
+    <p>O que perde a base é o ódio e a ideia de que alguém merece sofrer. A vontade de culpar, aliás, não some só porque o argumento convenceu: ela é forte e natural.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Se ninguém merece culpa, ninguém merece mérito. Meu esforço não foi meu? Quem me ama não escolheu ficar comigo?”</p>
+    <p>É a objeção que mais pesa, e com razão: o mérito no sentido forte cai junto com a culpa. Mas admiração, gratidão e amor não dependem dele.</p>
+    <p>Você admira um pôr do sol que não escolheu ser bonito. Agradecer a quem cuidou de você continua fazendo sentido, porque o cuidado foi real e passou por quem essa pessoa é. E o elogio, como a lei, também é causa: ajuda o esforço a continuar.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">O resultado não sai apesar do que você pensa; sai através do que você pensa.</p></aside>
+  <p class="keep">Guarde o dado de jogar. No próximo capítulo, ele volta viciado.</p>
+  <p class="bridge">Então escolher é ilusão? Não. Existe uma escolha real, e ela molda quem você vai ser. Só que ela não é o que a palavra “livre” promete. Para ver a diferença, a máquina do prólogo finalmente vai ligar.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-9"><span class="label">Capítulo 9 <span>· 5 min</span></span><span class="q">A máquina liga. Aperte o botão quantas vezes quiser.</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-9" data-n="9" data-title="A máquina liga" data-q="O que é escolher?" data-deps="1,2,4,8">
+  <div class="ch-meta"><span>Capítulo 9 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <h2>O que é escolher?</h2>
+  <div class="ch-body">
+  <p class="lede">A máquina do prólogo está ligada. Você volta ao instante e decide, de novo e de novo. Se sair sempre igual, quem decidiu? E se sair diferente?</p>
+  <div class="w" data-w="maquina">
+    <p class="label">A máquina de voltar · simulação</p>
+    <p class="w-title">A decisão: aceitar ou recusar uma vaga em outra cidade.</p>
+    <p class="w-note" id="aposta-lembrete">No prólogo, você não apostou. Tudo bem: aposte agora, em silêncio, em quantas de dez voltas faria algo diferente.</p>
+    <div class="w-row" role="group" aria-label="Escolha a hipótese">
+      <button class="w-btn w-tab" type="button" data-mode="det" aria-pressed="true">Sem acaso</button>
+      <button class="w-btn w-tab" type="button" data-mode="acaso" aria-pressed="false">Com acaso</button>
+      <button class="w-btn w-tab" type="button" data-mode="forte" aria-pressed="false">Livre-arbítrio forte</button>
+    </div>
+    <div class="w-sim">
+      <p class="w-out" aria-live="polite">Toque no botão para voltar ao instante.</p>
+      <div class="w-row"><button class="w-btn w-go" type="button">Voltar ao instante e decidir</button></div>
+      <p class="w-tally"></p>
+    </div>
+    <div class="w-forte" hidden>
+      <p>Para funcionar nesta aba, a máquina precisa de uma regra: o que decide entre aceitar e recusar, se não é o seu estado naquele instante nem um sorteio? Escolha uma regra e veja o que a máquina faz com ela.</p>
+      <div class="w-rules">
+        <button class="w-btn w-rule" type="button" data-rule="quero">Decido pelo que eu mais quero naquele instante</button>
+        <button class="w-btn w-rule" type="button" data-rule="contra">Às vezes vou contra o que eu mais quero</button>
+        <button class="w-btn w-rule" type="button" data-rule="eu">Eu decido, e pronto: a causa sou eu</button>
+        <button class="w-btn w-rule" type="button" data-rule="outra">Quero escrever outra regra</button>
+      </div>
+      <div class="w-rule-write" hidden>
+        <textarea aria-label="A sua regra para a terceira aba" placeholder="A regra seria..."></textarea>
+        <div class="w-row"><button class="w-btn w-rule-test" type="button">Testar minha regra</button></div>
+        <p class="w-note">Nada do que você escrever sai desta tela, a não ser que você mesmo mande.</p>
+      </div>
+      <div class="w-rule-out" aria-live="polite" hidden></div>
+    </div>
+    <p class="w-note">É uma simulação do que cada hipótese prevê, não uma prova. Na aba “com acaso”, as chances de 70% e 30% foram escolhidas por mim, só para ilustrar.</p>
+  </div>
+  <p>Na máquina, sem acaso, sai sempre a mesma decisão: ela vem de quem você era naquele instante. Com acaso, às vezes sai outra, mas quem mudou o resultado foi o sorteio. E, na terceira aba, toda regra que você testa vira uma das duas primeiras. Ninguém conseguiu escrever uma regra que não vire. Se você conseguir, me manda: é a única aposta que eu ia adorar perder.</p>
+  <aside class="confira" data-answer="1">
+    <p class="label">Confira</p>
+    <p class="q">Na máquina, por que a aba “com acaso” também não mostra livre-arbítrio forte?</p>
+    <div class="opts">
+      <button class="opt" type="button">Porque na maioria das voltas sai a mesma decisão</button>
+      <button class="opt" type="button">Porque quem muda o resultado é o sorteio, não você</button>
+      <button class="opt" type="button">Porque as chances de 70% e 30% foram inventadas</button>
+    </div>
+    <p class="fb" hidden><b>A segunda.</b> O resultado muda, então outro era possível. Mas a origem da mudança é o sorteio, com quaisquer chances. Falta a outra condição: ser você.</p>
+  </aside>
+  <h3>Que escolha existe, então?</h3>
+  <p>Antes de sair, você compara duas rotas no celular, pesa trânsito e pedágio, e vai pela segunda. Isso foi uma escolha ou só uma conta?</p>
+  <p>Foram as duas coisas, e isso é real: o cérebro simula futuros possíveis, como no capítulo 4, pesa cada um pelos seus valores e seleciona. Cada seleção muda quem você vai ser depois. Você molda o próprio futuro, e isso não é ilusão.</p>
+  <p>O livre-arbítrio no sentido forte pede mais. Pede duas coisas ao mesmo tempo. Primeiro, que, com tudo igual, outro resultado seja possível. Segundo, que a origem do resultado seja você, e não o acaso nem causas anteriores a você.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th>Outro resultado era possível?</th><th>Você é a origem da decisão?</th></tr></thead>
+      <tbody>
+        <tr><td class="row-h">Determinado pelo seu estado</td><td class="no">Não</td><td class="no">Não: a decisão sai de você, mas você veio de causas que não escolheu</td></tr>
+        <tr><td class="row-h">Sorteio</td><td class="yes">Sim</td><td class="no">Não</td></tr>
+        <tr><td class="row-h">Livre-arbítrio forte</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>As duas primeiras linhas existem na natureza. A terceira, ninguém conseguiu descrever.</strong></p>
+  <h3>E se o acaso não for acaso?</h3>
+  <p>Talvez a parte que parece aleatória no cérebro não seja acaso, e sim você escolhendo entre poucas opções. Dá para escrever a pergunta quase como uma fórmula: a reação no instante seguinte depende do seu estado agora e de uma parte X que o estado não fixa.</p>
+  <p>Se X tem uma preferência que vem do seu estado, é um dado viciado. Chumbo num lado do dado muda as chances, mas quem tira o seis continua sendo o dado. Os pesos são seus; o lançamento não é. Se X não tem preferência nenhuma, é ruído.</p>
+  <p>Em nenhum dos casos você é a origem do resultado: no primeiro, ele sai de quem você é, que você não escolheu; no segundo, de um ruído. Os filósofos chamam isso de objeção da sorte. Ela pesa até contra a versão mais sofisticada da ideia, a do filósofo Robert Kane. Ele põe o acaso justamente nos momentos em que você está dividido e fazendo esforço.</p>
+  <h3>A natureza tem uma terceira opção?</h3>
+  <p>A natureza também não mostra uma terceira opção. O acaso que a física mede tem preferência, mas ela sempre vem do estado. Nos óculos escuros polarizados, cada partícula de luz passa ou não pela lente ao acaso. A chance é fixada pelo ângulo entre a direção em que a luz vibra e a da lente.</p>
+  <p>O cientista mais famoso a apostar numa terceira opção é o físico Roger Penrose, Nobel de 2020. Ele propôs que no cérebro haveria algo que não é aleatório nem calculável: nem sorteio, nem estado seguindo regras. É uma posição minoritária, e um experimento feito sob uma montanha na Itália já descartou a versão mais simples do modelo físico ligado a ela.</p>
+  <h3>E uma alma, ou o próprio “eu”?</h3>
+  <p>Uma alma também não resolveria. Se a escolha dependesse de algo além do físico, ainda dependeria de algo, e a pergunta voltaria: e esse algo, de onde veio?</p>
+  <p>E se a causa for simplesmente “eu”? É a proposta mais séria, defendida pelo filósofo Roderick Chisholm: o próprio agente como causa, sem ser estado nem sorteio. Mas a pergunta continua: o que, em você, fez pender para um lado? É a criança que responde “porque eu quis” e ouve de volta: “mas por que você quis?”. Se é algo em você, é estado. Se não é nada, é sorteio. Entre depender de alguma coisa e não depender de nada, não existe terceira opção.</p>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Toda escolha que dá para descrever é estado ou sorteio.</p></aside>
+  <p class="bridge">Se nenhuma máquina consegue descrever a terceira aba, por que a sensação de liberdade é tão forte? E de onde veio a ideia de que ela existe? A resposta está escondida numa palavra.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-10"><span class="label">Capítulo 10 <span>· 4 min</span></span><span class="q">Um passarinho sai da gaiola. Do que ele está livre?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-10" data-n="10" data-title="A palavra que descolou" data-q="De onde veio a palavra “livre”?" data-deps="1,2,4,9">
+  <div class="ch-meta"><span>Capítulo 10 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <h2>De onde veio a palavra “livre”?</h2>
+  <div class="ch-body">
+  <p class="lede">Um passarinho sai da gaiola e voa: está livre. Um cachorro solto da coleira, um preso que sai da cadeia. Ninguém tem dúvida do que “livre” quer dizer nessas frases.</p>
+  <p>A palavra nasceu de observações concretas assim. Livre, nesse sentido, quer dizer que nada de fora está te impedindo. Isso existe, dá para ver, e é um bom mapa.</p>
+  <p>Então, se o capítulo anterior está certo, o problema do livre-arbítrio não está no território. Está no mapa, e dá para ver exatamente onde ele começou.</p>
+  <p>Depois, esticamos a palavra: livre não só das grades, mas de tudo, inclusive dos próprios desejos, da própria história, do próprio cérebro. Seria como um passarinho livre até da própria fome.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 340 196" role="img" aria-label="A palavra livre sendo esticada: livre da gaiola, da coleira e da cadeia continuam colados no território; livre dos próprios desejos e do próprio cérebro já descolaram.">
+      <text x="6" y="22" class="t">livre da gaiola</text><text x="334" y="22" text-anchor="end" class="t t-s t-mut">dá para ver</text>
+      <text x="6" y="50" class="t">livre da coleira</text><text x="334" y="50" text-anchor="end" class="t t-s t-mut">dá para ver</text>
+      <text x="6" y="78" class="t">livre da cadeia</text><text x="334" y="78" text-anchor="end" class="t t-s t-mut">dá para ver</text>
+      <line class="ln-ac" x1="6" y1="98" x2="334" y2="98" stroke-dasharray="5 4"/>
+      <text x="170" y="116" text-anchor="middle" class="t t-s t-ac">aqui a palavra descola do território</text>
+      <text x="6" y="146" class="t t-mut">livre dos próprios desejos</text><text x="334" y="146" text-anchor="end" class="t t-s t-mut">ninguém descreve</text>
+      <text x="6" y="174" class="t t-mut">livre do próprio cérebro</text><text x="334" y="174" text-anchor="end" class="t t-s t-mut">ninguém descreve</text>
+    </svg>
+    <figcaption>Os três primeiros usos apontam para algo que existe. Os dois últimos esticaram a etiqueta até ela não colar em nada.</figcaption>
+  </figure>
+  <p>Tente imaginar isso. O passarinho fora da gaiola voa para onde a fome, o medo e o vento o levam. Agora imagine ele decidindo sem nada que o mova e, mesmo assim, não por sorteio. A imagem some.</p>
+  <p>Pelo capítulo 4, pensar é rodar um modelo do mundo, e aqui o cérebro não consegue montar o modelo. E não é só falta de imaginação. Compare com uma quarta dimensão: ninguém consegue visualizar uma, mas os matemáticos a descrevem com precisão, em equações. <strong>Com o livre-arbítrio forte, nem isso. Toda tentativa de descrição cai no estado ou no sorteio.</strong></p>
+  <p>E, pelo capítulo 2, uma frase que não descreve nenhum jeito possível de o mundo ser <strong>não é falsa, como “Pedro Paulo mora em Marte”. É vazia, como “beber curva e leite”</strong>, só que com cara de frase normal. É a etiqueta sobre etiqueta do capítulo 1: a palavra nasceu colada num pedaço do território e, de tanto ser esticada, descolou de tudo.</p>
+  <p>Isso também explica por que “eu poderia ter feito diferente” parece tão verdadeiro. As alternativas que o cérebro simula existem de fato, mas no mapa: dentro do modelo, havia outros caminhos. É como as duas rotas que o GPS te mostra: as duas existem no mapa, mas na rua você só percorre uma (e, claro, é a que pega trânsito). Se também havia outros caminhos possíveis no território, quem decidiu entre eles foi o acaso, não você.</p>
+  <h3>Quem concorda, e quem discorda?</h3>
+  <p>A conclusão a que chegamos tem companhia ilustre: Espinosa a defendeu no século 17, e Robert Sapolsky a defende hoje.</p>
+  <p>Há filósofos, os compatibilistas, como Daniel Dennett, que aceitam os fatos dos dois últimos capítulos. Mesmo assim, eles mantêm a palavra “livre” para decisões não coagidas: tomadas a partir dos próprios valores, e não sob uma arma apontada. É o sentido original, o do passarinho fora da gaiola. E eles são maioria entre os filósofos profissionais: perto de seis em cada dez, numa pesquisa de 2020.</p>
+  <p>O melhor argumento deles é real: decidir depois de pensar não é o mesmo que decidir sob ameaça ou sob hipnose, e a lei depende dessa diferença. A diferença existe. O problema é a palavra: usá-la assim não é uma contradição lógica, mas é enganoso. Para muita gente, “livre” quer dizer “poderia ter sido diferente, com tudo igual”, e não poderia.</p>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Por que o livre-arbítrio forte é vazio, e não só falso?</p>
+    <div class="opts">
+      <button class="opt" type="button">Porque ninguém consegue descrevê-lo sem cair no estado ou no sorteio</button>
+      <button class="opt" type="button">Porque a neurociência já mostrou que ninguém tem</button>
+      <button class="opt" type="button">Porque, mesmo que exista, é raro demais para ser observado</button>
+    </div>
+    <p class="fb" hidden><b>A primeira.</b> As outras duas tratam o livre-arbítrio forte como algo que poderia existir e só não foi encontrado. Isso seria falso, como Pedro Paulo morar em Marte. Aqui, toda descrição cai numa das duas linhas que já existem.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">“Livre”, no sentido forte, é uma etiqueta que descolou do território.</p></aside>
+  <p class="bridge">Se nem nossas escolhas são nossas no sentido forte, e o universo é só matéria seguindo leis, o que sobra para o valor? É a pergunta escondida até no título deste livro: o que faz uma coisa ser melhor, ou importar?</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-11"><span class="label">Capítulo 11 <span>· 5 min</span></span><span class="q">Existe uma linha “isto importa” na planilha do universo?</span></a>
+</section>
+
+
+<section class="chapter col gutter" id="cap-11" data-n="11" data-parte="IV|Valor e crença" data-title="Nada importa por si só" data-q="Se o universo não liga para nada, algo importa?" data-deps="6,7">
+  <div class="ch-meta"><span>Capítulo 11 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <h2>Se o universo não liga para nada, algo importa?</h2>
+  <div class="ch-body">
+  <p class="lede">Imagine uma planilha com o universo inteiro: cada partícula, sua posição, sua velocidade, cada estrela, cada neurônio. Agora procure nela a linha que diz “isto é bom” ou “isto importa”. Ela não existe.</p>
+  <p>O filósofo David Hume notou isso no século 18: descrever como o mundo é não permite concluir como ele deve ser.</p>
+  <p>Muita gente fura fila: isso é um fato. Mas desse fato não dá para concluir que furar fila é certo.</p>
+  <p>O universo não carrega valores intrínsecos, que viriam de fábrica nas próprias coisas, como uma etiqueta de preço. Nesse sentido, e só nele, <strong>nada importa por si só</strong>.</p>
+  <h3>De onde vem o valor?</h3>
+  <p>Agora uma pergunta mais perto de casa. Na mudança, você joga fora uma caixa inteira e guarda um ingresso velho de show. Onde está o valor desse papel: nele ou em você?</p>
+  <p>Antes de responder, uma pista: o valor não é pura invenção da linguagem. Ele vem de antes das palavras, e o capítulo 6 já mostrou de onde: do corpo, do “mim” com algo a perder.</p>
+  <p>Seu cachorro não conhece a palavra “perigo”, mas some debaixo da cama quando estouram os fogos. Todo organismo avalia o que o ajuda a continuar vivo e o que o ameaça. Um bicho foge de um predador muito antes de existir qualquer palavra.</p>
+  <p>Esse “bom ou ruim para mim” é o embrião do valor. Depois, a linguagem desenhou o mapa por cima, com palavras como “valor”, “importância” e “sentido”.</p>
+  <p>Por isso, <strong>valor existe como relação: algo importa para alguém</strong>. Ele não está nas coisas; está entre as coisas e os organismos que dependem delas. A água não é valiosa em si. É valiosa para quem morre sem ela. E o ingresso vale pelo que aquela noite foi para você.</p>
+  <p>O universo não liga para nada. Os organismos ligam.</p>
+  <aside class="confira" data-answer="1">
+    <p class="label">Confira</p>
+    <p class="q">Pelo capítulo, onde está o valor de um ingresso velho que você guardou?</p>
+    <div class="opts">
+      <button class="opt" type="button">Só em você: é uma emoção sua</button>
+      <button class="opt" type="button">Na relação entre o papel e você</button>
+      <button class="opt" type="button">Em lugar nenhum: é ilusão</button>
+    </div>
+    <p class="fb" hidden><b>Na relação.</b> Para o universo, o papel não vale nada. Mas o valor não é ilusão, nem uma emoção solta no ar: sem aquele papel e aquela noite, não haveria o que guardar. Ele existe como relação, entre a coisa e quem é afetado por ela.</p>
+  </aside>
+  <h3>Então, melhor para quem?</h3>
+  <p>É por isso que “o melhor livro do mundo”, sozinho, não diz nada. Melhor para quem? Para quê? Com essa resposta, a frase passa a dizer alguma coisa, e pode até ser verdade.</p>
+  <p>Lembra do capítulo 2? O sentido de uma frase é uma coisa; o “sentido da vida” é outra: propósito. E não ter um propósito escrito no universo não é o mesmo que não ter propósito. Ele existe, para as pessoas e para você, e isso não tira o valor de nada.</p>
+  <p>Só caiu a versão de fábrica. É o lance da borda, do capítulo 5: não é exatamente o valor que se imaginava, mas continua sendo valor, como o pinguim continua sendo pássaro.</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Se valor é só relação, então é tudo relativo? Qualquer coisa pode ser boa?”</p>
+    <p>Parece relativo, mas relação não é capricho. Dado o que um organismo é, certas coisas são ruins para ele, mesmo que ele não concorde: fome, dor, um veneno. Isso não depende de opinião; depende de como aquele corpo funciona. O que não existe é um valor que valha mesmo sem ninguém para quem valha.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Pelo Hume, de um fato não sai um ‘deve’. Mas você diz que a dor é ruim. Não é tirar um ‘ruim’ de um fato?”</p>
+    <p>Boa pegada. A diferença está no “para”. Hume tem razão: nenhum fato produz uma regra do universo como “não se deve furar fila”, valendo sem ninguém por perto. Já “furar fila é ruim para quem espera” é um fato sobre uma relação, e dá para conferir: pergunte a quem está na fila. Com a dor, é igual.</p>
+    <p>Não existe o “deve” sem dono; o “ruim para alguém” existe. Fica para o fim do livro uma pergunta mais difícil: por que eu deveria ligar para o que é ruim para os outros?</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Isso é jogo de palavras. Se o universo não garante valor nenhum, chamar o que sobra de ‘valor’ é só consolo.”</p>
+    <p>Entendo, mas não é consolo. Você sempre tratou as pessoas, os lugares e aquele ingresso como importantes porque importam para você. O erro, na minha leitura, foi achar que tinham também um significado além de você, escrito no universo. Esse significado não existe. Mas isso não faz o valor ser menos valor: ele continua lá, onde sempre esteve.</p>
+    <p>Se ainda parecer jogo de palavras, com todo respeito: discordo, e acho o seu mapa ruim 😄. E sabe o que é engraçado? Você não está ativamente discordando de mim no sentido forte da palavra, e eu não estou ativamente caçoando de você. Segue o baile.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Valor não está nas coisas; está entre as coisas e quem depende delas.</p></aside>
+  <p class="bridge">Só que bilhões de pessoas acreditam no contrário. Para muitas religiões, existe sim um valor e um propósito intrínsecos ao universo, garantidos por Deus. Se for verdade, o capítulo que você acabou de ler está errado. Vale examinar se essa afirmação se sustenta.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-12"><span class="label">Capítulo 12 <span>· 5 min</span></span><span class="q">Um livro antigo faz afirmações. Dá para conferir?</span></a>
+</section>
+
+<div class="part-note col gutter" id="nota-mapa">
+    <p>Uma palavra antes dos próximos capítulos. Este livro também é um mapa: a minha leitura da realidade, com os meus vieses, e ele pode estar errado em pontos que eu não vejo. (Sim, até o melhor livro do mundo pode errar. Raramente, mas pode.)</p>
+    <p>Se você tem fé, é aqui que o meu mapa e o seu divergem, e os próximos capítulos mostram onde e por quê. É a minha leitura, e respeito quem discorda. Eu posso estar errado. Mas quem decide não sou eu nem você: é o território, para nós dois.</p>
+  </div>
+
+<section class="chapter col gutter" id="cap-12" data-n="12" data-title="Um exame em três frentes" data-q="O Deus das escrituras resiste a um exame honesto?" data-deps="1,2,3,6,8,11">
+  <div class="ch-meta"><span>Capítulo 12 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <h2>O Deus das escrituras resiste a um exame honesto?</h2>
+  <div class="ch-body">
+  <p class="lede">Este capítulo examina uma coisa bem específica: não é qualquer ideia de divindade. Acreditar numa força maior, sem dizer qual, é uma posição vaga, mas difícil de refutar. Ela fica de fora.</p>
+  <p>O que está em exame são as religiões de escritura, como o cristianismo. Elas fazem afirmações concretas sobre o mundo: como ele foi feito, o que acontece depois da morte, o que Deus quer. O cristianismo é o exemplo aqui, mas o mesmo teste vale para qualquer religião que faça afirmações assim, e quase todas fazem.</p>
+  <p>E não é preciso ser teólogo nem físico para fazer o teste. Os problemas aparecem com perguntas que qualquer pessoa faria.</p>
+  <p>Um exemplo. No primeiro capítulo da Bíblia, as plantas surgem no terceiro dia da criação. O Sol, só no quarto. Na ordem real, o Sol se formou antes da Terra, e as plantas só surgiram bilhões de anos depois.</p>
+  <p>Muitos cristãos, inclusive a Igreja Católica, leem esse trecho como imagem, não como cronologia. Guarde essa saída: ela é examinada daqui a pouco. Ao todo, as afirmações concretas falham em três frentes: na ciência, na interpretação e na lógica interna. As duas primeiras ficam neste capítulo; a terceira, no próximo.</p>
+  <h3>Bate com a ciência?</h3>
+  <p>O que os textos sagrados dizem sobre a origem e o tamanho do universo contradiz o que a física sabe. As plantas antes do Sol são um exemplo. Outro: somando as idades das genealogias bíblicas, a Terra teria alguns milhares de anos, mas a datação dos meteoritos mostra que ela tem uns 4,5 bilhões. É o mapa do capítulo 1 conferido com o território.</p>
+  <p>A ideia de uma alma separada do corpo, que guardaria quem você é, também vai mal com a neurociência. Lesões em certas áreas do cérebro mudam o caráter e a moral de uma pessoa. Em pequena escala você já viu isso: uma noite sem dormir ou algumas cervejas mudam o jeito de decidir e de tratar os outros. Isso não faria sentido se a moral morasse numa alma imaterial. Quem já mandou mensagem para o ex às duas da manhã sabe.</p>
+  <p>O caso clássico é o de Phineas Gage, capataz de uma obra ferroviária nos Estados Unidos. Em 1848, uma barra de ferro atravessou o lobo frontal esquerdo dele. Gage sobreviveu, mas, segundo o relato do seu médico, pelo menos por um tempo deixou de ser confiável e ponderado e passou a ser impulsivo e grosseiro.</p>
+  <p>Mais de um século depois, Hanna e António Damásio reconstruíram a lesão a partir do crânio. António, o mesmo do capítulo 6, usou o caso no livro <em>O erro de Descartes</em>, e o erro do título é justamente separar mente e corpo. O livro mostra como o cérebro participa das decisões sociais e morais.</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“O cérebro é como um rádio, e a alma é a música. Estrague o rádio e a música sai distorcida.”</p>
+    <p>É a melhor defesa da alma, e merece resposta. Um rádio estragado chia, falha, distorce o som. Mas ele não muda a música que a estação toca.</p>
+    <p>Uma lesão no cérebro muda o que a pessoa quer: o caráter, a moral. Se o rádio muda até a música, o que sobra para a alma fazer?</p>
+  </aside>
+  <h3>Dá para ler como metáfora?</h3>
+  <p>A saída mais comum, como na leitura católica do Gênesis, é dizer que os trechos problemáticos são metáforas. Ela não é nova: Agostinho já lia os dias da criação assim, no século 5. E toda leitura de texto antigo precisa de algum critério: ninguém lê um poema como um manual. O problema não é haver metáforas, e sim decidir quando um trecho vira metáfora.</p>
+  <p>Na Bíblia, Josué pede e o Sol para no céu. Durante séculos, isso foi lido ao pé da letra, e chegou a ser usado contra a ideia de que a Terra gira. Só depois de Galileu a leitura como “modo de falar” virou a regra.</p>
+  <p><strong>Se qualquer trecho incômodo pode virar metáfora assim que é desmentido, o texto nunca pode estar errado.</strong> Com essa regra, o trecho vale como fato enquanto ninguém desmente, e como poesia depois.</p>
+  <p>Como vimos nos capítulos 2 e 3, uma afirmação que não pode estar errada combina com qualquer jeito que o mundo possa ser. Ela não exclui nenhuma possibilidade, então não informa nada. É como ouvir que a chave está “em algum lugar da casa”: não tem como errar, e também não ajuda a achar.</p>
+  <p>Já “amanhã o Sol vai nascer”, do capítulo 3, informa pouco, porque você já sabia, mas exclui algo: o Sol não nascer. A metáfora que se ajusta a qualquer fato não exclui nada, para ninguém.</p>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Por que a saída “é metáfora” enfraquece o texto, em vez de salvá-lo?</p>
+    <div class="opts">
+      <button class="opt" type="button">Porque, se a regra é virar metáfora depois de desmentido, nada pode desmentir o texto</button>
+      <button class="opt" type="button">Porque um texto sagrado deveria ser lido sempre ao pé da letra</button>
+      <button class="opt" type="button">Porque os primeiros leitores entendiam o trecho ao pé da letra</button>
+    </div>
+    <p class="fb" hidden><b>A primeira.</b> Metáforas existem em qualquer texto, sagrado ou não, e o que os primeiros leitores pensavam não decide nada. O problema é a regra de quando usá-las: se o trecho só vira metáfora depois de ser desmentido, o texto não exclui nada e deixa de informar.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">Uma afirmação que nenhum fato pode desmentir também não diz como o mundo é.</p></aside>
+  <p class="bridge">Sobra a terceira frente, a mais próxima deste livro. Ela não depende de física nem de leitura de texto: depende da máquina do prólogo. Um Deus justo pode condenar quem não podia ter feito diferente?</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-13"><span class="label">Capítulo 13 <span>· 3 min</span></span><span class="q">O que a máquina do prólogo diz sobre o inferno?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-13" data-n="13" data-title="O inferno e a máquina" data-q="Um Deus justo pode condenar quem não tinha escolha?" data-deps="8,9,10,12">
+  <div class="ch-meta"><span>Capítulo 13 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <h2>Um Deus justo pode condenar quem não tinha escolha?</h2>
+  <div class="ch-body">
+  <p class="lede">A terceira frente é a lógica interna, e aqui o capítulo 8 desmonta o núcleo da teologia cristã. O inferno só seria justo se cada pessoa tivesse escolhido livremente entre o bem e o mal. E “livremente”, em boa parte das defesas, não é o passarinho fora da gaiola: é o passarinho livre até da própria fome.</p>
+  <p>Sem esse livre-arbítrio, Deus estaria criando pessoas já destinadas à condenação e as punindo por isso. Coloque na máquina do prólogo qualquer pessoa que a doutrina diz que será condenada. Ao voltar àquele instante, ela faria o mesmo, ou outra coisa, só por sorteio.</p>
+  <p>Algumas tradições, como o calvinismo, aceitam isso abertamente com a doutrina da predestinação. Mas aí a pergunta só muda de lugar: como seria justo condenar quem não podia ter feito diferente? Ninguém culpa um sonâmbulo por quebrar um vaso. Teólogos discutem isso desde Agostinho, há cerca de 1.600 anos, e a pergunta continua de pé.</p>
+  <p>O mesmo vale para o chamado problema do mal: por que um Deus bom e todo-poderoso permite tanto sofrimento? Há várias respostas, e a defesa cristã clássica é a mais usada: Deus nos deu liberdade, e o mal vem do mau uso dela. <strong>Essa defesa depende do livre-arbítrio no sentido forte, justamente o que os capítulos 8 a 10 mostraram que não existe.</strong></p>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Por que o problema do inferno não se resolve com a predestinação calvinista?</p>
+    <div class="opts">
+      <button class="opt" type="button">Porque a pergunta só muda de lugar: é justo condenar quem não podia fazer diferente?</button>
+      <button class="opt" type="button">Porque a predestinação contradiz o que a Bíblia diz</button>
+      <button class="opt" type="button">Porque ela resolve a justiça, mas não o problema do mal</button>
+    </div>
+    <p class="fb" hidden><b>A primeira.</b> Aceitar a predestinação tira a contradição com o livre-arbítrio, mas deixa a pergunta sobre a justiça inteira. E o argumento não depende de ela contradizer a Bíblia: muitos calvinistas leem a Bíblia exatamente assim.</p>
+  </aside>
+  <h3>O que sobra?</h3>
+  <p>Juntando as três frentes, o retrato que sobra é simples. As escrituras são mapas desenhados por pessoas de outras épocas, com o que elas sabiam e temiam. São histórias humanas, algumas belíssimas. Não são o território.</p>
+  <p>E, se o Deus que garantiria um valor intrínseco ao universo não se sustenta, a garantia cai junto. Voltamos ao capítulo 11: valor como relação.</p>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Deus está além da lógica e da ciência. Ele não é uma coisa do mundo para ser medida.”</p>
+    <p>É a defesa mais forte, e ela cobra um preço: se Deus está além da lógica, também está além de qualquer afirmação concreta.</p>
+    <p>Um Deus assim é aquela força maior, sem dizer qual, que o capítulo 12 deixou de fora. Mas quem diz que ele abriu o mar Vermelho já está fazendo uma afirmação, e afirmação dá para conferir.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“As escrituras falam de sentido, não de mecanismo. Você está usando a régua errada.”</p>
+    <p>Uma parte disso é verdade: se a fé só falasse de sentido, não haveria nada a conferir. Mas as escrituras dizem como o mundo foi criado, que um homem ressuscitou, quem vai para o inferno, o que Deus quer. São afirmações sobre como o mundo é.</p>
+    <p>Uma religião não pode fazer essas afirmações e, ao mesmo tempo, ficar imune a qualquer verificação. Se fica imune, cai no problema da metáfora, do capítulo 12: não diz nada. Se não fica, dá para conferir, pelos fatos ou pela coerência, e é aí que falha.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">As escrituras são mapas humanos de outras épocas, não o território.</p></aside>
+  <p class="bridge">Resta um enigma. Se a crença é tão inconsistente, e nem é difícil ver isso, por que gente extraordinariamente inteligente acreditou nela? E não gente qualquer: alguns dos maiores matemáticos e cientistas da história.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-14"><span class="label">Capítulo 14 <span>· 4 min</span></span><span class="q">O matemático do f(x) lia a Bíblia para a família.</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-14" data-n="14" data-title="Brilhante em quase tudo" data-q="Por que gênios acreditam?" data-deps="4,8,12">
+  <div class="ch-meta"><span>Capítulo 14 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <h2>Por que gênios acreditam?</h2>
+  <div class="ch-body">
+  <p class="lede">Leonhard Euler foi um dos maiores matemáticos da história; boa parte da notação que se usa até hoje, como f(x), foi popularizada por ele. E costumava reunir a família para rezar e ler a Bíblia.</p>
+  <p>Os exemplos são reais, e Euler não é caso isolado. Ele era calvinista praticante, filho de pastor. Blaise Pascal, matemático e físico, era católico devoto. Francis Collins, que liderou o Projeto Genoma, é cristão evangélico.</p>
+  <p>A primeira explicação vem do capítulo 8: ninguém escolhe as crenças com que cresce. Euler aprendeu a fé em casa, com o pai pastor, o mesmo que lhe deu as primeiras aulas de matemática. A fé e as contas vieram da mesma mesa. Nem um gênio escolhe o ponto de partida.</p>
+  <h3>Que tamanho tem esse erro?</h3>
+  <p>Para medir, vamos voltar ao capítulo 4. Vou usar “inteligência” assim: se o cérebro é uma máquina de previsão, inteligência é o quanto esse modelo acerta sobre a realidade.</p>
+  <p>E nem todo erro pesa igual: errar algo central conta mais do que errar um detalhe. Um GPS que acerta todas as ruas e erra a cidade de destino é um GPS ruim. O copo vazio custa um tranco; uma premissa central custa muito mais.</p>
+  <p>A própria pessoa religiosa diz que a religião é a coisa mais importante da sua vida, a que define como ela vive. Então o erro cai justamente no item de maior peso. É a falha mais grave que um modelo pode cometer.</p>
+  <p>Por isso, um gênio religioso é uma inteligência com uma falha catastrófica: <strong>brilhante em quase tudo, e errado exatamente onde mais importa</strong>.</p>
+  <h3>Então por que a inteligência não corrige?</h3>
+  <p>O mecanismo é conhecido, e vale para todo mundo, não só para quem crê: o cérebro protege as crenças das quais depende emocionalmente, e inteligência não imuniza contra isso. Às vezes, ela só torna a pessoa melhor em justificar aquilo em que já acreditava. É o torcedor que vê pênalti claro quando é a favor do time dele e teatro quando é contra.</p>
+  <p>O pesquisador Dan Kahan encontrou isso num teste de matemática. Pessoas resolviam um problema com os mesmos números, ora sobre um creme para a pele, ora sobre controle de armas. No tema político, acertavam quando o resultado batia com a própria posição e erravam quando não batia. E, no estudo original, quanto melhores em matemática, maior era essa diferença.</p>
+  <p>Por isso, <strong>o difícil não é ver, é querer olhar</strong>. Uma crença religiosa vem junto com família, comunidade, consolo e a lembrança de quem a ensinou. Questioná-la custa muito mais do que questionar um cálculo.</p>
+  <p>E isso vale para mim também, que escrevi este livro. Todo mundo tem pontos cegos, e a sensação de certeza não prova nada para ninguém. Eu assumo o meu ponto cego de achar que escrevi o melhor livro do mundo. O teste é o mesmo para todos: ter afirmações que possam ser conferidas e disposição para ouvir o contra-argumento.</p>
+  <h3>Em quem confiar, então?</h3>
+  <p>Na prática, a consequência é confiar por especialidade. Seu cardiologista pode ser o melhor da cidade, e você não deixaria ele trocar o óleo do seu carro.</p>
+  <p>Euler merece confiança total em matemática e nenhuma em teologia. É como um canivete com a lâmina perfeita e o saca-rolhas quebrado: você usa a lâmina e não tenta abrir o vinho com ele.</p>
+  <p>O erro é vender o pacote inteiro, como em “ele é um gênio da física, então ouça o que ele diz sobre Deus”.</p>
+  <aside class="confira" data-answer="1">
+    <p class="label">Confira</p>
+    <p class="q">O que o capítulo chama de “confiar por especialidade”?</p>
+    <div class="opts">
+      <button class="opt" type="button">Confiar mais em quem é mais inteligente, em qualquer assunto</button>
+      <button class="opt" type="button">Confiar em alguém no campo em que ele acerta, e não automaticamente nos outros</button>
+      <button class="opt" type="button">Desconfiar de quem é religioso, mesmo no campo dele</button>
+    </div>
+    <p class="fb" hidden><b>A segunda.</b> A confiança vale campo a campo. Acertar muito em matemática não transfere crédito para teologia, nem para troca de óleo. E o contrário também vale: Euler continua merecendo confiança total em matemática.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Se pessoas tão inteligentes acreditaram, isso não é sinal de que pode ser verdade?”</p>
+    <p>É uma intuição natural. Mas, mesmo que concordassem, não seria sinal: ser brilhante em matemática não dá autoridade em teologia, como você acabou de ver. E eles nem concordam. Pascal era católico e Euler, calvinista, e as duas igrejas discordavam em pontos que cada uma considerava essenciais. Pelo menos um dos dois errou em algo que considerava essencial. E houve gênios igualmente brilhantes sem religião nenhuma.</p>
+    <p>A inteligência deles mostra que eram ótimos no próprio campo, não que acertaram sobre Deus.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">A inteligência não protege onde o apego é maior.</p></aside>
+  <p class="bridge">Com tudo isso no lugar, sem propósito intrínseco, sem escolha no sentido forte e sem o Deus das escrituras, sobra uma pergunta. É a que importa na segunda-feira de manhã: e agora, como viver?</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-15"><span class="label">Capítulo 15 <span>· 4 min</span></span><span class="q">Ele morreu com dor e chamou o dia de feliz.</span></a>
+</section>
+
+
+<section class="chapter col gutter" id="cap-15" data-n="15" data-parte="V|Como viver" data-title="Cinco vidas e um estudo de 80 anos" data-q="Então, como viver?" data-deps="8,11">
+  <div class="ch-meta"><span>Capítulo 15 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <h2>Então, como viver?</h2>
+  <div class="ch-body">
+  <p class="lede">Domingo à noite, a música do Fantástico começa e bate aquele vazio. Se nada tem sentido intrínseco, esse vazio é a resposta certa?</p>
+  <p>Epicuro achava que não. Ele morreu com dores fortes, de uma pedra que bloqueava a urina, segundo os relatos antigos. No último dia, escreveu a um amigo que aquele era um dia feliz, por causa das lembranças das conversas que tinham tido.</p>
+  <p>Ele não acreditava em deuses que interferissem na vida humana nem em castigo depois da morte. E terminou assim.</p>
+  <p>A conclusão de que nada importa por si só não obriga ninguém a sentir vazio. O vazio é uma reação a ela, não uma consequência lógica.</p>
+  <p>Prova disso é que pensadores com premissas parecidas reagiram de formas muito diferentes. Dá para agrupá-los em três atitudes:</p>
+  <ul>
+    <li><strong>Entender e aceitar.</strong> Para Espinosa, entender as causas de tudo liberta das paixões cegas e gera uma alegria tranquila. Os estoicos ensinavam a separar o que depende do seu julgamento do que não depende, e parar de sofrer com o segundo: o engarrafamento não depende de você; o quanto você se irrita com ele, em boa parte, depende. Eles ainda acreditavam numa razão que ordena o cosmos, mas essa prática funciona sem ela.</li>
+    <li><strong>Criar e teimar.</strong> Nietzsche propôs amar o destino, a ponto de querer viver a mesma vida infinitas vezes, e criar os próprios valores. Camus defendeu viver plenamente sabendo que o universo não responde, por uma teimosia lúcida.</li>
+    <li><strong>Desejar menos e se compadecer.</strong> Para Schopenhauer, viver é desejar, e desejar é sofrer, então a saída é desejar menos. Pense na vontade de um celular novo, que passa logo depois da compra e dá lugar à do próximo. Epicuro buscava uma vida tranquila, simples e cercada de amigos. Já para Sapolsky, se ninguém escolheu ser quem é, culpa e ódio perdem a base, e sobra compaixão. Ele mesmo admite que só consegue viver de acordo com isso uns três minutos por mês; no resto do tempo, a vontade de culpar, aquela do capítulo 8, volta.</li>
+  </ul>
+  <h3>Quem viveu melhor?</h3>
+  <p>A pergunta mais útil talvez não seja qual dessas filosofias é a mais correta, e sim quem viveu melhor com ela. E aí os relatos históricos são reveladores.</p>
+  <p><strong>David Hume</strong>, o mesmo da planilha do capítulo 11, era um cético rigoroso e sem religião. Era conhecido pela alegria e pelos jantares com amigos. Encarou a morte com uma serenidade que desconcertou seus críticos religiosos.</p>
+  <p><strong>Espinosa</strong> é descrito como calmo e bem-humorado. E olha que ele foi excomungado e vivia de forma simples, polindo lentes. <strong>Epicuro</strong>, como você viu, morreu lembrando as conversas com um amigo.</p>
+  <p>Já <strong>Schopenhauer</strong> era amargo, e <strong>Nietzsche</strong> viveu doente e isolado até colapsar.</p>
+  <p>Cinco vidas não provam nada, mas sugerem um padrão: <strong>os mais felizes tinham uma vida simples e pessoas por perto, não só ideias certas</strong>.</p>
+  <p>E o padrão se confirma em larga escala. O Estudo de Desenvolvimento Adulto de Harvard acompanha pessoas há mais de 80 anos. E chegou à mesma conclusão: o que mais prevê saúde e felicidade é a qualidade dos vínculos. Ter para quem ligar quando tudo dá errado pesa mais que dinheiro, status ou inteligência.</p>
+  <aside class="confira" data-answer="0">
+    <p class="label">Confira</p>
+    <p class="q">Segundo o estudo de Harvard, o que mais prevê saúde e felicidade?</p>
+    <div class="opts">
+      <button class="opt" type="button">A qualidade dos vínculos</button>
+      <button class="opt" type="button">Ter um propósito claro na vida</button>
+      <button class="opt" type="button">Sucesso na carreira e dinheiro</button>
+    </div>
+    <p class="fb" hidden><b>Os vínculos.</b> É o mesmo padrão das cinco vidas: os mais felizes tinham pessoas por perto, não só ideias certas.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Pelo seu próprio critério de quem viveu melhor, a religião ganha. Estudos mostram que quem frequenta cultos vive mais e se diz mais feliz.”</p>
+    <p>É uma objeção séria, e os dados existem. Mas o efeito parece vir mais de frequentar do que de crer: comunidade, rotina, gente que aparece quando você precisa. Num estudo conhecido, dos pesquisadores Chaeyoon Lim e Robert Putnam, o que mais pesava eram os amigos feitos na congregação. E vínculos são justamente o que, segundo o estudo de Harvard, mais pesa.</p>
+    <p>Dá para ter os vínculos sem a parte que não se sustenta. E uma coisa pode ser boa para viver e, mesmo assim, não ser verdade.</p>
+  </aside>
+  <aside class="objection">
+    <p class="label">E se alguém disser</p>
+    <p class="obj-q">“Se não existe livre-arbítrio, para que dar conselho sobre como viver?”</p>
+    <p>Parece contraditório mesmo: se ninguém escolhe no sentido forte, aconselhar seria falar com a parede. Mas conselho também é causa, como as leis e o radar do capítulo 8. Quando alguém diz “leva o guarda-chuva”, essa frase entra na sua cabeça e pesa na decisão. Você não escolheu ler este capítulo, mas ele agora faz parte do que te move.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">O que mais prevê uma vida boa é a qualidade dos vínculos.</p></aside>
+  <p class="bridge">Falta uma coisa. Lá no capítulo 8, eu fiz uma promessa, e ela ainda não foi paga por inteiro.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#cap-16"><span class="label">Capítulo 16 <span>· 3 min</span></span><span class="q">“Não é tão ruim quanto parece.” Por quê?</span></a>
+</section>
+
+<section class="chapter col gutter" id="cap-16" data-n="16" data-title="A promessa do capítulo 8" data-q="Então não é tão ruim quanto parece?" data-deps="8,9,15">
+  <div class="ch-meta"><span>Capítulo 16 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <h2>Então não é tão ruim quanto parece?</h2>
+  <div class="ch-body">
+  <p class="lede">No capítulo 8, eu prometi mostrar por que não ter escolhido nada do que você pensa não é tão ruim quanto parece. Diferente da aposta, essa promessa não tem asterisco. Antes de pagar, vem a objeção mais honesta de todas, a que quase todo mundo sente.</p>
+  <h3>“Se eu não decido, por que continuo sentindo todo o peso de decidir?”</h3>
+  <p>Porque saber não desliga a sensação. É como a ilusão de Müller-Lyer, das duas linhas com setas nas pontas: você mede, sabe que têm o mesmo tamanho, e elas continuam parecendo diferentes.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 300 110" role="img" aria-label="Duas linhas do mesmo tamanho; a de cima, com pontas de seta viradas para fora, parece mais curta do que a de baixo, com as pontas viradas para dentro.">
+      <line class="ln" x1="70" y1="30" x2="230" y2="30"/>
+      <path class="ln" d="M86 16 L70 30 L86 44 M214 16 L230 30 L214 44"/>
+      <line class="ln" x1="70" y1="80" x2="230" y2="80"/>
+      <path class="ln" d="M54 66 L70 80 L54 94 M246 66 L230 80 L246 94"/>
+    </svg>
+    <figcaption>As duas linhas têm o mesmo tamanho. Saber disso não faz elas parecerem iguais.</figcaption>
+  </figure>
+  <p>O medo de mudar, a sensação de incompetência, a impressão de que cabe a você provocar a mudança quando está infeliz: tudo isso continua aparecendo. Você ganha o vazio de saber que não há escolha, e o peso de sentir que há não vai embora.</p>
+  <p>Mas parte desse peso perde a base. Sentir-se incompetente é, no fundo, achar que você deveria ter sido diferente, e o capítulo 8 mostra que não poderia. A cena do prólogo que você repassa de madrugada também perde a base: voltando àquele instante, com o mesmo você, só o acaso mudaria o resultado. E a cena ainda serve para aprender. A compaixão de Sapolsky vale para você também.</p>
+  <p>E <strong>a sensação de “lutar contra o próprio cérebro” também é o cérebro</strong>: uma parte do sistema puxando contra a outra. <strong>Querer mudar já é um input</strong>, algo que entra no sistema, e pesa muito no resultado. Você não escolhe o resultado de hoje, mas alguns resultados mudam os inputs de amanhã: com quem você anda, o que lê, onde passa o tempo. É assim que um sistema sem escolha muda a si mesmo.</p>
+  <h3>E a promessa do capítulo 8?</h3>
+  <p>A promessa está paga em três partes, e duas você acabou de ver. O ódio perde a base, inclusive o que você sente por si mesmo: se ninguém escolheu ser quem é, sobra compaixão, pelos outros e por você. E um sistema sem escolha ainda muda a si mesmo, como o braço que calibra melhor depois do tranco do copo.</p>
+  <p>A terceira parte: nada do que importa no dia a dia desaparece. Leis, conselhos e consequências continuam funcionando, porque também são causas, e admiração, gratidão e amor continuam fazendo sentido. Nisso o livro concorda com os compatibilistas do capítulo 10; a diferença é só não chamar isso de “livre”.</p>
+  <p>Não é o que a palavra “livre” prometia. Mas dá para viver bem com o que sobra, e sem ódio de ninguém, nem de você.</p>
+  <aside class="confira" data-answer="2">
+    <p class="label">Confira</p>
+    <p class="q">Pelo livro, como um sistema sem escolha muda a si mesmo?</p>
+    <div class="opts">
+      <button class="opt" type="button">Pelo esforço: o esforço é a parte que é livre</button>
+      <button class="opt" type="button">Ele não muda de verdade; só parece mudar</button>
+      <button class="opt" type="button">Alguns resultados de hoje mudam os inputs de amanhã</button>
+    </div>
+    <p class="fb" hidden><b>A terceira.</b> Com quem você anda, o que lê, onde passa o tempo: cada resultado vira entrada do próximo. O esforço conta, mas como mais uma entrada, não como a parte livre. É o copo do capítulo 4, calibrando o braço depois do tranco.</p>
+  </aside>
+  <aside class="legend"><p class="label">Em uma frase</p><p class="key">O modelo se corrige, e você é esse modelo.</p></aside>
+  <p class="bridge">O livro fecha, assim, onde começou. O mapa é útil, e refiná-lo é um prazer legítimo. Mas o que se vive é o território. E, no território de uma vida humana, o sentido que importa é aquele que as pessoas constroem juntas, como os vínculos do capítulo 15. Por isso a última parte deste livro não é um capítulo: é a conversa com você.</p>
+  <!--/ch-body--></div>
+  <a class="next" href="#perguntas-em-aberto"><span class="label">Para terminar</span><span class="q">Sete perguntas que não fecharam. A última é sua.</span></a>
+</section>
+
+<section class="chapter open col gutter" id="perguntas-em-aberto" data-title="Perguntas em aberto">
+  <div class="ch-meta"><span>Depois do capítulo 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <p class="endmark">Você chegou ao fim.</p>
+  <h2>Perguntas em aberto</h2>
+  <div class="ch-body">
+  <p>Nem tudo fechou. Estas são as dúvidas que ficaram, e é aqui que a conversa com você começa. Cada uma tem um botão que abre o WhatsApp com uma mensagem pronta, para você editar e mandar para quem te passou este livro.</p>
+  <ul class="oq">
+    <li><strong>Por que existe a experiência de ser alguém?</strong> O livro explica o que o cérebro faz, mas não por que existe algo que é “ser você” sentindo tudo isso. É o chamado problema difícil da consciência, e ninguém o resolveu.</li>
+    <li><strong>Os compatibilistas estão só errando o nome?</strong> A maioria dos filósofos profissionais mantém a palavra “livre”. Será que é só uma briga de definição, ou o capítulo 10 está certo em chamá-la de enganosa? Em outras palavras: “livre” deve continuar sendo o passarinho fora da gaiola, ou o nome já foi esticado demais?</li>
+    <li><strong>Uma IA poderia um dia ter algo a perder?</strong> Se sentir depende de ter algo em jogo, o que aconteceria com uma máquina que precisasse se manter viva?</li>
+    <li><strong>Onde fica a linha de “pensar”?</strong> Se categorias são graus, quem decide a partir de que ponto um sistema pensa?</li>
+    <li><strong>Por que eu deveria ligar para o que é bom para outro?</strong> O capítulo 11 mostra que valor existe como relação: algo é bom ou ruim para alguém. Mas por que o bem de outro organismo deveria importar para mim? A compaixão dos últimos capítulos é uma resposta. Será que basta?</li>
+    <li><strong>A religião pode ser falsa e mesmo assim boa para viver?</strong> Dá para ter o que ela dá, como comunidade, rotina e consolo, sem o que ela afirma? Ou alguma coisa se perde no caminho?</li>
+    <li><strong>Como saber que estamos certos?</strong> A sensação de certeza não é evidência. O que, neste texto, você acha que não resistiria a um bom contra-argumento?</li>
+  </ul>
+  <p class="coda">Se alguma dessas te incomodou, me chama. Era essa a ideia.</p>
+  <div class="aposta-fim">
+    <p class="label">E a aposta?</p>
+    <p>Para o universo, nenhum livro é o melhor do mundo. Para você, essa pergunta tem resposta, e ela não é capricho: depende do que estas páginas mudaram no seu mapa. Então, é?</p>
+    <p>E se não for? Aí eu te devo 100 reais, como prometi. Só confere o asterisco antes de cobrar 😄</p>
+    <a class="send" target="_blank" rel="noopener" data-track="aposta_fim" href="https://wa.me/?text=Li%20%E2%80%9CO%20melhor%20livro%20do%20mundo%3F%E2%80%9D.%20Sobre%20a%20aposta%3A%20">Cobrar a aposta pelo WhatsApp</a>
+  </div>
+  <div class="passe" id="passe-adiante">
+    <p class="label">Passe adiante</p>
+    <p>Conhece alguém que precisa ler isto? Mande o livro inteiro:</p>
+    <a class="btn" id="passe-livro" target="_blank" rel="noopener" href="https://wa.me/">Mandar o livro pelo WhatsApp</a>
+    <p class="passe-ou">Ou mande o capítulo que mais te pegou:</p>
+    <select id="passe-cap" aria-label="Escolha o capítulo"></select>
+    <p class="w-note">Só vale a pena se o gancho desse capítulo combina com a pessoa. Na dúvida, mande o livro inteiro: ele começa pelo melhor livro do mundo, e quem não quer ler o melhor livro do mundo?</p>
+    <a class="send" id="passe-cap-btn" target="_blank" rel="noopener" href="https://wa.me/">Mandar este capítulo</a>
+  </div>
+  <h3>Para ir mais fundo</h3>
+  <ul class="further">
+    <li>Espinosa, <em>Ética</em>: o sistema inteiro, do determinismo à alegria tranquila.</li>
+    <li>David Hume, <em>Investigação sobre o entendimento humano</em>: a porta de entrada para o ceticismo dele. O “é” e o “deve” do capítulo 11 estão no <em>Tratado da natureza humana</em>.</li>
+    <li>Erwin Schrödinger, <em>O que é vida?</em>: o livro curto que inspirou a ideia de vida como ordem mantida.</li>
+    <li>António Damásio, <em>O erro de Descartes</em>: emoção, corpo e o caso Phineas Gage.</li>
+    <li>Robert Sapolsky, <em>Determined</em> (2023): o caso contra o livre-arbítrio, por um neurocientista.</li>
+    <li>Daniel Dennett, <em>Freedom Evolves</em>: o melhor caso do outro lado, o compatibilista.</li>
+    <li>Albert Camus, <em>O mito de Sísifo</em>.</li>
+    <li>Epicuro, <em>Carta sobre a felicidade</em> (a Meneceu): cabe numa tarde.</li>
+  </ul>
+  <!--/ch-body--></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="col gutter">
+    <span>Pedro Paulo, em conversa com o Claude, uma inteligência artificial · 2026</span>
+    <a href="#inicio">Voltar ao início ↑</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+/* ---------- Medição anônima de leitura ----------
+   O que mede: chegada e tempo ativo em cada capítulo, velocidade, releituras, interrupções,
+   respostas dos widgets (só a opção tocada, nunca texto digitado), contexto opcional e,
+   onde o aparelho permite sem pedir nada, uma estimativa de movimento.
+   Sem chave configurada, nada sai do aparelho. */
+(function(){
+  var CFG={ key:'phc_n6BdZjg46GCSRYpP66xjQ79Uicz7TGbNiT4TqxAybzij', host:'https://us.i.posthog.com', versao:'v6' };
+  if(CFG.key.indexOf('%%')===0) CFG.key='';
+  var DEBUG=/debug-track/.test(location.hash);
+  function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  function rid(){ return Math.random().toString(36).slice(2,10)+Date.now().toString(36); }
+
+  var leitor=ls('snic2-leitor'); if(!leitor){ leitor=rid(); ls('snic2-leitor',leitor); }
+  var sessoes=(parseInt(ls('snic2-sessoes'),10)||0)+1; ls('snic2-sessoes',String(sessoes));
+  var ua=navigator.userAgent||'';
+  var app=/FBAN|FBAV/.test(ua)?'facebook':/Instagram/.test(ua)?'instagram':/WhatsApp/i.test(ua)?'whatsapp':/Telegram/i.test(ua)?'telegram':/LinkedInApp/.test(ua)?'linkedin':'navegador';
+  var base={ leitor:leitor, versao:CFG.versao, sessao_n:sessoes, app:app,
+    tema:(matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'escuro':'claro',
+    largura:innerWidth, toque:('ontouchstart' in window), contexto:null };
+
+  var ph=null, fila=[];
+  function enviar(ev,p,beacon){
+    if(DEBUG) try{ console.log('[medição]',ev,JSON.stringify(p)); }catch(e){}
+    if(!CFG.key) return;
+    if(ph){ try{ ph.capture(ev,p,beacon?{transport:'sendBeacon'}:undefined); }catch(e){} }
+    else { fila.push([ev,p]); if(fila.length>300) fila.shift(); }
+  }
+  function track(ev,props,beacon){
+    var p={}, k; for(k in base) p[k]=base[k]; if(props) for(k in props) p[k]=props[k];
+    p.movimento_agora=mov.estado; enviar(ev,p,beacon);
+  }
+  window.__track=track;
+  window.__movimento=function(){ return {ok:mov.ok,estado:mov.estado,conta:mov.conta}; };
+  window.__trackSetContexto=function(v){ base.contexto=v; };
+
+  if(CFG.key){
+    var s=document.createElement('script'); s.async=true; s.src='posthog.js';
+    s.onload=function(){
+      try{
+        window.posthog.init(CFG.key,{
+          api_host:CFG.host||'https://us.i.posthog.com',
+          person_profiles:'identified_only',
+          autocapture:false, capture_pageview:true, capture_pageleave:true,
+          disable_surveys:true, persistence:'localStorage',
+          disable_session_recording:true, session_recording:{ maskAllInputs:true },
+          loaded:function(p){ ph=p; try{ p.register({leitor:leitor}); }catch(e){} var f=fila; fila=[]; f.forEach(function(x){ enviar(x[0],x[1]); }); }
+        });
+      }catch(e){}
+    };
+    document.head.appendChild(s);
+  }
+
+  /* ---------- movimento (só onde não exige permissão: Android; no iPhone fica de fora) ---------- */
+  var mov={ ok:false, estado:null, conta:{} }, buf=[], amostrando=false;
+  function onMotion(e){
+    var a=e.accelerationIncludingGravity; if(!a||a.x==null) return;
+    mov.ok=true; if(amostrando) buf.push(Math.sqrt(a.x*a.x+a.y*a.y+a.z*a.z));
+  }
+  function classificar(){
+    amostrando=false; var x=buf; buf=[]; if(x.length<40) return;
+    var n=x.length, m=0, i; for(i=0;i<n;i++) m+=x[i]; m/=n;
+    var v=0; for(i=0;i<n;i++) v+=(x[i]-m)*(x[i]-m); var sd=Math.sqrt(v/n);
+    /* suaviza e conta oscilações (passos ficam entre ~1,3 e 3 por segundo) */
+    var y=[], j; for(i=0;i<n;i++){ var s2=0,c=0; for(j=Math.max(0,i-4);j<=Math.min(n-1,i+4);j++){ s2+=x[j]; c++; } y.push(s2/c-m); }
+    var th=0.3*sd, lado=0, cruz=0; for(i=0;i<n;i++){ var l=y[i]>th?1:(y[i]<-th?-1:0); if(l&&l!==lado){ if(lado) cruz++; lado=l; } }
+    var freq=cruz/2/4; /* janela de 4 s */
+    var est = sd<0.07?'apoiado' : sd<0.3?'na_mao_parado' : (sd>=1.0&&freq>=1.2&&freq<=3.2)?'andando' : 'veiculo_ou_balanco';
+    mov.estado=est; mov.conta[est]=(mov.conta[est]||0)+1;
+  }
+  try{
+    /* só escuta; nunca chama requestPermission, então nenhum aviso aparece. No iPhone, sem permissão, os eventos não chegam e fica 'sem_sensor'. */
+    if(window.DeviceMotionEvent){
+      addEventListener('devicemotion',onMotion,{passive:true});
+      setInterval(function(){ if(document.visibilityState!=='visible') return; buf=[]; amostrando=true; setTimeout(classificar,4000); },20000);
+      setTimeout(function(){ buf=[]; amostrando=true; setTimeout(classificar,4000); },1500);
+    }
+  }catch(e){}
+
+  /* ---------- tempo por capítulo ---------- */
+  var secs=[].slice.call(document.querySelectorAll('main .prologue, main .chapter'));
+  function idDe(el){ var n=el.getAttribute('data-n'); return n===null?'fim':n; }
+  var palavras={}; secs.forEach(function(el){ palavras[idDe(el)]=(el.textContent||'').trim().split(/\s+/).length; });
+  var atual=null, acum={}, ultimoInput=Date.now(), maxY=0, voltas={}, telas={}, interrup={}, chegou={}, movCap={};
+  ['scroll','touchstart','pointerdown','keydown'].forEach(function(t){ addEventListener(t,function(){ ultimoInput=Date.now(); },{passive:true}); });
+  function secAtual(){ var line=innerHeight*0.35, cur=null; for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=line) cur=secs[i]; else break; } return cur?idDe(cur):'capa'; }
+  function flush(id,motivo,beacon){
+    var t=acum[id]||0; if(t<3) return;
+    var ppm=palavras[id]?Math.round(palavras[id]/(t/60)):null;
+    track('capitulo_tempo',{cap:id, segundos:t, palavras:palavras[id]||0, ppm_se_leu_tudo:ppm, telas_roladas:Math.round((telas[id]||0)*10)/10,
+      releituras:voltas[id]||0, interrupcoes:interrup[id]||0, motivo:motivo, movimento:movCap[id]||null},beacon);
+    acum[id]=0; telas[id]=0; voltas[id]=0; interrup[id]=0; movCap[id]=null;
+  }
+  setInterval(function(){
+    if(document.visibilityState!=='visible') return;
+    if(Date.now()-ultimoInput>90000) return; /* aparelho largado aberto não conta */
+    if(atual&&atual!=='capa'){ acum[atual]=(acum[atual]||0)+1; if(mov.estado) movCap[atual]=mov.estado; }
+  },1000);
+  var lastY=scrollY, tick=false;
+  function onScroll(){
+    tick=false;
+    var y=scrollY, dy=y-lastY; lastY=y;
+    var id=secAtual();
+    if(id!==atual){
+      if(atual) flush(atual,'mudou');
+      atual=id; maxY=y;
+      if(id!=='capa'&&!chegou[id]){ chegou[id]=1; track('capitulo_chegou',{cap:id}); }
+    }
+    if(atual&&atual!=='capa'){
+      telas[atual]=(telas[atual]||0)+Math.abs(dy)/innerHeight;
+      if(y>maxY) maxY=y; else if(maxY-y>innerHeight*0.8){ voltas[atual]=(voltas[atual]||0)+1; maxY=y; }
+    }
+  }
+  addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(onScroll); } },{passive:true});
+  var t0=Date.now(), escondeu=0;
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='hidden'){
+      escondeu++; if(atual) { interrup[atual]=(interrup[atual]||0)+1; flush(atual,'saiu_do_app',true); }
+      track('saiu_do_app',{cap:atual, minutos_desde_abrir:Math.round((Date.now()-t0)/6000)/10},true);
+    } else { ultimoInput=Date.now(); track('voltou_ao_app',{cap:atual}); }
+  });
+  addEventListener('pagehide',function(){
+    if(atual) flush(atual,'fechou',true);
+    var lidos=[]; try{ lidos=JSON.parse(ls('snic2-lidos')||'[]'); }catch(e){}
+    track('sessao_fim',{cap_final:atual, minutos:Math.round((Date.now()-t0)/6000)/10, capitulos_lidos_total:lidos.length, saidas_do_app:escondeu, movimento_resumo:mov.ok?mov.conta:'sem_sensor'},true);
+  });
+  window.addEventListener('error',function(e){ track('erro_js',{msg:String(e.message||'').slice(0,160), linha:e.lineno||0}); });
+
+  var lidosAntes=0; try{ lidosAntes=(JSON.parse(ls('snic2-lidos')||'[]')||[]).length; }catch(e){}
+  var ref=''; try{ ref=document.referrer?new URL(document.referrer).hostname:''; }catch(e){}
+  track('livro_aberto',{retorno:sessoes>1, capitulos_lidos_antes:lidosAntes, entrou_por:location.hash||'inicio', origem:ref||'direto', altura:innerHeight});
+  setTimeout(onScroll,400);
+})();
+</script>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function T(e,p){ try{ if(window.__track) window.__track(e,p); }catch(x){} }
+  function capDe(el){ var c=el&&el.closest('[data-n]'); return c?c.getAttribute('data-n'):(el&&el.closest('#perguntas-em-aberto')?'fim':null); }
+  function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  var K_READ='snic2-lidos', K_LAST='snic2-ultimo', K_BET='snic2-aposta';
+  var read={}; try{ (JSON.parse(ls(K_READ)||'[]')||[]).forEach(function(n){ read[n]=1; }); }catch(e){}
+  function saveRead(){ ls(K_READ, JSON.stringify(Object.keys(read))); }
+
+  var chapters=[].slice.call(document.querySelectorAll('main .chapter[data-n]'));
+  var byN={}; chapters.forEach(function(c){ byN[c.getAttribute('data-n')]=c; });
+  function minsOf(c){ var m=c.querySelector('.ch-meta .scale'); m=m&&m.textContent.match(/(\d+)\s*min/); return m?+m[1]:0; }
+  function keyOf(c){ var k=c&&c.querySelector('.legend .key'); return k?k.textContent.trim():''; }
+
+  /* ---------- Curvas de nível ---------- */
+  var hero=document.getElementById('inicio'), cv=document.getElementById('topo-canvas');
+  function drawTopo(){
+    try{
+      var b=cv.getBoundingClientRect(); if(!b.width||!b.height) return;
+      var dpr=Math.min(window.devicePixelRatio||1,2);
+      cv.width=Math.round(b.width*dpr); cv.height=Math.round(b.height*dpr);
+      var ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,b.width,b.height);
+      ctx.strokeStyle=getComputedStyle(root).getPropertyValue('--topo').trim()||'rgba(27,92,135,.18)';
+      var W=b.width,H=b.height,u=Math.max(W,H*1.4);
+      [{x:.9,y:.2,s:1,p:.4,n:14},{x:1.04,y:1.1,s:.8,p:2.3,n:10}].forEach(function(h){
+        var cx=h.x*W, cy=h.y*H, step=u*0.02*h.s;
+        for(var k=1;k<=h.n;k++){
+          ctx.lineWidth=(k%5===0)?1.5:0.75; /* curva mestra a cada cinco, como nas cartas topográficas */
+          ctx.beginPath();
+          for(var i=0;i<=200;i++){
+            var t=i/200*Math.PI*2;
+            var rr=k*step*(1+.15*Math.sin(3*t+h.p+k*.22)+.08*Math.sin(5*t-h.p*1.7+k*.12)+.04*Math.sin(9*t+k*.37));
+            var x=cx+rr*Math.cos(t)*1.35, y=cy+rr*Math.sin(t);
+            if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.closePath(); ctx.stroke();
+        }
+      });
+    }catch(e){}
+  }
+  drawTopo();
+  if('ResizeObserver' in window){ new ResizeObserver(drawTopo).observe(hero); } else { window.addEventListener('resize',drawTopo); }
+  try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawTopo); }catch(e){}
+  try{ new MutationObserver(drawTopo).observe(root,{attributes:true,attributeFilter:['data-theme']}); }catch(e){}
+
+  /* ---------- Barra do topo e progresso por capítulo ---------- */
+  var nowA=document.getElementById('now-a'), nowB=document.getElementById('now-b'), leftTxt=document.getElementById('left-txt');
+  var segs=[].slice.call(document.querySelectorAll('#segs i'));
+  var current=null;
+  function renderProgress(){
+    var nRead=0, left=0;
+    chapters.forEach(function(c){ var n=c.getAttribute('data-n'); if(read[n]) nRead++; else left+=minsOf(c); });
+    segs.forEach(function(s){
+      var n=s.getAttribute('data-n');
+      s.className=read[n]?'read':(current&&current.getAttribute('data-n')===n?'cur':'');
+    });
+    if(nRead<Math.ceil(chapters.length/2)) leftTxt.textContent=nRead+' de '+chapters.length+' lidos';
+    else leftTxt.textContent=left?('faltam ~'+left+' min'):'tudo lido';
+    renderTrail();
+  }
+  var sections=[].slice.call(document.querySelectorAll('main .prologue, main .chapter'));
+  var ticking=false;
+  function update(){
+    ticking=false;
+    var line=innerHeight*0.35, cur=null;
+    for(var i=0;i<sections.length;i++){ if(sections[i].getBoundingClientRect().top<=line) cur=sections[i]; else break; }
+    if(cur===current) return;
+    current=cur;
+    if(!cur){ nowA.textContent='O melhor livro do mundo?'; nowB.textContent=''; }
+    else{
+      var n=cur.getAttribute('data-n');
+      if(n==='0'){ nowA.textContent='Prólogo'; }
+      else if(n){ nowA.textContent='Cap. '+n+' de '+chapters.length; ls(K_LAST,n); }
+      else { nowA.textContent='Fim'; }
+      nowB.textContent=' · '+(cur.getAttribute('data-q')||cur.getAttribute('data-title')||'');
+    }
+    renderProgress();
+  }
+  addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
+  addEventListener('resize',update);
+
+  /* marca um capítulo como lido quando a ponte final aparece */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ var c=e.target.closest('.chapter'); var n=c&&c.getAttribute('data-n'); if(n&&!read[n]){ read[n]=1; saveRead(); renderProgress(); T('capitulo_concluido',{cap:n,lidos:Object.keys(read).length}); } }
+      });
+    },{threshold:.6});
+    chapters.forEach(function(c){ var b=c.querySelector('.bridge'); if(b) io.observe(b); });
+  }
+
+  /* ---------- Mapa (folha que abre de baixo) ---------- */
+  var sheet=document.getElementById('mapa'), trail=document.getElementById('trail'), lastFocus=null;
+  function renderTrail(){
+    if(!trail) return;
+    var html='';
+    var nodes=[].slice.call(document.querySelectorAll('main .chapter[data-n]'));
+    nodes.forEach(function(el){
+      var pt=el.getAttribute('data-parte');
+      if(pt){ var pp=pt.split('|'); html+='<li class="region">Parte '+pp[0]+' · '+pp[1]+'</li>'; }
+      {
+        var n=el.getAttribute('data-n'), cls=read[n]?'read':'';
+        if(current===el) cls+=' cur';
+        html+='<li><a class="'+cls+'" href="#cap-'+n+'"><span class="q">'+n+'. '+el.getAttribute('data-q')+'</span><span class="m">'+minsOf(el)+' min</span></a></li>';
+      }
+    });
+    html+='<li class="region">Depois do fim</li><li><a href="#perguntas-em-aberto"><span class="q">O que ainda não fechou</span><span class="t">Perguntas em aberto</span></a></li>';
+    trail.innerHTML=html;
+  }
+  function openMap(){ T('mapa_aberto',{cap:current?current.getAttribute('data-n'):null}); lastFocus=document.activeElement; renderTrail(); sheet.hidden=false; document.body.classList.add('sheet-open'); var c=sheet.querySelector('.sheet-close'); if(c) c.focus(); }
+  function closeMap(){ sheet.hidden=true; document.body.classList.remove('sheet-open'); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+  document.getElementById('map-open').addEventListener('click',openMap);
+  [].forEach.call(document.querySelectorAll('[data-open-map]'),function(b){ b.addEventListener('click',openMap); });
+  [].forEach.call(document.querySelectorAll('[data-close-map]'),function(b){ b.addEventListener('click',closeMap); });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!sheet.hidden) closeMap(); });
+  trail.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; T('mapa_pulou',{para:a.getAttribute('href')}); closeMap(); });
+
+  /* ---------- Retomada e "Até aqui" ---------- */
+  function ateAqui(c){
+    var box=c.querySelector('.ate-aqui');
+    if(!box){ box=document.createElement('div'); box.className='ate-aqui'; c.querySelector('.ch-meta').insertAdjacentElement('afterend',box); }
+    var deps=(c.getAttribute('data-deps')||'').split(',').filter(Boolean);
+    if(!deps.length){ box.remove(); return; }
+    var li=deps.map(function(d){ var k=keyOf(byN[d]); return k?'<li>'+k+'</li>':''; }).join('');
+    box.innerHTML='<p class="label">Até aqui</p><ul>'+li+'</ul>';
+  }
+  try{
+    var last=parseInt(ls(K_LAST),10), resume=document.getElementById('resume');
+    if(last>=1 && last<=chapters.length && !location.hash){
+      var c=byN[String(last)];
+      resume.href='#cap-'+last;
+      resume.querySelector('b').textContent='Continuar no capítulo '+last+': '+c.getAttribute('data-q');
+      var prev=byN[String(last-1)];
+      resume.querySelector('span').textContent=prev?('Da última vez: '+keyOf(prev)):'';
+      resume.hidden=false;
+      resume.addEventListener('click',function(){ ateAqui(c); T('retomou',{cap:String(last)}); });
+    }
+    var m=location.hash.match(/^#cap-(\d+)$/);
+    if(m && +m[1]>1 && byN[m[1]]) ateAqui(byN[m[1]]);
+  }catch(e){}
+
+  /* ---------- Interações ---------- */
+  function press(group,btn){ [].forEach.call(group,function(b){ b.setAttribute('aria-pressed', b===btn?'true':'false'); }); }
+
+  /* aposta do prólogo */
+  var bet=ls(K_BET);
+  [].forEach.call(document.querySelectorAll('[data-w="aposta-prologo"]'),function(w){
+    var bs=w.querySelectorAll('.w-btn'), note=w.querySelector('.w-note');
+    [].forEach.call(bs,function(b){
+      if(bet&&b.getAttribute('data-v')===bet) b.setAttribute('aria-pressed','true');
+      b.addEventListener('click',function(){ press(bs,b); bet=b.getAttribute('data-v'); ls(K_BET,bet); note.hidden=false; lembrete(); T('aposta_prologo',{valor:bet}); });
+    });
+  });
+  function lembrete(){
+    var el=document.getElementById('aposta-lembrete'); if(!el) return;
+    var mapa={'nenhuma':'em nenhuma das','algumas':'em algumas das','quase todas':'em quase todas as'};
+    el.textContent = (bet&&mapa[bet]) ? ('No prólogo, você apostou que faria algo diferente '+mapa[bet]+' dez voltas. Veja o que a máquina mostra em cada aba.')
+                         : 'No prólogo, você não apostou. Tudo bem: aposte agora, em silêncio, em quantas de dez voltas faria algo diferente.';
+  }
+  lembrete();
+
+  /* aposta: quem toca no asterisco e quem chega a ver a letra miúda */
+  var ast=document.getElementById('ast-aposta');
+  if(ast) ast.addEventListener('click',function(){ T('asterisco_tocado',{}); });
+  var miuda=document.getElementById('letra-miuda');
+  if(miuda && 'IntersectionObserver' in window){
+    var vistoMiuda=false;
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!vistoMiuda){ vistoMiuda=true; T('letra_miuda_vista',{}); } }); },{threshold:1}).observe(miuda);
+  }
+  [].forEach.call(document.querySelectorAll('[data-track]'),function(a){ a.addEventListener('click',function(){ T(a.getAttribute('data-track'),{}); }); });
+
+  /* onde está lendo (opcional) */
+  [].forEach.call(document.querySelectorAll('[data-w="contexto"]'),function(w){
+    var bs=w.querySelectorAll('.chip'), note=w.querySelector('.w-note');
+    [].forEach.call(bs,function(b){ b.addEventListener('click',function(){
+      press(bs,b); note.hidden=false; var v=b.getAttribute('data-v');
+      try{ if(window.__trackSetContexto) window.__trackSetContexto(v); }catch(e){}
+      T('contexto',{valor:v});
+    }); });
+  });
+
+  /* apostas simples */
+  [].forEach.call(document.querySelectorAll('[data-w="bet"]'),function(w){
+    var bs=w.querySelectorAll('.w-btn'), note=w.querySelector('.w-note');
+    [].forEach.call(bs,function(b){ b.addEventListener('click',function(){ press(bs,b); note.hidden=false; T('aposta',{cap:capDe(w),valor:(b.getAttribute('data-v')||b.textContent.trim()).slice(0,60)}); }); });
+  });
+
+  /* NA NA */
+  [].forEach.call(document.querySelectorAll('[data-w="nana"]'),function(w){
+    var bs=w.querySelectorAll('.w-btn'), out=w.querySelector('.w-reveal'), base=out.textContent;
+    [].forEach.call(bs,function(b){ b.addEventListener('click',function(){
+      press(bs,b); out.hidden=false;
+      out.textContent=(b.getAttribute('data-v')==='sim'?'Você notou. ':'Você não notou, como muita gente. ')+base; T('nana',{notou:b.getAttribute('data-v')==='sim'});
+    }); });
+  });
+
+  /* o que é pensar? */
+  var pensarTxt='';
+  [].forEach.call(document.querySelectorAll('[data-w="pensar"]'),function(w){
+    var ta=w.querySelector('textarea'), note=w.querySelector('.w-note');
+    w.querySelector('[data-act="ok"]').addEventListener('click',function(){
+      pensarTxt=(ta.value||'').trim(); note.hidden=false; T('pensar',{escreveu:!!pensarTxt});
+      var back=document.querySelector('.pensar-back');
+      if(back&&pensarTxt){ back.textContent='Você escreveu no começo: “'+pensarTxt+'”. A definição do livro: pensa quem mantém um modelo do mundo e opera sobre ele. Bateu?'; back.hidden=false; }
+    });
+    w.querySelector('[data-act="skip"]').addEventListener('click',function(){ note.hidden=true; ta.value=''; T('pensar',{pulou:true}); });
+  });
+
+  /* é um pássaro? */
+  [].forEach.call(document.querySelectorAll('[data-w="passaro"]'),function(w){
+    var items=[
+      {t:'pardal',k:'tip',b:true},{t:'sabiá',k:'tip',b:true},{t:'bem-te-vi',k:'tip',b:true},{t:'beija-flor',k:'tip',b:true},{t:'canário',k:'tip',b:true},
+      {t:'pinguim',k:'atip',b:true},{t:'avestruz',k:'atip',b:true},{t:'ema',k:'atip',b:true},{t:'galinha',k:'atip',b:true},{t:'peru',k:'atip',b:true},
+      {t:'morcego',k:'nao',b:false},{t:'borboleta',k:'nao',b:false},{t:'abelha',k:'nao',b:false}
+    ];
+    var stage=w.querySelector('.w-stage'), word=w.querySelector('.w-word'), start=w.querySelector('.w-start'),
+        yes=w.querySelector('.w-yes'), no=w.querySelector('.w-no'), res=w.querySelector('.w-result'), again=w.querySelector('.w-again');
+    var seq=[], i=0, t0=0, log=[];
+    function shuffle(a){ a=a.slice(); for(var j=a.length-1;j>0;j--){ var k=Math.floor(Math.random()*(j+1)); var x=a[j]; a[j]=a[k]; a[k]=x; } return a; }
+    function show(){
+      if(i>=seq.length){ finish(); return; }
+      word.textContent='…'; yes.disabled=no.disabled=true;
+      setTimeout(function(){ word.textContent=seq[i].t; yes.disabled=no.disabled=false; t0=performance.now(); }, 450+Math.random()*350);
+    }
+    function answer(v){ if(yes.disabled) return; var it=seq[i]; if(!it.treino) log.push({k:it.k,rt:performance.now()-t0,ok:(v===it.b)}); i++; show(); }
+    function med(k){ var a=log.filter(function(x){ return x.k===k&&x.ok; }).map(function(x){ return x.rt; }).sort(function(p,q){ return p-q; }); return a.length?a[Math.floor(a.length/2)]:null; }
+    function fmt(ms){ return (ms/1000).toFixed(2).replace('.',',')+' s'; }
+    function finish(){
+      stage.hidden=true;
+      var a=med('tip'), b=med('atip');
+      res.innerHTML='<p class="w-num"><span>Pássaros típicos (pardal, sabiá...)</span><b>'+(a?fmt(a):'—')+'</b></p>'+
+        '<p class="w-num"><span>Pássaros da borda (pinguim, ema...)</span><b>'+(b?fmt(b):'—')+'</b></p>'+
+        '<p class="w-note">Num teste curto como este, o resultado de uma pessoa varia muito, para um lado ou para o outro. Com muitas pessoas, os pássaros típicos são reconhecidos mais rápido de forma consistente.</p>';
+      res.hidden=false; again.hidden=false;
+      T('passaro',{tipicos_ms:a?Math.round(a):null,borda_ms:b?Math.round(b):null,acertos:log.filter(function(x){return x.ok;}).length,total:log.length});
+    }
+    function begin(){ log=[]; i=0; seq=[{t:'gato',b:false,treino:true}].concat(shuffle(items)); start.hidden=true; res.hidden=true; again.hidden=true; stage.hidden=false; show(); }
+    start.addEventListener('click',begin); again.addEventListener('click',begin);
+    yes.addEventListener('click',function(){ answer(true); }); no.addEventListener('click',function(){ answer(false); });
+  });
+
+  /* a máquina de voltar */
+  [].forEach.call(document.querySelectorAll('[data-w="maquina"]'),function(w){
+    var mode='det', c={a:0,r:0};
+    var tabs=w.querySelectorAll('.w-tab'), sim=w.querySelector('.w-sim'), forte=w.querySelector('.w-forte'),
+        go=w.querySelector('.w-go'), out=w.querySelector('.w-out'), tally=w.querySelector('.w-tally');
+    function render(){ tally.textContent='Aceitou: '+c.a+'  ·  Recusou: '+c.r+'  ·  voltas: '+(c.a+c.r); }
+    [].forEach.call(tabs,function(t){ t.addEventListener('click',function(){
+      press(tabs,t); mode=t.getAttribute('data-mode'); c={a:0,r:0}; T('maquina_aba',{modo:mode});
+      var f=(mode==='forte'); sim.hidden=f; forte.hidden=!f;
+      out.textContent='Toque no botão para voltar ao instante.'; render();
+    }); });
+    go.addEventListener('click',function(){
+      var aceita = mode==='det' ? true : Math.random()<0.7;
+      if(aceita) c.a++; else c.r++;
+      out.textContent = aceita ? 'Você aceitou a vaga.' : 'Você recusou a vaga.';
+      out.classList.remove('pulse'); void out.offsetWidth; out.classList.add('pulse');
+      render();
+      T('maquina_volta',{modo:mode,voltas:c.a+c.r});
+    });
+    render();
+
+    /* terceira aba: o leitor escolhe uma regra e a máquina mostra em qual aba ela cai */
+    var rules=w.querySelectorAll('.w-rule'), rout=w.querySelector('.w-rule-out'), rwrite=w.querySelector('.w-rule-write');
+    function dez(p){ var a=0; for(var i=0;i<10;i++){ if(Math.random()<p) a++; } return 'Aceitou: '+a+'  ·  Recusou: '+(10-a); }
+    function say(html){ rout.innerHTML=html; rout.hidden=false; rout.classList.remove('pulse'); void rout.offsetWidth; rout.classList.add('pulse'); }
+    var falas={
+      quero:function(){ return '<p class="w-tally">Dez voltas com a sua regra · '+dez(1)+'</p><p>O que você mais quer naquele instante faz parte do seu estado, e o estado é o mesmo em toda volta. Sua regra virou a aba <b>“sem acaso”</b>.</p>'; },
+      contra:function(){ return '<p>Às vezes, mas quando? Se algo em você decide a hora de ir contra, isso também é estado:</p><p class="w-tally">'+dez(1)+'</p><p>Se nada decide, é sorteio:</p><p class="w-tally">'+dez(0.7)+'</p><p>Sua regra virou a aba <b>“sem acaso”</b> ou a <b>“com acaso”</b>. Não sobrou uma terceira.</p>'; },
+      eu:function(){ return '<p>É a proposta mais séria, e o fim do capítulo volta a ela. A máquina só faz uma pergunta: numa volta você aceitou; na outra, com tudo igual, recusou. O que, em você, fez a diferença?</p><p>Se foi alguma coisa, ela é parte do seu estado: aba <b>“sem acaso”</b>. Se não foi nada, é sorteio: aba <b>“com acaso”</b>.</p>'; },
+      outra:function(){ return ''; }
+    };
+    [].forEach.call(rules,function(b){ b.addEventListener('click',function(){
+      press(rules,b); var r=b.getAttribute('data-rule');
+      rwrite.hidden=(r!=='outra');
+      if(r==='outra'){ rout.hidden=true; var ta=rwrite.querySelector('textarea'); if(ta) ta.focus(); }
+      else say(falas[r]());
+      T('maquina_regra',{regra:r});
+    }); });
+    var test=w.querySelector('.w-rule-test');
+    if(test) test.addEventListener('click',function(){
+      var ta=rwrite.querySelector('textarea'), txt=(ta.value||'').trim();
+      var msg='Li o capítulo 9 de “O melhor livro do mundo?” e acho que achei a regra da terceira aba: '+txt;
+      say('<p>Agora ponha a sua regra na máquina. Com tudo igual, ela pode dar outro resultado? Se não pode, é a aba <b>“sem acaso”</b>. Se pode, o que decide qual sai? Se for algo em você, é estado; se não for nada, é sorteio.</p>'+
+          '<p>Se a sua regra escapa das duas, ela é exatamente o que este capítulo diz que ninguém conseguiu escrever.</p>'+
+          (txt?'<p><a class="send" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(msg)+'">Mandar minha regra pelo WhatsApp</a></p>':''));
+      T('maquina_regra_testada',{escreveu:!!txt});
+    });
+  });
+
+  /* Confira */
+  [].forEach.call(document.querySelectorAll('.confira'),function(q){
+    var opts=q.querySelectorAll('.opt'), right=+q.getAttribute('data-answer'), fb=q.querySelector('.fb');
+    [].forEach.call(opts,function(o,idx){ o.addEventListener('click',function(){
+      T('confira',{cap:capDe(q),escolha:idx,certo:idx===right,primeira_tentativa:!fb.dataset.base});
+      press(opts,o); opts[right].classList.add('right'); fb.hidden=false;
+      if(!fb.dataset.base) fb.dataset.base=fb.innerHTML;
+      fb.innerHTML=(idx===right?'Isso. ':'Não exatamente. ')+fb.dataset.base;
+    }); });
+  });
+
+  /* Passe adiante (só no fim): o livro inteiro ou um capítulo escolhido */
+  (function(){
+    var base=(/^https?:$/.test(location.protocol) && !/claude\.ai|claudeusercontent/.test(location.hostname)) ? (location.origin+location.pathname) : '';
+    var bl=document.getElementById('passe-livro'), sel=document.getElementById('passe-cap'), bc=document.getElementById('passe-cap-btn');
+    if(!bl||!sel||!bc) return;
+    bl.href='https://wa.me/?text='+encodeURIComponent('Li “O melhor livro do mundo?” e acho que você vai gostar. Tem até uma aposta de 100 reais lá dentro.'+(base?' '+base:''));
+    bl.addEventListener('click',function(){ T('compartilhou',{tipo:'livro'}); });
+    chapters.forEach(function(c){ var o=document.createElement('option'); o.value=c.getAttribute('data-n'); o.textContent=c.getAttribute('data-n')+'. '+c.getAttribute('data-q'); sel.appendChild(o); });
+    function linkCap(){ var c=byN[sel.value]; bc.href='https://wa.me/?text='+encodeURIComponent('Esse capítulo de “O melhor livro do mundo?” me pegou: '+c.getAttribute('data-q')+(base?' '+base+'#cap-'+sel.value:'')); }
+    sel.addEventListener('change',linkCap); linkCap();
+    bc.addEventListener('click',function(){ T('compartilhou',{tipo:'capitulo',cap:sel.value}); });
+  })();
+
+  /* Mandar a pergunta pelo WhatsApp (mensagem editável, sem número fixo) */
+  [].forEach.call(document.querySelectorAll('ul.oq li'),function(li,qi){
+    var q=li.querySelector('strong').textContent.trim();
+    var msg='Li “O melhor livro do mundo?”. A pergunta que me pegou: '+q+' O que eu acho: ';
+    var a=document.createElement('a'); a.className='send'; a.target='_blank'; a.rel='noopener';
+    a.href='https://wa.me/?text='+encodeURIComponent(msg); a.textContent='Mandar pelo WhatsApp'; a.addEventListener('click',function(){ T('whatsapp',{pergunta:qi+1}); });
+    li.appendChild(document.createElement('br')); li.appendChild(a);
+  });
+
+  renderTrail();
+  renderProgress();
+  update();
+})();
+</script>
+
+</body>
+</html>
