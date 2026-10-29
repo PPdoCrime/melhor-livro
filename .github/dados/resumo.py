@@ -360,12 +360,43 @@ min_por_hora = {f'{h:02d}h': round(horas[h], 1) for h in range(24) if horas[h]}
 
 erros_js = conta('erro_js', 'msg')
 
+# ---------- atividade recente (para saber se alguém está lendo agora) ----------
+agora = datetime.datetime.now(BRT)
+
+
+def janela(horas):
+    corte = agora - datetime.timedelta(hours=horas)
+    rec = [(ev, t, p) for ev, t, p in reais if t and t >= corte]
+    seg = collections.defaultdict(collections.Counter)
+    for ev, t, p in rec:
+        if ev == 'capitulo_tempo' and str(p.get('cap')) in ORD:
+            seg[p.get('leitor')][str(p.get('cap'))] += num(p.get('segundos')) or 0
+    lidos = collections.Counter()
+    for lid, cs in seg.items():
+        for c, sg in cs.items():
+            if palavras.get(c) and sg >= 0.4 * palavras[c] / 180 * 60:
+                lidos[NOME[c]] += 1
+    ult = max((t for _, t, _ in rec), default=None)
+    return {
+        'leitores_ativos': len({p.get('leitor') for _, _, p in rec}),
+        'aberturas': sum(1 for ev, _, _ in rec if ev == 'livro_aberto'),
+        'chegaram_em': dict(collections.Counter(NOME[str(p.get('cap'))] for ev, _, p in rec
+                                                if ev == 'capitulo_chegou' and str(p.get('cap')) in ORD)),
+        'leram_de_verdade': dict(lidos),
+        'minutos_lidos': round(sum(sum(cs.values()) for cs in seg.values()) / 60, 1),
+        'ultimo_evento': ult.strftime('%d/%m %H:%M') if ult else None,
+    }
+
+
+recente = {'ultimas_3h': janela(3), 'ultimas_24h': janela(24)}
+
 resumo = {
     'atualizado': datetime.datetime.now(BRT).strftime('%Y-%m-%d %H:%M (Brasília)'),
     'janela_dias': DIAS,
     'eventos_lidos': len(evs),
     'limite_atingido': bool(res.get('hasMore')) or len(evs) >= 50000,
     'leitores': n_leit,
+    'recente': recente,
     'leitores_que_voltaram_outro_dia': sum(1 for d in leitores if len(d['dias']) > 1),
     'versoes': dict(collections.Counter(','.join(sorted(d['versao'])) or '?' for d in leitores)),
     'robos_provaveis_excluidos': perfis.get('robo_provavel', {}).get('n', 0),
@@ -397,6 +428,9 @@ m = [f"# Leitura do livro — {resumo['atualizado']}", '',
      f"**{n_leit} leitores** (fora você e {resumo['robos_provaveis_excluidos']} robôs prováveis). "
      f"{resumo['leitores_que_voltaram_outro_dia']} voltaram em outro dia.", '',
      'Perfis: ' + ', '.join(f"{k} {v['n']}" for k, v in perfis.items()), '',
+     '## Agora', ''] + [f"- {k.replace('_', ' ')}: {v['leitores_ativos']} leitores, {v['minutos_lidos']} min lidos, "
+                        f"chegaram em {v['chegaram_em'] or '–'}, leram de verdade {v['leram_de_verdade'] or '–'}, "
+                        f"último evento {v['ultimo_evento'] or '–'}" for k, v in recente.items()] + ['',
      '## Até onde chegaram', '', '| trecho | chegaram | leram de verdade | tempo típico (min) | esperado (min) |',
      '|---|---|---|---|---|']
 for c in CAPS:
