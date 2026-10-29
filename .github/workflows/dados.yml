@@ -1,0 +1,48 @@
+# Puxa os eventos de leitura do PostHog e grava só números agregados no ramo "dados".
+# A chave fica no segredo POSTHOG_KEY. O log não mostra dados.
+name: dados-leitura
+
+on:
+  schedule:
+    - cron: '23 */3 * * *'   # a cada 3 horas
+  workflow_dispatch:
+  push:
+    branches: [main, rodar-dados]  # roda também a cada publicação; rodar-dados = rodar na hora
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dados-leitura
+  cancel-in-progress: false
+
+jobs:
+  resumo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resumir
+        env:
+          POSTHOG_KEY: ${{ secrets.POSTHOG_KEY }}
+        run: python3 .github/dados/resumo.py "$RUNNER_TEMP/saida" || true
+
+      - name: Gravar no ramo dados
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          URL="https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          D="$RUNNER_TEMP/ramo"
+          if git clone -q --depth 1 --branch dados "$URL" "$D" 2>/dev/null; then :; else
+            mkdir -p "$D" && cd "$D" && git init -q -b dados && git remote add origin "$URL" && cd -
+          fi
+          cp "$RUNNER_TEMP"/saida/* "$D"/
+          cd "$D"
+          git config user.name "dados-leitura"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "sem mudança"; exit 0; fi
+          git commit -q -m "Resumo de leitura"
+          git push -q origin dados
