@@ -1415,7 +1415,8 @@ a.copy{text-decoration:none}
           autocapture:false, capture_pageview:true, capture_pageleave:true,
           disable_surveys:true, persistence:'localStorage',
           disable_session_recording:true, session_recording:{ maskAllInputs:true },
-          loaded:function(p){ ph=p; try{ p.register({leitor:leitor}); }catch(e){} var f=fila; fila=[]; f.forEach(function(x){ enviar(x[0],x[1]); }); }
+          before_send:function(ev){ try{ if(ev&&ev.properties) ev.properties.$geoip_disable=true; }catch(e){} return ev; },
+          loaded:function(p){ ph=p; try{ p.register({leitor:leitor, $geoip_disable:true}); }catch(e){} var f=fila; fila=[]; f.forEach(function(x){ enviar(x[0],x[1]); }); }
         });
       }catch(e){}
     };
