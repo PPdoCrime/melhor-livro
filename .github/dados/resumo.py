@@ -234,6 +234,21 @@ reais = [x for x in reais if x[2].get('leitor') not in robos]  # o resto do resu
 n_leit = len(leitores)
 leram = {NOME[c]: sum(1 for d in leitores if c in d['caps'] and lida(d, c)) for c in CAPS}
 
+# comparação entre versões (ex.: v6 mostrava "16 capítulos" logo de cara; v7 não mostra)
+por_versao = {}
+for d in leitores:
+    v = sorted(d['versao'])[0] if d['versao'] else '?'
+    x = por_versao.setdefault(v, {'leitores': 0, 'perfis': collections.Counter(), 'chegaram_prologo': 0,
+                                  'leram_prologo': 0, 'chegaram_cap1': 0, 'leram_cap1': 0})
+    x['leitores'] += 1
+    x['perfis'][d['perfil']] += 1
+    x['chegaram_prologo'] += '0' in d['caps']
+    x['leram_prologo'] += '0' in d['caps'] and lida(d, '0')
+    x['chegaram_cap1'] += '1' in d['caps']
+    x['leram_cap1'] += '1' in d['caps'] and lida(d, '1')
+for x in por_versao.values():
+    x['perfis'] = dict(x['perfis'])
+
 alcance = {NOME[c]: sum(1 for d in leitores if c in d['caps']) for c in CAPS}
 concluiu = {NOME[c]: sum(1 for d in leitores if c in d['concl']) for c in CAPS}
 param = collections.Counter(NOME[ultimo(d)] if ultimo(d) else 'só abriu' for d in leitores)
@@ -402,6 +417,7 @@ resumo = {
     'robos_provaveis_excluidos': perfis.get('robo_provavel', {}).get('n', 0),
     'perfis': perfis,
     'leram_de_verdade_por_capitulo': leram,
+    'por_versao': por_versao,
     'alcance_leitores_por_capitulo': alcance,
     'concluiram_por_capitulo': concluiu,
     'onde_pararam_ultimo_capitulo': param,
@@ -438,6 +454,9 @@ for c in CAPS:
     tp = tempo.get(nm, {})
     if alcance[nm] or tp:
         m.append(f"| {nm} | {alcance[nm]} | {leram[nm]} | {tp.get('min_mediana', '–')} | {tp.get('min_esperado_180ppm', '–')} |")
+m += ['', '## Por versão', ''] + [f"- {k}: {v['leitores']} leitores, {v['perfis'].get('so_abriu', 0)} só abriram, "
+                                   f"{v['leram_prologo']} leram o prólogo, {v['leram_cap1']} leram o cap 1"
+                                   for k, v in sorted(por_versao.items())]
 m += ['', '## Onde pararam', ''] + [f'- {k}: {v}' for k, v in param.items()]
 m += ['', '## Convites', ''] + [f"- {k}: {v['leitores']} leitores, {v['chegaram_cap1']} no cap 1, {v['chegaram_cap8']} no cap 8, {v['chegaram_fim']} no fim"
                                 for k, v in sorted(convites.items(), key=lambda kv: -kv[1]['leitores'])]

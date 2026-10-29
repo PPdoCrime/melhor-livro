@@ -79,6 +79,7 @@ button{font:inherit;color:inherit}
 .left-txt{font-family:var(--font-mono);font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .map-btn{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:none;border:1px solid var(--accent);border-radius:2px;padding:4px 9px;cursor:pointer}
 .segs{display:flex;gap:2px;padding-bottom:7px}
+.segs[hidden]{display:none}
 .segs i{flex:1;height:3px;background:var(--rule)}
 .segs i.read{background:var(--accent)}
 .segs i.cur{background:linear-gradient(90deg,var(--accent) 50%,var(--rule) 50%)}
@@ -309,9 +310,9 @@ a.copy{text-decoration:none}
 <header class="topbar">
   <div class="bar col-wide gutter">
     <span class="now" id="now"><b id="now-a">O melhor livro do mundo?</b> <span id="now-b"></span></span>
-    <span class="bar-right"><span class="left-txt" id="left-txt">0 de 16 lidos</span><button class="map-btn" id="map-open" type="button" aria-haspopup="dialog">Mapa</button></span>
+    <span class="bar-right"><span class="left-txt" id="left-txt"></span><button class="map-btn" id="map-open" type="button" aria-haspopup="dialog">Mapa</button></span>
   </div>
-  <div class="col-wide gutter"><div class="segs" id="segs" aria-hidden="true"><i data-n="1"></i><i data-n="2"></i><i data-n="3"></i><i data-n="4"></i><i data-n="5"></i><i data-n="6"></i><i data-n="7"></i><i data-n="8"></i><i data-n="9"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i></div></div>
+  <div class="col-wide gutter"><div class="segs" id="segs" aria-hidden="true" hidden><i data-n="1"></i><i data-n="2"></i><i data-n="3"></i><i data-n="4"></i><i data-n="5"></i><i data-n="6"></i><i data-n="7"></i><i data-n="8"></i><i data-n="9"></i><i data-n="10"></i><i data-n="11"></i><i data-n="12"></i><i data-n="13"></i><i data-n="14"></i><i data-n="15"></i><i data-n="16"></i></div></div>
 </header>
 
 <section class="hero" id="inicio">
@@ -354,7 +355,7 @@ a.copy{text-decoration:none}
   <p>Essa pergunta eu não consigo responder de cara. No capítulo 9, essa máquina vira um simulador aqui mesmo na página, e você volta ao momento quantas vezes quiser. Antes, vamos passar por algumas paradas que já valem a viagem. O que é real, e o que é só nome? Por que um copo vazio dá um tranco no seu braço? Uma IA pensa? E sente? Por que o seu café esfria e você não?</p>
   <p>Parecem desvios, mas cada parada é fundamental para chegar à conclusão deste livro. Sei que você vai aproveitar a jornada. Afinal, é o melhor livro do mundo 😄</p>
   <div class="orient">
-    <p><strong>Como ler.</strong> São dezesseis capítulos curtos, de três a cinco minutos cada. Pode parar quando quiser: a página guarda onde você estava. <small class="aparte">(Claro, o melhor livro do mundo é tecnológico. Vou parar de me gabar, eu prometo 🙂)</small></p>
+    <p><strong>Como ler.</strong> Os capítulos são curtos. Pode parar quando quiser: a página guarda onde você estava. <small class="aparte">(Claro, o melhor livro do mundo é tecnológico. Vou parar de me gabar, eu prometo 🙂)</small></p>
     <p>O livro começa pelo mais básico. Cada capítulo responde uma dúvida e abre a seguinte, até chegar na última. Qual? O melhor livro do mundo não dá spoiler: aqui não compactuamos com esse tipo de comportamento. Só lendo para descobrir. E, afinal, quem em sã consciência não vai ler o melhor livro do mundo até o fim?</p>
     <p>Neste livro só tem o que já passou por <strong>muita</strong> discussão e crítica. No caminho aparecem pensadores que chegaram a ideias semelhantes e, no fim, tem uma lista curta para quem quiser ir mais fundo em algum detalhe.</p>
     <div class="row"><button class="btn ghost" type="button" data-open-map>Ver o mapa do livro</button></div>
@@ -383,7 +384,7 @@ a.copy{text-decoration:none}
 
 
 <section class="chapter col gutter" id="cap-1" data-n="1" data-parte="I|O mundo e as palavras" data-title="O território e o mapa" data-q="O que é real, e o que é só nome?" data-deps="">
-  <div class="ch-meta"><span>Capítulo 1 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <div class="ch-meta"><span>Capítulo 1</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
   <h2>O que é real, e o que é só nome?</h2>
   <div class="ch-body">
   <p class="lede">Em 2006, os astrônomos decidiram que Plutão não é mais um planeta. Plutão não ficou sabendo. Continuou girando exatamente como antes. Então o que mudou?</p>
@@ -445,7 +446,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-2" data-n="2" data-title="Sentido e verdade" data-q="Uma frase pode fazer sentido e ser mentira?" data-deps="1">
-  <div class="ch-meta"><span>Capítulo 2 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <div class="ch-meta"><span>Capítulo 2</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
   <h2>Uma frase pode fazer sentido e ser mentira?</h2>
   <div class="ch-body">
   <p class="lede">Leia estas duas frases:</p>
@@ -508,7 +509,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-3" data-n="3" data-title="O que é informação" data-q="O que uma notícia muda dentro de você?" data-deps="1,2">
-  <div class="ch-meta"><span>Capítulo 3 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <div class="ch-meta"><span>Capítulo 3</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
   <h2>O que uma notícia muda dentro de você?</h2>
   <div class="ch-body">
   <p class="lede">Você está atrasado e a chave sumiu. Pode estar no bolso do casaco, na mesa, no carro, em qualquer canto da casa. Aí alguém grita da cozinha: “tá em cima da geladeira”.</p>
@@ -568,7 +569,7 @@ a.copy{text-decoration:none}
 
 
 <section class="chapter col gutter" id="cap-4" data-n="4" data-parte="II|Pensar e sentir" data-title="O que é pensar" data-q="O que o seu cérebro está fazendo agora?" data-deps="1,2,3">
-  <div class="ch-meta"><span>Capítulo 4 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <div class="ch-meta"><span>Capítulo 4</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
   <h2>O que o seu cérebro está fazendo agora?</h2>
   <div class="ch-body">
   <p class="lede">Você pega um copo achando que está cheio. Ele está vazio, e seu braço sobe rápido demais, num tranco.</p>
@@ -657,7 +658,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-5" data-n="5" data-title="Categorias são graus" data-q="Onde termina o “pássaro”?" data-deps="1,4">
-  <div class="ch-meta"><span>Capítulo 5 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <div class="ch-meta"><span>Capítulo 5</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
   <h2>Onde termina o “pássaro”?</h2>
   <div class="ch-body">
   <p class="lede">Um pinguim é um pássaro? Você provavelmente hesitou uma fração de segundo. Com um pardal, não hesitaria.</p>
@@ -707,7 +708,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-6" data-n="6" data-title="Pensar não é sentir" data-q="Uma IA pensa? E sente?" data-deps="4,5">
-  <div class="ch-meta"><span>Capítulo 6 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <div class="ch-meta"><span>Capítulo 6</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
   <h2>Uma IA pensa? E sente?</h2>
   <div class="ch-body">
   <p class="lede">Você pode xingar uma IA, elogiá-la ou dizer que vai apagá-la. Ela vai responder como se algo tivesse acontecido. Aconteceu alguma coisa com ela?</p>
@@ -763,7 +764,7 @@ a.copy{text-decoration:none}
 
 
 <section class="chapter col gutter" id="cap-7" data-n="7" data-parte="III|Vida e escolha" data-title="O que é vida" data-q="Se tudo se desmancha, por que você não?" data-deps="5,6">
-  <div class="ch-meta"><span>Capítulo 7 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <div class="ch-meta"><span>Capítulo 7</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
   <h2>Se tudo se desmancha, por que você não?</h2>
   <div class="ch-body">
   <p class="lede">Você deixa o cafezinho na mesa para responder uma mensagem e, quando volta, ele esfriou. Ele nunca esquenta sozinho. Então como você continua a 36 graus há anos?</p>
@@ -840,7 +841,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-8" data-n="8" data-title="Não existe livre-arbítrio" data-q="Você poderia ter feito diferente?" data-deps="1,4,7">
-  <div class="ch-meta"><span>Capítulo 8 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <div class="ch-meta"><span>Capítulo 8</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
   <h2>Você poderia ter feito diferente?</h2>
   <div class="ch-body">
   <p class="lede">Volte à máquina do prólogo. Mesmo cérebro, mesmas memórias, mesmo humor, mesma informação. Você poderia ter escolhido diferente?</p>
@@ -919,7 +920,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-9" data-n="9" data-title="A máquina liga" data-q="O que é escolher?" data-deps="1,2,4,8">
-  <div class="ch-meta"><span>Capítulo 9 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <div class="ch-meta"><span>Capítulo 9</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
   <h2>O que é escolher?</h2>
   <div class="ch-body">
   <p class="lede">A máquina do prólogo está ligada. Você volta ao instante e decide, de novo e de novo. Se sair sempre igual, quem decidiu? E se sair diferente?</p>
@@ -997,7 +998,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-10" data-n="10" data-title="A palavra que descolou" data-q="De onde veio a palavra “livre”?" data-deps="1,2,4,9">
-  <div class="ch-meta"><span>Capítulo 10 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <div class="ch-meta"><span>Capítulo 10</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
   <h2>De onde veio a palavra “livre”?</h2>
   <div class="ch-body">
   <p class="lede">Um passarinho sai da gaiola e voa: está livre. Um cachorro solto da coleira, um preso que sai da cadeia. Ninguém tem dúvida do que “livre” quer dizer nessas frases.</p>
@@ -1042,7 +1043,7 @@ a.copy{text-decoration:none}
 
 
 <section class="chapter col gutter" id="cap-11" data-n="11" data-parte="IV|Valor e crença" data-title="Nada importa por si só" data-q="Se o universo não liga para nada, algo importa?" data-deps="6,7">
-  <div class="ch-meta"><span>Capítulo 11 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <div class="ch-meta"><span>Capítulo 11</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
   <h2>Se o universo não liga para nada, algo importa?</h2>
   <div class="ch-body">
   <p class="lede">Imagine uma planilha com o universo inteiro: cada partícula, sua posição, sua velocidade, cada estrela, cada neurônio. Agora procure nela a linha que diz “isto é bom” ou “isto importa”. Ela não existe.</p>
@@ -1099,7 +1100,7 @@ a.copy{text-decoration:none}
   </div>
 
 <section class="chapter col gutter" id="cap-12" data-n="12" data-title="Um exame em três frentes" data-q="O Deus das escrituras resiste a um exame honesto?" data-deps="1,2,3,6,8,11">
-  <div class="ch-meta"><span>Capítulo 12 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
+  <div class="ch-meta"><span>Capítulo 12</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></i>5 min</span></div>
   <h2>O Deus das escrituras resiste a um exame honesto?</h2>
   <div class="ch-body">
   <p class="lede">Este capítulo examina uma coisa bem específica: não é qualquer ideia de divindade. Acreditar numa força maior, sem dizer qual, é uma posição vaga, mas difícil de refutar. Ela fica de fora.</p>
@@ -1141,7 +1142,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-13" data-n="13" data-title="O inferno e a máquina" data-q="Um Deus justo pode condenar quem não tinha escolha?" data-deps="8,9,10,12">
-  <div class="ch-meta"><span>Capítulo 13 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <div class="ch-meta"><span>Capítulo 13</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
   <h2>Um Deus justo pode condenar quem não tinha escolha?</h2>
   <div class="ch-body">
   <p class="lede">A terceira frente é a lógica interna, e aqui o capítulo 8 desmonta o núcleo da teologia cristã. O inferno só seria justo se cada pessoa tivesse escolhido livremente entre o bem e o mal. E “livremente”, em boa parte das defesas, não é o passarinho fora da gaiola: é o passarinho livre até da própria fome.</p>
@@ -1180,7 +1181,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-14" data-n="14" data-title="Brilhante em quase tudo" data-q="Por que gênios acreditam?" data-deps="4,8,12">
-  <div class="ch-meta"><span>Capítulo 14 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <div class="ch-meta"><span>Capítulo 14</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
   <h2>Por que gênios acreditam?</h2>
   <div class="ch-body">
   <p class="lede">Leonhard Euler foi um dos maiores matemáticos da história; boa parte da notação que se usa até hoje, como f(x), foi popularizada por ele. E costumava reunir a família para rezar e ler a Bíblia.</p>
@@ -1224,7 +1225,7 @@ a.copy{text-decoration:none}
 
 
 <section class="chapter col gutter" id="cap-15" data-n="15" data-parte="V|Como viver" data-title="Cinco vidas e um estudo de 80 anos" data-q="Então, como viver?" data-deps="8,11">
-  <div class="ch-meta"><span>Capítulo 15 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
+  <div class="ch-meta"><span>Capítulo 15</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span><span></span></i>4 min</span></div>
   <h2>Então, como viver?</h2>
   <div class="ch-body">
   <p class="lede">Domingo à noite, a música do Fantástico começa e bate aquele vazio. Se nada tem sentido intrínseco, esse vazio é a resposta certa?</p>
@@ -1272,7 +1273,7 @@ a.copy{text-decoration:none}
 </section>
 
 <section class="chapter col gutter" id="cap-16" data-n="16" data-title="A promessa do capítulo 8" data-q="Então não é tão ruim quanto parece?" data-deps="8,9,15">
-  <div class="ch-meta"><span>Capítulo 16 de 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
+  <div class="ch-meta"><span>Capítulo 16</span><span class="scale" title="Tempo de leitura"><i aria-hidden="true"><span></span><span></span><span></span></i>3 min</span></div>
   <h2>Então não é tão ruim quanto parece?</h2>
   <div class="ch-body">
   <p class="lede">No capítulo 8, eu prometi mostrar por que não ter escolhido nada do que você pensa não é tão ruim quanto parece. Diferente da aposta, essa promessa não tem asterisco. Antes de pagar, vem a objeção mais honesta de todas, a que quase todo mundo sente.</p>
@@ -1373,7 +1374,7 @@ a.copy{text-decoration:none}
    onde o aparelho permite sem pedir nada, uma estimativa de movimento.
    Sem chave configurada, nada sai do aparelho. */
 (function(){
-  var CFG={ key:'phc_n6BdZjg46GCSRYpP66xjQ79Uicz7TGbNiT4TqxAybzij', host:'https://us.i.posthog.com', versao:'v6' };
+  var CFG={ key:'phc_n6BdZjg46GCSRYpP66xjQ79Uicz7TGbNiT4TqxAybzij', host:'https://us.i.posthog.com', versao:'v7' };
   if(CFG.key.indexOf('%%')===0) CFG.key='';
   var DEBUG=/debug-track/.test(location.hash);
   function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
@@ -1556,7 +1557,7 @@ a.copy{text-decoration:none}
 
   /* ---------- Barra do topo e progresso por capítulo ---------- */
   var nowA=document.getElementById('now-a'), nowB=document.getElementById('now-b'), leftTxt=document.getElementById('left-txt');
-  var segs=[].slice.call(document.querySelectorAll('#segs i'));
+  var segs=[].slice.call(document.querySelectorAll('#segs i')), segsBox=document.getElementById('segs');
   var current=null;
   function renderProgress(){
     var nRead=0, left=0;
@@ -1565,7 +1566,10 @@ a.copy{text-decoration:none}
       var n=s.getAttribute('data-n');
       s.className=read[n]?'read':(current&&current.getAttribute('data-n')===n?'cur':'');
     });
-    if(nRead<Math.ceil(chapters.length/2)) leftTxt.textContent=nRead+' de '+chapters.length+' lidos';
+    /* o total só aparece da metade em diante: longe do fim ele desanima, perto ele puxa */
+    var metade=nRead>=Math.ceil(chapters.length/2);
+    if(segsBox) segsBox.hidden=!metade;
+    if(!metade) leftTxt.textContent='';
     else leftTxt.textContent=left?('faltam ~'+left+' min'):'tudo lido';
     renderTrail();
   }
@@ -1581,7 +1585,7 @@ a.copy{text-decoration:none}
     else{
       var n=cur.getAttribute('data-n');
       if(n==='0'){ nowA.textContent='Prólogo'; }
-      else if(n){ nowA.textContent='Cap. '+n+' de '+chapters.length; ls(K_LAST,n); }
+      else if(n){ nowA.textContent='Cap. '+n; ls(K_LAST,n); }
       else { nowA.textContent='Fim'; }
       nowB.textContent=' · '+(cur.getAttribute('data-q')||cur.getAttribute('data-title')||'');
     }
