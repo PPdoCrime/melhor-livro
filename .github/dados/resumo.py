@@ -146,7 +146,7 @@ def quartis(xs):
 
 
 L = collections.defaultdict(lambda: {'caps': set(), 'concl': set(), 'seg': collections.Counter(), 'versao': set(),
-                                      'convite': None, 'dias': set(), 'aberturas': 0})
+                                      'convite': None, 'dias': set(), 'aberturas': 0, 'aparelho': {}})
 palavras = {}
 for ev, t, p in reais:
     lid = p.get('leitor')
@@ -162,6 +162,8 @@ for ev, t, p in reais:
     cap = str(p.get('cap')) if p.get('cap') is not None else None
     if ev == 'livro_aberto':
         d['aberturas'] += 1
+        if not d['aparelho']:
+            d['aparelho'] = {k: p.get(k) for k in ('largura', 'altura', 'toque', 'tema')}
     elif ev == 'capitulo_chegou' and cap in ORD:
         d['caps'].add(cap)
     elif ev == 'capitulo_concluido' and cap in ORD:
@@ -177,8 +179,60 @@ def ultimo(d):
     return max(d['caps'], key=ORD.get) if d['caps'] else None
 
 
-leitores = [d for d in L.values() if d['aberturas'] or d['caps']]
+todos = [d for d in L.values() if d['aberturas'] or d['caps'] or d['concl']]
+
+
+def perfil(d):
+    # robô provável: "concluiu" capítulos em que nunca chegou rolando (página renderizada inteira de uma vez,
+    # típico de verificador de links, antivírus ou gerador de prévia)
+    if len(d['concl'] - d['caps']) >= 3:
+        return 'robo_provavel'
+    if not d['caps']:
+        return 'so_abriu'
+    total = sum(d['seg'].values())
+    if any(lida(d, c) for c in d['caps']):
+        return 'leu_algum_trecho'
+    return 'folheou' if total >= 3 else 'so_rolou'
+
+
+def lida(d, c):
+    # trecho lido de verdade: ao menos 40% do tempo esperado a 180 palavras/min (ou seja, até ~450 ppm)
+    pal = palavras.get(c)
+    return bool(pal) and d['seg'][c] >= 0.4 * pal / 180 * 60
+
+
+def faixa(v, cortes, rot):
+    v = num(v)
+    if v is None:
+        return '?'
+    for c, r in zip(cortes, rot):
+        if v <= c:
+            return r
+    return rot[-1]
+
+
+perfis = {}
+for d in todos:
+    d['perfil'] = perfil(d)
+for nome_p in ('robo_provavel', 'so_abriu', 'so_rolou', 'folheou', 'leu_algum_trecho'):
+    ds = [d for d in todos if d['perfil'] == nome_p]
+    if not ds:
+        continue
+    ap = [d['aparelho'] for d in ds]
+    perfis[nome_p] = {
+        'n': len(ds),
+        'largura': dict(collections.Counter(faixa(a.get('largura'), [360, 430, 767], ['até 360', '361-430', '431-767', '768+']) for a in ap)),
+        'altura': dict(collections.Counter(faixa(a.get('altura'), [700, 950, 1400], ['até 700', '701-950', '951-1400', '1401+']) for a in ap)),
+        'toque': dict(collections.Counter(str(a.get('toque')) for a in ap)),
+        'dias': dict(collections.Counter(min(d['dias']) if d['dias'] else '?' for d in ds)),
+        'convite': dict(collections.Counter(d['convite'] or '(sem)' for d in ds)),
+    }
+
+leitores = [d for d in todos if d['perfil'] != 'robo_provavel']
+robos = {lid for lid, d in L.items() if d.get('perfil') == 'robo_provavel'}
+reais = [x for x in reais if x[2].get('leitor') not in robos]  # o resto do resumo ignora os robôs
 n_leit = len(leitores)
+leram = {NOME[c]: sum(1 for d in leitores if c in d['caps'] and lida(d, c)) for c in CAPS}
 
 alcance = {NOME[c]: sum(1 for d in leitores if c in d['caps']) for c in CAPS}
 concluiu = {NOME[c]: sum(1 for d in leitores if c in d['concl']) for c in CAPS}
@@ -314,6 +368,9 @@ resumo = {
     'leitores': n_leit,
     'leitores_que_voltaram_outro_dia': sum(1 for d in leitores if len(d['dias']) > 1),
     'versoes': dict(collections.Counter(','.join(sorted(d['versao'])) or '?' for d in leitores)),
+    'robos_provaveis_excluidos': perfis.get('robo_provavel', {}).get('n', 0),
+    'perfis': perfis,
+    'leram_de_verdade_por_capitulo': leram,
     'alcance_leitores_por_capitulo': alcance,
     'concluiram_por_capitulo': concluiu,
     'onde_pararam_ultimo_capitulo': param,
@@ -337,13 +394,16 @@ with open(os.path.join(SAIDA, 'resumo.json'), 'w') as f:
 
 # ---------- 4. versão para ler no celular ----------
 m = [f"# Leitura do livro — {resumo['atualizado']}", '',
-     f"**{n_leit} leitores** (fora você). {resumo['leitores_que_voltaram_outro_dia']} voltaram em outro dia.", '',
-     '## Até onde chegaram', '', '| trecho | leitores | tempo típico (min) | esperado (min) |', '|---|---|---|---|']
+     f"**{n_leit} leitores** (fora você e {resumo['robos_provaveis_excluidos']} robôs prováveis). "
+     f"{resumo['leitores_que_voltaram_outro_dia']} voltaram em outro dia.", '',
+     'Perfis: ' + ', '.join(f"{k} {v['n']}" for k, v in perfis.items()), '',
+     '## Até onde chegaram', '', '| trecho | chegaram | leram de verdade | tempo típico (min) | esperado (min) |',
+     '|---|---|---|---|---|']
 for c in CAPS:
     nm = NOME[c]
     tp = tempo.get(nm, {})
     if alcance[nm] or tp:
-        m.append(f"| {nm} | {alcance[nm]} | {tp.get('min_mediana', '–')} | {tp.get('min_esperado_180ppm', '–')} |")
+        m.append(f"| {nm} | {alcance[nm]} | {leram[nm]} | {tp.get('min_mediana', '–')} | {tp.get('min_esperado_180ppm', '–')} |")
 m += ['', '## Onde pararam', ''] + [f'- {k}: {v}' for k, v in param.items()]
 m += ['', '## Convites', ''] + [f"- {k}: {v['leitores']} leitores, {v['chegaram_cap1']} no cap 1, {v['chegaram_cap8']} no cap 8, {v['chegaram_fim']} no fim"
                                 for k, v in sorted(convites.items(), key=lambda kv: -kv[1]['leitores'])]
