@@ -1,9 +1,51 @@
 {
- "atualizado": "2026-10-29 11:43 (Brasília)",
+ "atualizado": "2026-10-29 12:19 (Brasília)",
  "janela_dias": 180,
  "eventos_lidos": 392,
  "limite_atingido": false,
  "leitores": 21,
+ "recente": {
+  "ultimas_3h": {
+   "leitores_ativos": 2,
+   "aberturas": 2,
+   "chegaram_em": {
+    "prólogo": 1
+   },
+   "leram_de_verdade": {},
+   "minutos_lidos": 0.7,
+   "ultimo_evento": "29/10 11:32"
+  },
+  "ultimas_24h": {
+   "leitores_ativos": 21,
+   "aberturas": 25,
+   "chegaram_em": {
+    "prólogo": 15,
+    "cap 1": 8,
+    "cap 2": 4,
+    "cap 3": 4,
+    "cap 4": 4,
+    "cap 5": 3,
+    "cap 7": 3,
+    "cap 9": 3,
+    "cap 11": 2,
+    "cap 12": 2,
+    "cap 14": 2,
+    "cap 15": 2,
+    "cap 16": 2,
+    "fim": 2,
+    "cap 6": 2,
+    "cap 8": 2,
+    "cap 10": 1,
+    "cap 13": 1
+   },
+   "leram_de_verdade": {
+    "prólogo": 2,
+    "fim": 1
+   },
+   "minutos_lidos": 17.2,
+   "ultimo_evento": "29/10 11:32"
+  }
+ },
  "leitores_que_voltaram_outro_dia": 0,
  "versoes": {
   "v6": 21
