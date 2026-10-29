@@ -1,7 +1,7 @@
 {
- "atualizado": "2026-10-29 18:30 (Brasília)",
+ "atualizado": "2026-10-29 20:16 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 499,
+ "eventos_lidos": 500,
  "limite_atingido": false,
  "leitores": 26,
  "recente": {
@@ -10,8 +10,8 @@
    "aberturas": 0,
    "chegaram_em": {},
    "leram_de_verdade": {},
-   "minutos_lidos": 0.1,
-   "ultimo_evento": "29/10 15:37"
+   "minutos_lidos": 0.0,
+   "ultimo_evento": "29/10 18:52"
   },
   "ultimas_24h": {
    "leitores_ativos": 26,
@@ -41,7 +41,7 @@
     "fim": 1
    },
    "minutos_lidos": 28.2,
-   "ultimo_evento": "29/10 15:37"
+   "ultimo_evento": "29/10 18:52"
   }
  },
  "leitores_que_voltaram_outro_dia": 1,
@@ -538,10 +538,10 @@
   }
  },
  "sessoes": {
-  "n": 13,
-  "minutos_mediana": 3.3,
+  "n": 14,
+  "minutos_mediana": 5.8,
   "cap_final": {
-   "prólogo": 6,
+   "prólogo": 7,
    "capa": 3,
    "fim": 3,
    "cap 1": 1
@@ -577,7 +577,7 @@
   },
   "2026-10-29": {
    "leitores": 14,
-   "eventos": 160
+   "eventos": 161
   }
  },
  "minutos_lidos_por_hora_do_dia": {
@@ -601,7 +601,7 @@
   "livro_aberto": 36,
   "voltou_ao_app": 22,
   "letra_miuda_vista": 18,
-  "sessao_fim": 13,
+  "sessao_fim": 14,
   "aposta_prologo": 6,
   "mapa_aberto": 4,
   "asterisco_tocado": 4,
