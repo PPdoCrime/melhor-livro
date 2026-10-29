@@ -1381,11 +1381,14 @@ a.copy{text-decoration:none}
 
   var leitor=ls('snic2-leitor'); if(!leitor){ leitor=rid(); ls('snic2-leitor',leitor); }
   var sessoes=(parseInt(ls('snic2-sessoes'),10)||0)+1; ls('snic2-sessoes',String(sessoes));
+  /* leitura do próprio autor: abrir uma vez com ?teste=1 marca este aparelho (e ?teste=0 desmarca), para filtrar no painel */
+  var tq=(location.search.match(/[?&]teste=([01])/)||[])[1]; if(tq) ls('snic2-teste',tq);
+  var teste=ls('snic2-teste')==='1';
   var ua=navigator.userAgent||'';
   var app=/FBAN|FBAV/.test(ua)?'facebook':/Instagram/.test(ua)?'instagram':/WhatsApp/i.test(ua)?'whatsapp':/Telegram/i.test(ua)?'telegram':/LinkedInApp/.test(ua)?'linkedin':'navegador';
   var base={ leitor:leitor, versao:CFG.versao, sessao_n:sessoes, app:app,
     tema:(matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'escuro':'claro',
-    largura:innerWidth, toque:('ontouchstart' in window), contexto:null };
+    largura:innerWidth, toque:('ontouchstart' in window), contexto:null, teste:teste };
 
   var ph=null, fila=[];
   function enviar(ev,p,beacon){
