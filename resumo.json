@@ -1,38 +1,20 @@
 {
- "atualizado": "2026-10-29 15:26 (Brasília)",
+ "atualizado": "2026-10-29 17:21 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 495,
+ "eventos_lidos": 499,
  "limite_atingido": false,
  "leitores": 26,
  "recente": {
   "ultimas_3h": {
-   "leitores_ativos": 7,
-   "aberturas": 8,
+   "leitores_ativos": 4,
+   "aberturas": 3,
    "chegaram_em": {
-    "prólogo": 7,
-    "cap 1": 2,
-    "cap 2": 1,
-    "cap 3": 1,
-    "cap 4": 1,
-    "cap 5": 1,
-    "cap 6": 1,
-    "cap 7": 1,
-    "cap 8": 1,
-    "cap 9": 1,
-    "cap 10": 1,
-    "cap 11": 1,
-    "cap 12": 1,
-    "cap 13": 1,
-    "cap 14": 1,
-    "cap 15": 1,
-    "cap 16": 1,
-    "fim": 1
+    "prólogo": 3,
+    "cap 1": 1
    },
-   "leram_de_verdade": {
-    "prólogo": 2
-   },
-   "minutos_lidos": 8.8,
-   "ultimo_evento": "29/10 14:57"
+   "leram_de_verdade": {},
+   "minutos_lidos": 0.6,
+   "ultimo_evento": "29/10 15:37"
   },
   "ultimas_24h": {
    "leitores_ativos": 26,
@@ -61,8 +43,8 @@
     "prólogo": 4,
     "fim": 1
    },
-   "minutos_lidos": 28.1,
-   "ultimo_evento": "29/10 14:57"
+   "minutos_lidos": 28.2,
+   "ultimo_evento": "29/10 15:37"
   }
  },
  "leitores_que_voltaram_outro_dia": 1,
@@ -284,7 +266,7 @@
    "min_mediana": 0.7,
    "min_quartis": [
     0.1,
-    2.5
+    2.6
    ],
    "min_esperado_180ppm": 4.0,
    "ppm_mediana": 1103.5,
@@ -490,20 +472,20 @@
   }
  },
  "movimento_minutos": {
-  "None": 17.4,
+  "None": 17.5,
   "na_mao_parado": 7.2,
   "apoiado": 1.9,
   "veiculo_ou_balanco": 1.5
  },
  "saiu_do_app_por_capitulo": {
-  "prólogo": 23,
+  "prólogo": 24,
   "fim": 5,
   "cap 1": 3,
   "cap 4": 1
  },
  "motivo_fim_de_trecho_por_capitulo": {
   "prólogo": {
-   "fechou": 5,
+   "fechou": 6,
    "mudou": 15,
    "saiu_do_app": 14
   },
@@ -559,10 +541,10 @@
   }
  },
  "sessoes": {
-  "n": 12,
-  "minutos_mediana": 2.6,
+  "n": 13,
+  "minutos_mediana": 3.3,
   "cap_final": {
-   "prólogo": 5,
+   "prólogo": 6,
    "capa": 3,
    "fim": 3,
    "cap 1": 1
@@ -598,7 +580,7 @@
   },
   "2026-10-29": {
    "leitores": 14,
-   "eventos": 156
+   "eventos": 160
   }
  },
  "minutos_lidos_por_hora_do_dia": {
@@ -608,6 +590,7 @@
   "12h": 2.0,
   "13h": 8.3,
   "14h": 0.6,
+  "15h": 0.1,
   "21h": 0.1,
   "22h": 5.2,
   "23h": 9.2
@@ -615,13 +598,13 @@
  "erros_js": {},
  "eventos_por_tipo": {
   "capitulo_chegou": 91,
-  "capitulo_tempo": 68,
+  "capitulo_tempo": 69,
   "capitulo_concluido": 48,
-  "saiu_do_app": 41,
+  "saiu_do_app": 42,
   "livro_aberto": 36,
-  "voltou_ao_app": 21,
+  "voltou_ao_app": 22,
   "letra_miuda_vista": 18,
-  "sessao_fim": 12,
+  "sessao_fim": 13,
   "aposta_prologo": 6,
   "mapa_aberto": 4,
   "asterisco_tocado": 4,
