@@ -1,4 +1,4 @@
-# Leitura do livro — 2026-10-30 14:57 (Brasília)
+# Leitura do livro — 2026-10-30 15:03 (Brasília)
 
 **31 leitores** (fora você e 5 robôs prováveis). 3 voltaram em outro dia.
 
@@ -7,7 +7,7 @@ Perfis: robo_provavel 5, so_abriu 11, so_rolou 2, folheou 10, leu_algum_trecho 8
 ## Agora
 
 - ultimas 3h: 1 leitores, 13.2 min lidos, chegaram em {'prólogo': 1, 'cap 1': 1, 'cap 2': 1, 'cap 3': 1, 'cap 4': 1, 'cap 5': 1, 'cap 6': 1}, leram de verdade {'prólogo': 1, 'cap 1': 1, 'cap 2': 1, 'cap 3': 1, 'cap 5': 1}, último evento 30/10 14:15
-- ultimas 24h: 8 leitores, 151.3 min lidos, chegaram em {'prólogo': 11, 'cap 1': 5, 'cap 3': 5, 'cap 9': 3, 'cap 11': 3, 'cap 10': 3, 'cap 12': 3, 'cap 14': 3, 'cap 15': 3, 'cap 2': 3, 'cap 4': 4, 'cap 5': 3, 'cap 6': 3, 'cap 7': 2, 'cap 8': 2, 'cap 16': 2, 'fim': 2, 'cap 13': 2}, leram de verdade {'prólogo': 4, 'cap 1': 2, 'cap 2': 2, 'cap 3': 2, 'cap 4': 1, 'cap 5': 2, 'cap 6': 1, 'cap 7': 1, 'cap 8': 1, 'cap 9': 1, 'cap 10': 1, 'cap 11': 1, 'cap 12': 1, 'cap 15': 1, 'cap 16': 1, 'fim': 1}, último evento 30/10 14:15
+- ultimas 24h: 8 leitores, 151.0 min lidos, chegaram em {'prólogo': 10, 'cap 1': 5, 'cap 3': 5, 'cap 9': 3, 'cap 11': 3, 'cap 10': 3, 'cap 12': 3, 'cap 14': 3, 'cap 15': 3, 'cap 2': 3, 'cap 4': 4, 'cap 5': 3, 'cap 6': 3, 'cap 7': 2, 'cap 8': 2, 'cap 16': 2, 'fim': 2, 'cap 13': 2}, leram de verdade {'prólogo': 4, 'cap 1': 2, 'cap 2': 2, 'cap 3': 2, 'cap 4': 1, 'cap 5': 2, 'cap 6': 1, 'cap 7': 1, 'cap 8': 1, 'cap 9': 1, 'cap 10': 1, 'cap 11': 1, 'cap 12': 1, 'cap 15': 1, 'cap 16': 1, 'fim': 1}, último evento 30/10 14:15
 
 ## Até onde chegaram
 

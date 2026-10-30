@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-10-30 14:57 (Brasília)",
+ "atualizado": "2026-10-30 15:03 (Brasília)",
  "janela_dias": 180,
  "eventos_lidos": 755,
  "limite_atingido": false,
@@ -29,9 +29,9 @@
   },
   "ultimas_24h": {
    "leitores_ativos": 8,
-   "aberturas": 15,
+   "aberturas": 14,
    "chegaram_em": {
-    "prólogo": 11,
+    "prólogo": 10,
     "cap 1": 5,
     "cap 3": 5,
     "cap 9": 3,
@@ -68,7 +68,7 @@
     "cap 16": 1,
     "fim": 1
    },
-   "minutos_lidos": 151.3,
+   "minutos_lidos": 151.0,
    "ultimo_evento": "30/10 14:15"
   }
  },
