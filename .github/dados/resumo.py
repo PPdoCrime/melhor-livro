@@ -160,6 +160,7 @@ for ev, t, p in reais:
         d['convite'] = str(p['convite'])
     if t:
         d['dias'].add(t.date().isoformat())
+        d.setdefault('t0', t)  # primeiro evento (só vira contagem por período, nunca sai por pessoa)
     cap = str(p.get('cap')) if p.get('cap') is not None else None
     if ev == 'livro_aberto':
         d['aberturas'] += 1
@@ -406,6 +407,18 @@ def janela(horas):
 
 recente = {'ultimas_3h': janela(3), 'ultimas_24h': janela(24)}
 
+
+def periodo(t):
+    h = t.hour
+    nome = 'madrugada' if h < 6 else 'manhã' if h < 11 else 'almoço (11h-14h)' if h < 14 else 'tarde' if h < 18 else 'noite'
+    return t.strftime('%d/%m ') + nome
+
+
+# contagem agregada: em que dia e período chegou quem leu de verdade 8 trechos ou mais
+chegada_longe = dict(collections.Counter(
+    periodo(d['t0']) for d in leitores
+    if d.get('t0') and sum(1 for c in CAPS if c in d['caps'] and lida(d, c)) >= 8))
+
 resumo = {
     'atualizado': datetime.datetime.now(BRT).strftime('%Y-%m-%d %H:%M (Brasília)'),
     'janela_dias': DIAS,
@@ -419,6 +432,7 @@ resumo = {
     'perfis': perfis,
     'leram_de_verdade_por_capitulo': leram,
     'por_versao': por_versao,
+    'chegada_de_quem_leu_8_ou_mais': chegada_longe,
     'alcance_leitores_por_capitulo': alcance,
     'concluiram_por_capitulo': concluiu,
     'onde_pararam_ultimo_capitulo': param,
