@@ -34,9 +34,9 @@ Perfis: robo_provavel 5, so_abriu 11, so_rolou 2, folheou 10, leu_algum_trecho 9
 
 ## Por versão
 
-- v10: 2 leitores, 0 só abriram, 2 leram o prólogo, 2 leram o cap 1
+- v10: 1 leitores, 0 só abriram, 1 leram o prólogo, 1 leram o cap 1
 - v6: 24 leitores, 11 só abriram, 5 leram o prólogo, 1 leram o cap 1
-- v7: 6 leitores, 0 só abriram, 2 leram o prólogo, 0 leram o cap 1
+- v7: 7 leitores, 0 só abriram, 3 leram o prólogo, 1 leram o cap 1
 
 ## Onde pararam
 

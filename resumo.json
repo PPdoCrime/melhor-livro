@@ -220,26 +220,26 @@
    "leram_cap1": 1
   },
   "v7": {
-   "leitores": 6,
+   "leitores": 7,
    "perfis": {
     "folheou": 3,
     "so_rolou": 1,
-    "leu_algum_trecho": 2
+    "leu_algum_trecho": 3
    },
-   "chegaram_prologo": 6,
-   "leram_prologo": 2,
-   "chegaram_cap1": 2,
-   "leram_cap1": 0
+   "chegaram_prologo": 7,
+   "leram_prologo": 3,
+   "chegaram_cap1": 3,
+   "leram_cap1": 1
   },
   "v10": {
-   "leitores": 2,
+   "leitores": 1,
    "perfis": {
-    "leu_algum_trecho": 2
+    "leu_algum_trecho": 1
    },
-   "chegaram_prologo": 2,
-   "leram_prologo": 2,
-   "chegaram_cap1": 2,
-   "leram_cap1": 2
+   "chegaram_prologo": 1,
+   "leram_prologo": 1,
+   "chegaram_cap1": 1,
+   "leram_cap1": 1
   }
  },
  "alcance_leitores_por_capitulo": {
