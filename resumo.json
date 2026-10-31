@@ -1,61 +1,62 @@
 {
- "atualizado": "2026-10-30 21:02 (Brasília)",
+ "atualizado": "2026-10-31 01:48 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 831,
+ "eventos_lidos": 962,
  "limite_atingido": false,
- "leitores": 31,
+ "leitores": 32,
  "recente": {
   "ultimas_3h": {
    "leitores_ativos": 1,
-   "aberturas": 1,
+   "aberturas": 0,
    "chegaram_em": {},
    "leram_de_verdade": {},
    "minutos_lidos": 0.0,
-   "ultimo_evento": "30/10 20:03"
+   "ultimo_evento": "30/10 23:34"
   },
   "ultimas_24h": {
    "leitores_ativos": 7,
-   "aberturas": 18,
+   "aberturas": 17,
    "chegaram_em": {
-    "prólogo": 13,
-    "cap 1": 8,
+    "prólogo": 14,
+    "cap 1": 9,
     "cap 3": 8,
+    "cap 4": 7,
+    "cap 7": 5,
+    "cap 8": 5,
     "cap 9": 5,
-    "cap 11": 4,
     "cap 10": 5,
+    "cap 11": 4,
     "cap 12": 4,
+    "cap 13": 4,
     "cap 14": 4,
     "cap 15": 4,
-    "cap 2": 6,
-    "cap 4": 6,
-    "cap 5": 5,
-    "cap 6": 5,
-    "cap 7": 4,
-    "cap 8": 4,
-    "cap 16": 3,
-    "fim": 3,
-    "cap 13": 3
+    "cap 16": 4,
+    "fim": 4,
+    "cap 2": 10,
+    "cap 5": 6,
+    "cap 6": 6
    },
    "leram_de_verdade": {
-    "prólogo": 4,
+    "prólogo": 2,
     "cap 1": 2,
-    "cap 2": 2,
-    "cap 3": 2,
-    "cap 4": 2,
-    "cap 5": 2,
-    "cap 6": 2,
-    "cap 7": 2,
-    "cap 8": 1,
+    "cap 2": 1,
+    "cap 3": 1,
+    "cap 4": 1,
+    "cap 5": 1,
+    "cap 6": 1,
+    "cap 7": 1,
     "cap 9": 1,
     "cap 10": 1,
     "cap 11": 1,
     "cap 12": 1,
+    "cap 13": 1,
+    "cap 14": 1,
     "cap 15": 1,
     "cap 16": 1,
     "fim": 1
    },
-   "minutos_lidos": 160.4,
-   "ultimo_evento": "30/10 20:03"
+   "minutos_lidos": 78.4,
+   "ultimo_evento": "30/10 23:34"
   }
  },
  "leitores_que_voltaram_outro_dia": 5,
@@ -63,7 +64,9 @@
   "v6": 21,
   "v6,v7,v9": 1,
   "v6,v7": 2,
-  "v7": 7
+  "v7": 6,
+  "v10,v7": 1,
+  "v10": 1
  },
  "robos_provaveis_excluidos": 5,
  "perfis": {
@@ -156,34 +159,35 @@
    }
   },
   "leu_algum_trecho": {
-   "n": 8,
+   "n": 9,
    "largura": {
     "361-430": 5,
     "768+": 2,
-    "até 360": 1
+    "até 360": 1,
+    "431-767": 1
    },
    "altura": {
-    "701-950": 7,
+    "701-950": 8,
     "até 700": 1
    },
    "toque": {
-    "True": 6,
+    "True": 7,
     "False": 2
    },
    "dias": {
     "2026-10-28": 3,
     "2026-10-29": 4,
-    "2026-10-30": 1
+    "2026-10-30": 2
    },
    "convite": {
-    "opiniao": 7,
+    "opiniao": 8,
     "aposta": 1
    }
   }
  },
  "leram_de_verdade_por_capitulo": {
-  "prólogo": 8,
-  "cap 1": 2,
+  "prólogo": 9,
+  "cap 1": 3,
   "cap 2": 2,
   "cap 3": 2,
   "cap 4": 2,
@@ -191,14 +195,14 @@
   "cap 6": 2,
   "cap 7": 2,
   "cap 8": 1,
-  "cap 9": 1,
-  "cap 10": 1,
-  "cap 11": 1,
-  "cap 12": 1,
-  "cap 13": 0,
-  "cap 14": 0,
-  "cap 15": 1,
-  "cap 16": 1,
+  "cap 9": 2,
+  "cap 10": 2,
+  "cap 11": 2,
+  "cap 12": 2,
+  "cap 13": 1,
+  "cap 14": 1,
+  "cap 15": 2,
+  "cap 16": 2,
   "fim": 2
  },
  "por_versao": {
@@ -216,56 +220,66 @@
    "leram_cap1": 1
   },
   "v7": {
-   "leitores": 7,
+   "leitores": 6,
    "perfis": {
     "folheou": 3,
     "so_rolou": 1,
-    "leu_algum_trecho": 3
+    "leu_algum_trecho": 2
    },
-   "chegaram_prologo": 7,
-   "leram_prologo": 3,
-   "chegaram_cap1": 3,
-   "leram_cap1": 1
+   "chegaram_prologo": 6,
+   "leram_prologo": 2,
+   "chegaram_cap1": 2,
+   "leram_cap1": 0
+  },
+  "v10": {
+   "leitores": 2,
+   "perfis": {
+    "leu_algum_trecho": 2
+   },
+   "chegaram_prologo": 2,
+   "leram_prologo": 2,
+   "chegaram_cap1": 2,
+   "leram_cap1": 2
   }
  },
  "alcance_leitores_por_capitulo": {
-  "prólogo": 20,
-  "cap 1": 11,
-  "cap 2": 8,
-  "cap 3": 9,
-  "cap 4": 8,
-  "cap 5": 8,
-  "cap 6": 7,
-  "cap 7": 7,
-  "cap 8": 6,
-  "cap 9": 8,
-  "cap 10": 6,
-  "cap 11": 6,
-  "cap 12": 6,
-  "cap 13": 4,
-  "cap 14": 6,
-  "cap 15": 6,
-  "cap 16": 5,
-  "fim": 5
+  "prólogo": 21,
+  "cap 1": 12,
+  "cap 2": 9,
+  "cap 3": 10,
+  "cap 4": 9,
+  "cap 5": 9,
+  "cap 6": 8,
+  "cap 7": 8,
+  "cap 8": 7,
+  "cap 9": 9,
+  "cap 10": 7,
+  "cap 11": 8,
+  "cap 12": 8,
+  "cap 13": 6,
+  "cap 14": 8,
+  "cap 15": 8,
+  "cap 16": 7,
+  "fim": 7
  },
  "concluiram_por_capitulo": {
   "prólogo": 0,
-  "cap 1": 9,
-  "cap 2": 8,
-  "cap 3": 9,
-  "cap 4": 8,
-  "cap 5": 8,
-  "cap 6": 7,
-  "cap 7": 5,
-  "cap 8": 6,
-  "cap 9": 6,
-  "cap 10": 5,
-  "cap 11": 4,
-  "cap 12": 4,
-  "cap 13": 4,
-  "cap 14": 4,
-  "cap 15": 4,
-  "cap 16": 5,
+  "cap 1": 10,
+  "cap 2": 9,
+  "cap 3": 10,
+  "cap 4": 9,
+  "cap 5": 9,
+  "cap 6": 8,
+  "cap 7": 6,
+  "cap 8": 7,
+  "cap 9": 7,
+  "cap 10": 7,
+  "cap 11": 6,
+  "cap 12": 6,
+  "cap 13": 6,
+  "cap 14": 6,
+  "cap 15": 6,
+  "cap 16": 7,
   "fim": 0
  },
  "onde_pararam_ultimo_capitulo": {
@@ -274,75 +288,74 @@
   "cap 1": 3,
   "cap 6": 1,
   "cap 9": 1,
-  "cap 10": 1,
   "cap 15": 1,
-  "fim": 5
+  "fim": 7
  },
  "tempo_por_capitulo": {
   "prólogo": {
-   "leitores": 17,
-   "min_mediana": 0.8,
+   "leitores": 18,
+   "min_mediana": 1.5,
    "min_quartis": [
     0.3,
-    3.2
+    2.9
    ],
    "min_esperado_180ppm": 4.0,
-   "ppm_mediana": 938,
+   "ppm_mediana": 631.0,
    "passou_batido_ppm_acima_600": 9
   },
   "cap 1": {
-   "leitores": 8,
+   "leitores": 9,
    "min_mediana": 0.3,
    "min_quartis": [
     0.1,
-    2.2
+    6.5
    ],
-   "min_esperado_180ppm": 3.9,
-   "ppm_mediana": 2386.0,
+   "min_esperado_180ppm": 4.4,
+   "ppm_mediana": 2355,
    "passou_batido_ppm_acima_600": 6
   },
   "cap 2": {
-   "leitores": 5,
+   "leitores": 6,
    "min_mediana": 0.2,
    "min_quartis": [
     0.1,
-    5.2
+    3.8
    ],
-   "min_esperado_180ppm": 3.6,
-   "ppm_mediana": 3894,
-   "passou_batido_ppm_acima_600": 3
+   "min_esperado_180ppm": 3.8,
+   "ppm_mediana": 3440.0,
+   "passou_batido_ppm_acima_600": 4
   },
   "cap 3": {
-   "leitores": 4,
-   "min_mediana": 1.8,
+   "leitores": 5,
+   "min_mediana": 0.5,
    "min_quartis": [
-    0.2,
-    5.8
+    0.1,
+    4.9
    ],
    "min_esperado_180ppm": 3.7,
-   "ppm_mediana": 792.5,
-   "passou_batido_ppm_acima_600": 2
+   "ppm_mediana": 1392,
+   "passou_batido_ppm_acima_600": 3
   },
   "cap 4": {
-   "leitores": 5,
-   "min_mediana": 0.4,
+   "leitores": 6,
+   "min_mediana": 0.3,
    "min_quartis": [
     0.2,
-    8.5
+    5.7
    ],
    "min_esperado_180ppm": 5.9,
-   "ppm_mediana": 2760,
-   "passou_batido_ppm_acima_600": 3
+   "ppm_mediana": 3247.0,
+   "passou_batido_ppm_acima_600": 4
   },
   "cap 5": {
    "leitores": 5,
    "min_mediana": 0.2,
    "min_quartis": [
     0.1,
-    4.2
+    4.3
    ],
-   "min_esperado_180ppm": 3.2,
-   "ppm_mediana": 3492,
+   "min_esperado_180ppm": 3.3,
+   "ppm_mediana": 3570,
    "passou_batido_ppm_acima_600": 3
   },
   "cap 6": {
@@ -357,89 +370,109 @@
    "passou_batido_ppm_acima_600": 3
   },
   "cap 7": {
+   "leitores": 5,
+   "min_mediana": 0.1,
+   "min_quartis": [
+    0.1,
+    5.2
+   ],
+   "min_esperado_180ppm": 4.4,
+   "ppm_mediana": 6746,
+   "passou_batido_ppm_acima_600": 3
+  },
+  "cap 8": {
    "leitores": 4,
    "min_mediana": 1.0,
    "min_quartis": [
     0.1,
-    6.9
+    7.7
    ],
-   "min_esperado_180ppm": 4.3,
-   "ppm_mediana": 3496.0,
+   "min_esperado_180ppm": 5.2,
+   "ppm_mediana": 4231.5,
    "passou_batido_ppm_acima_600": 2
-  },
-  "cap 8": {
-   "leitores": 3,
-   "min_mediana": 1.7,
-   "min_quartis": null,
-   "min_esperado_180ppm": 5.1,
-   "ppm_mediana": 548,
-   "passou_batido_ppm_acima_600": 1
   },
   "cap 9": {
    "leitores": 3,
-   "min_mediana": 1.4,
+   "min_mediana": 5.2,
    "min_quartis": null,
-   "min_esperado_180ppm": 5.3,
-   "ppm_mediana": 668,
-   "passou_batido_ppm_acima_600": 2
+   "min_esperado_180ppm": 5.5,
+   "ppm_mediana": 191,
+   "passou_batido_ppm_acima_600": 1
   },
   "cap 10": {
    "leitores": 4,
-   "min_mediana": 0.2,
+   "min_mediana": 1.5,
    "min_quartis": [
     0.1,
-    4.9
+    5.5
    ],
    "min_esperado_180ppm": 4.0,
-   "ppm_mediana": 8234.0,
-   "passou_batido_ppm_acima_600": 3
+   "ppm_mediana": 1211.5,
+   "passou_batido_ppm_acima_600": 2
   },
   "cap 11": {
-   "leitores": 3,
-   "min_mediana": 0.5,
-   "min_quartis": null,
-   "min_esperado_180ppm": 5.0,
-   "ppm_mediana": 1941,
+   "leitores": 4,
+   "min_mediana": 3.0,
+   "min_quartis": [
+    0.2,
+    8.4
+   ],
+   "min_esperado_180ppm": 5.3,
+   "ppm_mediana": 1103.5,
    "passou_batido_ppm_acima_600": 2
   },
   "cap 12": {
-   "leitores": 2,
-   "min_mediana": 3.9,
+   "leitores": 3,
+   "min_mediana": 4.9,
    "min_quartis": null,
-   "min_esperado_180ppm": 5.3,
-   "ppm_mediana": 7171.0,
+   "min_esperado_180ppm": 5.4,
+   "ppm_mediana": 199,
    "passou_batido_ppm_acima_600": 1
   },
-  "cap 14": {
+  "cap 13": {
    "leitores": 1,
-   "min_mediana": 0.1,
+   "min_mediana": 4.1,
    "min_quartis": null,
-   "min_esperado_180ppm": 4.5,
-   "ppm_mediana": 16380,
+   "min_esperado_180ppm": 3.6,
+   "ppm_mediana": 157,
+   "passou_batido_ppm_acima_600": 0
+  },
+  "cap 14": {
+   "leitores": 2,
+   "min_mediana": 2.2,
+   "min_quartis": null,
+   "min_esperado_180ppm": 5.2,
+   "ppm_mediana": 9378.0,
    "passou_batido_ppm_acima_600": 1
   },
   "cap 15": {
-   "leitores": 3,
-   "min_mediana": 1.3,
-   "min_quartis": null,
-   "min_esperado_180ppm": 4.5,
-   "ppm_mediana": 634,
+   "leitores": 4,
+   "min_mediana": 1.8,
+   "min_quartis": [
+    0.4,
+    3.0
+   ],
+   "min_esperado_180ppm": 4.6,
+   "ppm_mediana": 500.0,
    "passou_batido_ppm_acima_600": 2
   },
   "cap 16": {
-   "leitores": 2,
-   "min_mediana": 2.8,
+   "leitores": 3,
+   "min_mediana": 5.6,
    "min_quartis": null,
-   "min_esperado_180ppm": 3.4,
-   "ppm_mediana": 6174.5,
+   "min_esperado_180ppm": 4.1,
+   "ppm_mediana": 131,
    "passou_batido_ppm_acima_600": 1
   },
   "fim": {
-   "leitores": 3,
-   "min_mediana": 1.2,
-   "min_quartis": null,
+   "leitores": 4,
+   "min_mediana": 2.3,
+   "min_quartis": [
+    1.1,
+    4.9
+   ],
    "min_esperado_180ppm": 3.1,
-   "ppm_mediana": 450,
+   "ppm_mediana": 306.0,
    "passou_batido_ppm_acima_600": 0
   }
  },
@@ -453,12 +486,12 @@
    "min_lidos_mediana": 0
   },
   "opiniao": {
-   "leitores": 19,
-   "chegaram_cap1": 10,
-   "chegaram_cap4": 7,
-   "chegaram_cap8": 6,
-   "chegaram_fim": 4,
-   "min_lidos_mediana": 0.9
+   "leitores": 20,
+   "chegaram_cap1": 11,
+   "chegaram_cap4": 8,
+   "chegaram_cap8": 7,
+   "chegaram_fim": 6,
+   "min_lidos_mediana": 1.0
   },
   "aposta": {
    "leitores": 1,
@@ -479,80 +512,84 @@
  },
  "abertura": {
   "app": {
-   "navegador": 54
+   "navegador": 61
   },
   "tema": {
-   "claro": 35,
+   "claro": 42,
    "escuro": 19
   },
   "toque": {
-   "True": 36,
-   "False": 18
+   "True": 42,
+   "False": 19
   },
   "origem": {
-   "direto": 54
+   "direto": 61
   },
   "entrou_por": {
-   "inicio": 52,
+   "inicio": 59,
    "#letra-miuda": 1,
    "#cap-7": 1
   },
   "retorno": {
-   "False": 31,
-   "True": 23
+   "False": 32,
+   "True": 29
   },
   "versao": {
    "v6": 33,
    "v7": 20,
+   "v10": 7,
    "v9": 1
   },
   "largura": {
    "361-430": 32,
-   "768+": 18,
+   "768+": 19,
+   "431-767": 6,
    "até 360": 4
   }
  },
  "movimento_minutos": {
-  "apoiado": 115.9,
-  "None": 44.3,
-  "na_mao_parado": 19.1,
+  "apoiado": 127.0,
+  "None": 83.1,
+  "na_mao_parado": 21.4,
   "veiculo_ou_balanco": 9.3
  },
  "saiu_do_app_por_capitulo": {
-  "prólogo": 34,
+  "prólogo": 35,
   "fim": 15,
   "cap 1": 3,
   "cap 4": 1,
   "cap 15": 3,
   "cap 6": 2,
-  "cap 10": 1
+  "cap 10": 1,
+  "cap 2": 1
  },
  "motivo_fim_de_trecho_por_capitulo": {
   "prólogo": {
    "fechou": 8,
-   "mudou": 24,
-   "saiu_do_app": 19
+   "mudou": 25,
+   "saiu_do_app": 20
   },
   "cap 1": {
-   "mudou": 12,
+   "mudou": 16,
    "saiu_do_app": 2
   },
   "cap 4": {
-   "mudou": 6,
+   "mudou": 8,
    "saiu_do_app": 1
   },
   "cap 5": {
-   "mudou": 6
+   "mudou": 7
   },
   "fim": {
    "saiu_do_app": 10,
-   "mudou": 2
+   "mudou": 4
   },
   "cap 2": {
-   "mudou": 6
+   "mudou": 9,
+   "saiu_do_app": 1
   },
   "cap 3": {
-   "mudou": 6
+   "mudou": 8
   },
   "cap 6": {
    "mudou": 4,
@@ -560,42 +597,45 @@
    "fechou": 1
   },
   "cap 7": {
-   "mudou": 4
+   "mudou": 5
   },
   "cap 8": {
-   "mudou": 3
+   "mudou": 5
   },
   "cap 10": {
-   "mudou": 3,
+   "mudou": 5,
    "fechou": 1
   },
   "cap 11": {
-   "mudou": 3
+   "mudou": 4
   },
   "cap 12": {
-   "mudou": 2
+   "mudou": 3
   },
   "cap 14": {
-   "mudou": 1
+   "mudou": 2
   },
   "cap 15": {
-   "mudou": 2,
+   "mudou": 3,
    "saiu_do_app": 2,
    "fechou": 1
   },
   "cap 16": {
-   "mudou": 3
+   "mudou": 5
   },
   "cap 9": {
-   "mudou": 3
+   "mudou": 5
+  },
+  "cap 13": {
+   "mudou": 1
   }
  },
  "sessoes": {
-  "n": 24,
-  "minutos_mediana": 8.1,
+  "n": 25,
+  "minutos_mediana": 8.2,
   "cap_final": {
    "prólogo": 12,
-   "capa": 4,
+   "capa": 5,
    "fim": 3,
    "cap 6": 2,
    "cap 1": 1,
@@ -633,7 +673,7 @@
   },
   "aposta_widget": {},
   "contexto": {
-   "casa": 2
+   "casa": 3
   },
   "nana_notou": {
    "False": 1
@@ -668,8 +708,8 @@
    "eventos": 235
   },
   "2026-10-30": {
-   "leitores": 6,
-   "eventos": 257
+   "leitores": 7,
+   "eventos": 376
   }
  },
  "minutos_lidos_por_hora_do_dia": {
@@ -685,41 +725,42 @@
   "14h": 13.8,
   "15h": 0.1,
   "16h": 9.5,
-  "21h": 2.1,
-  "22h": 8.9,
+  "21h": 43.9,
+  "22h": 19.3,
   "23h": 44.0
  },
  "erros_js": {},
  "eventos_por_tipo": {
-  "capitulo_chegou": 185,
-  "capitulo_tempo": 136,
-  "capitulo_concluido": 96,
-  "saiu_do_app": 79,
-  "livro_aberto": 54,
-  "voltou_ao_app": 45,
-  "letra_miuda_vista": 31,
-  "sessao_fim": 24,
+  "capitulo_chegou": 230,
+  "capitulo_tempo": 167,
+  "capitulo_concluido": 119,
+  "saiu_do_app": 83,
+  "livro_aberto": 61,
+  "voltou_ao_app": 46,
+  "letra_miuda_vista": 35,
+  "sessao_fim": 25,
+  "mapa_aberto": 9,
   "aposta_prologo": 8,
-  "mapa_aberto": 8,
   "asterisco_tocado": 4,
   "confira": 4,
   "mapa_pulou": 3,
+  "contexto": 3,
   "whatsapp": 3,
-  "contexto": 2,
   "pensar": 2,
   "nana": 1,
-  "maquina_volta": 1
+  "maquina_volta": 1,
+  "retomou": 1
  },
  "eventos_do_autor_teste": {
-  "capitulo_tempo": 12,
-  "capitulo_chegou": 11,
-  "saiu_do_app": 7,
-  "livro_aberto": 4,
-  "letra_miuda_vista": 4,
+  "capitulo_tempo": 15,
+  "capitulo_chegou": 13,
+  "saiu_do_app": 9,
+  "livro_aberto": 6,
+  "letra_miuda_vista": 5,
+  "voltou_ao_app": 4,
   "capitulo_concluido": 3,
-  "voltou_ao_app": 3,
+  "sessao_fim": 3,
   "mapa_aberto": 2,
-  "sessao_fim": 2,
   "mapa_pulou": 1,
   "aposta_prologo": 1
  }
