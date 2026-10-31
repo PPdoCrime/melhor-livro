@@ -155,6 +155,7 @@ for ev, t, p in reais:
     d = L[lid]
     if p.get('versao'):
         d['versao'].add(p['versao'])
+        d.setdefault('v1', p['versao'])  # versão em que a pessoa chegou (eventos vêm em ordem de tempo)
     if p.get('convite') and not d['convite']:
         d['convite'] = str(p['convite'])
     if t:
@@ -237,7 +238,7 @@ leram = {NOME[c]: sum(1 for d in leitores if c in d['caps'] and lida(d, c)) for 
 # comparação entre versões (ex.: v6 mostrava "16 capítulos" logo de cara; v7 não mostra)
 por_versao = {}
 for d in leitores:
-    v = sorted(d['versao'])[0] if d['versao'] else '?'
+    v = d.get('v1', '?')
     x = por_versao.setdefault(v, {'leitores': 0, 'perfis': collections.Counter(), 'chegaram_prologo': 0,
                                   'leram_prologo': 0, 'chegaram_cap1': 0, 'leram_cap1': 0})
     x['leitores'] += 1
