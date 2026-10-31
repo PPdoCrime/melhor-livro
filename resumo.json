@@ -1,12 +1,12 @@
 {
- "atualizado": "2026-10-31 02:05 (Brasília)",
+ "atualizado": "2026-10-31 02:51 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 974,
+ "eventos_lidos": 980,
  "limite_atingido": false,
  "leitores": 33,
  "recente": {
   "ultimas_3h": {
-   "leitores_ativos": 2,
+   "leitores_ativos": 1,
    "aberturas": 1,
    "chegaram_em": {
     "prólogo": 1,
@@ -770,14 +770,14 @@
   "retomou": 1
  },
  "eventos_do_autor_teste": {
-  "capitulo_tempo": 15,
-  "capitulo_chegou": 13,
-  "saiu_do_app": 9,
-  "livro_aberto": 6,
+  "capitulo_tempo": 16,
+  "capitulo_chegou": 15,
+  "saiu_do_app": 10,
+  "livro_aberto": 7,
   "letra_miuda_vista": 5,
+  "sessao_fim": 4,
   "voltou_ao_app": 4,
   "capitulo_concluido": 3,
-  "sessao_fim": 3,
   "mapa_aberto": 2,
   "mapa_pulou": 1,
   "aposta_prologo": 1
