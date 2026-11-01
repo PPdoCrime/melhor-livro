@@ -1,4 +1,4 @@
-# Leitura do livro — 2026-11-01 03:15 (Brasília)
+# Leitura do livro — 2026-11-01 10:32 (Brasília)
 
 **37 leitores** (fora você e 5 robôs prováveis). 5 voltaram em outro dia.
 
@@ -7,7 +7,7 @@ Perfis: robo_provavel 5, so_abriu 11, so_rolou 3, folheou 13, leu_algum_trecho 1
 ## Agora
 
 - ultimas 3h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
-- ultimas 24h: 4 leitores, 13.3 min lidos, chegaram em {'cap 3': 1, 'prólogo': 3, 'cap 1': 2}, leram de verdade {'prólogo': 1, 'cap 1': 1}, último evento 31/10 22:34
+- ultimas 24h: 1 leitores, 0.2 min lidos, chegaram em {'prólogo': 1, 'cap 1': 1}, leram de verdade –, último evento 31/10 22:34
 
 ## Até onde chegaram
 
