@@ -1,4 +1,4 @@
-# Leitura do livro — 2026-11-04 11:54 (Brasília)
+# Leitura do livro — 2026-11-04 14:19 (Brasília)
 
 **39 leitores** (fora você e 5 robôs prováveis). 7 voltaram em outro dia.
 
