@@ -1,21 +1,21 @@
-# Leitura do livro — 2026-11-06 03:55 (Brasília)
+# Leitura do livro — 2026-11-06 09:58 (Brasília)
 
-**39 leitores** (fora você e 5 robôs prováveis). 7 voltaram em outro dia.
+**41 leitores** (fora você e 5 robôs prováveis). 7 voltaram em outro dia.
 
-Perfis: robo_provavel 5, so_abriu 11, so_rolou 4, folheou 13, leu_algum_trecho 11
+Perfis: robo_provavel 5, so_abriu 11, so_rolou 5, folheou 13, leu_algum_trecho 12
 
 ## Agora
 
-- ultimas 3h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
-- ultimas 24h: 1 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento 05/11 11:03
+- ultimas 3h: 2 leitores, 7.1 min lidos, chegaram em {'prólogo': 2, 'cap 1': 1, 'cap 2': 1}, leram de verdade {'cap 1': 1, 'cap 2': 1}, último evento 06/11 09:35
+- ultimas 24h: 3 leitores, 7.1 min lidos, chegaram em {'prólogo': 2, 'cap 1': 1, 'cap 2': 1}, leram de verdade {'cap 1': 1, 'cap 2': 1}, último evento 06/11 09:35
 
 ## Até onde chegaram
 
 | trecho | chegaram | leram de verdade | tempo típico (min) | esperado (min) |
 |---|---|---|---|---|
-| prólogo | 26 | 11 | 1.7 | 4.0 |
-| cap 1 | 16 | 5 | 0.3 | 4.4 |
-| cap 2 | 11 | 3 | 0.2 | 3.8 |
+| prólogo | 28 | 11 | 1.2 | 4.0 |
+| cap 1 | 17 | 6 | 0.6 | 4.4 |
+| cap 2 | 12 | 4 | 1.4 | 3.8 |
 | cap 3 | 13 | 3 | 0.5 | 3.7 |
 | cap 4 | 10 | 3 | 0.4 | 5.9 |
 | cap 5 | 10 | 3 | 1.1 | 3.3 |
@@ -34,15 +34,16 @@ Perfis: robo_provavel 5, so_abriu 11, so_rolou 4, folheou 13, leu_algum_trecho 1
 
 ## Por versão
 
-- v10: 8 leitores, 0 só abriram, 3 leram o prólogo, 3 leram o cap 1
+- v10: 10 leitores, 0 só abriram, 3 leram o prólogo, 4 leram o cap 1
 - v6: 24 leitores, 11 só abriram, 5 leram o prólogo, 1 leram o cap 1
 - v7: 7 leitores, 0 só abriram, 3 leram o prólogo, 1 leram o cap 1
 
 ## Onde pararam
 
 - só abriu: 11
-- prólogo: 9
+- prólogo: 10
 - cap 1: 5
+- cap 2: 1
 - cap 3: 2
 - cap 6: 3
 - cap 9: 1
@@ -53,6 +54,7 @@ Perfis: robo_provavel 5, so_abriu 11, so_rolou 4, folheou 13, leu_algum_trecho 1
 
 - opiniao: 27 leitores, 15 no cap 1, 7 no cap 8, 6 no fim
 - (sem convite): 10 leitores, 0 no cap 1, 0 no cap 8, 0 no fim
+- v10: 2 leitores, 1 no cap 1, 0 no cap 8, 0 no fim
 - aposta: 1 leitores, 1 no cap 1, 0 no cap 8, 1 no fim
 - zejsqpo: 1 leitores, 0 no cap 1, 0 no cap 8, 0 no fim
 
