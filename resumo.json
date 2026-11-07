@@ -1,7 +1,7 @@
 {
- "atualizado": "2026-11-07 03:06 (Brasília)",
+ "atualizado": "2026-11-07 10:11 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 1095,
+ "eventos_lidos": 1099,
  "limite_atingido": false,
  "leitores": 41,
  "recente": {
@@ -14,22 +14,17 @@
    "ultimo_evento": null
   },
   "ultimas_24h": {
-   "leitores_ativos": 2,
-   "aberturas": 2,
+   "leitores_ativos": 1,
+   "aberturas": 1,
    "chegaram_em": {
-    "prólogo": 2,
-    "cap 1": 1,
     "cap 2": 1
    },
-   "leram_de_verdade": {
-    "cap 1": 1,
-    "cap 2": 1
-   },
-   "minutos_lidos": 7.1,
-   "ultimo_evento": "06/11 09:35"
+   "leram_de_verdade": {},
+   "minutos_lidos": 0.0,
+   "ultimo_evento": "07/11 07:00"
   }
  },
- "leitores_que_voltaram_outro_dia": 7,
+ "leitores_que_voltaram_outro_dia": 8,
  "versoes": {
   "v6": 21,
   "v6,v7,v9": 1,
@@ -511,37 +506,37 @@
  },
  "abertura": {
   "app": {
-   "navegador": 74
+   "navegador": 75
   },
   "tema": {
-   "claro": 48,
+   "claro": 49,
    "escuro": 26
   },
   "toque": {
-   "True": 52,
+   "True": 53,
    "False": 22
   },
   "origem": {
-   "direto": 74
+   "direto": 75
   },
   "entrou_por": {
-   "inicio": 70,
+   "inicio": 71,
    "#cap-1": 2,
    "#letra-miuda": 1,
    "#cap-7": 1
   },
   "retorno": {
    "False": 41,
-   "True": 33
+   "True": 34
   },
   "versao": {
    "v6": 35,
    "v7": 20,
-   "v10": 18,
+   "v10": 19,
    "v9": 1
   },
   "largura": {
-   "361-430": 42,
+   "361-430": 43,
    "768+": 22,
    "431-767": 6,
    "até 360": 4
@@ -561,7 +556,7 @@
   "cap 15": 3,
   "cap 6": 5,
   "cap 10": 1,
-  "cap 2": 4,
+  "cap 2": 6,
   "cap 3": 2
  },
  "motivo_fim_de_trecho_por_capitulo": {
@@ -748,6 +743,10 @@
   "2026-11-06": {
    "leitores": 2,
    "eventos": 24
+  },
+  "2026-11-07": {
+   "leitores": 1,
+   "eventos": 4
   }
  },
  "minutos_lidos_por_hora_do_dia": {
@@ -771,11 +770,11 @@
  },
  "erros_js": {},
  "eventos_por_tipo": {
-  "capitulo_chegou": 254,
+  "capitulo_chegou": 255,
   "capitulo_tempo": 192,
   "capitulo_concluido": 127,
-  "saiu_do_app": 103,
-  "livro_aberto": 74,
+  "saiu_do_app": 105,
+  "livro_aberto": 75,
   "voltou_ao_app": 51,
   "letra_miuda_vista": 41,
   "sessao_fim": 28,
