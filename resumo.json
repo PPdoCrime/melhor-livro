@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-17 13:08 (Brasília)",
+ "atualizado": "2026-11-17 19:32 (Brasília)",
  "janela_dias": 180,
  "eventos_lidos": 1162,
  "limite_atingido": false,
@@ -14,12 +14,12 @@
    "ultimo_evento": null
   },
   "ultimas_24h": {
-   "leitores_ativos": 1,
-   "aberturas": 1,
+   "leitores_ativos": 0,
+   "aberturas": 0,
    "chegaram_em": {},
    "leram_de_verdade": {},
    "minutos_lidos": 0.0,
-   "ultimo_evento": "16/11 13:39"
+   "ultimo_evento": null
   }
  },
  "leitores_que_voltaram_outro_dia": 9,
