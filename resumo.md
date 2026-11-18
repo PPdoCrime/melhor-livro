@@ -1,13 +1,13 @@
-# Leitura do livro — 2026-11-18 08:50 (Brasília)
+# Leitura do livro — 2026-11-18 17:37 (Brasília)
 
-**41 leitores** (fora você e 5 robôs prováveis). 9 voltaram em outro dia.
+**41 leitores** (fora você e 5 robôs prováveis). 10 voltaram em outro dia.
 
 Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 13
 
 ## Agora
 
-- ultimas 3h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
-- ultimas 24h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
+- ultimas 3h: 1 leitores, 0.1 min lidos, chegaram em {'prólogo': 1, 'cap 2': 1, 'cap 3': 1, 'cap 4': 1, 'cap 8': 1}, leram de verdade –, último evento 18/11 16:18
+- ultimas 24h: 2 leitores, 20.9 min lidos, chegaram em {'prólogo': 2, 'cap 1': 1, 'cap 2': 2, 'cap 3': 2, 'cap 4': 2, 'cap 5': 1, 'cap 6': 1, 'cap 7': 1, 'cap 8': 2, 'cap 9': 1, 'cap 10': 1, 'cap 11': 1, 'cap 12': 1, 'cap 13': 1, 'cap 14': 1, 'cap 15': 1, 'cap 16': 1, 'fim': 1}, leram de verdade {'prólogo': 1, 'cap 1': 1, 'cap 2': 1, 'cap 3': 1}, último evento 18/11 16:18
 
 ## Até onde chegaram
 
@@ -15,13 +15,13 @@ Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 1
 |---|---|---|---|---|
 | prólogo | 30 | 12 | 1.8 | 4.0 |
 | cap 1 | 18 | 6 | 0.6 | 4.4 |
-| cap 2 | 12 | 4 | 1.4 | 3.8 |
-| cap 3 | 13 | 3 | 0.5 | 3.7 |
-| cap 4 | 10 | 3 | 0.4 | 5.9 |
+| cap 2 | 12 | 5 | 2.5 | 3.8 |
+| cap 3 | 13 | 4 | 3.1 | 3.7 |
+| cap 4 | 10 | 3 | 1.5 | 5.9 |
 | cap 5 | 10 | 3 | 1.1 | 3.3 |
 | cap 6 | 10 | 2 | 0.4 | 4.8 |
 | cap 7 | 8 | 2 | 0.1 | 4.4 |
-| cap 8 | 7 | 1 | 1.0 | 5.2 |
+| cap 8 | 7 | 1 | 1.1 | 5.2 |
 | cap 9 | 9 | 2 | 5.2 | 5.5 |
 | cap 10 | 7 | 2 | 1.5 | 4.0 |
 | cap 11 | 8 | 2 | 3.0 | 5.3 |
@@ -60,9 +60,9 @@ Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 1
 
 ## Confira (acerto de primeira)
 
-- cap 1: 1/2
-- cap 2: 1/1
-- cap 3: 0/2
+- cap 1: 1/3
+- cap 2: 2/2
+- cap 3: 1/3
 - cap 4: 1/2
 - cap 5: 0/1
 
