@@ -1,7 +1,7 @@
 {
- "atualizado": "2026-11-19 08:47 (Brasília)",
+ "atualizado": "2026-11-19 17:43 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 1212,
+ "eventos_lidos": 1214,
  "limite_atingido": false,
  "leitores": 41,
  "recente": {
@@ -14,36 +14,14 @@
    "ultimo_evento": null
   },
   "ultimas_24h": {
-   "leitores_ativos": 2,
-   "aberturas": 3,
+   "leitores_ativos": 1,
+   "aberturas": 1,
    "chegaram_em": {
-    "prólogo": 2,
-    "cap 1": 1,
-    "cap 2": 2,
-    "cap 3": 2,
-    "cap 4": 2,
-    "cap 5": 1,
-    "cap 6": 1,
-    "cap 7": 1,
-    "cap 8": 2,
-    "cap 9": 1,
-    "cap 10": 1,
-    "cap 11": 1,
-    "cap 12": 1,
-    "cap 13": 1,
-    "cap 14": 1,
-    "cap 15": 1,
-    "cap 16": 1,
-    "fim": 1
+    "prólogo": 1
    },
-   "leram_de_verdade": {
-    "prólogo": 1,
-    "cap 1": 1,
-    "cap 2": 1,
-    "cap 3": 1
-   },
-   "minutos_lidos": 20.9,
-   "ultimo_evento": "18/11 16:18"
+   "leram_de_verdade": {},
+   "minutos_lidos": 0.0,
+   "ultimo_evento": "19/11 11:41"
   }
  },
  "leitores_que_voltaram_outro_dia": 10,
@@ -529,40 +507,40 @@
  },
  "abertura": {
   "app": {
-   "navegador": 88
+   "navegador": 89
   },
   "tema": {
    "claro": 53,
-   "escuro": 35
+   "escuro": 36
   },
   "toque": {
    "True": 59,
-   "False": 29
+   "False": 30
   },
   "origem": {
-   "direto": 88
+   "direto": 89
   },
   "entrou_por": {
    "inicio": 76,
    "#cap-1": 7,
-   "#cap-2": 2,
+   "#cap-2": 3,
    "#letra-miuda": 1,
    "#cap-7": 1,
    "#cap-4": 1
   },
   "retorno": {
-   "True": 47,
+   "True": 48,
    "False": 41
   },
   "versao": {
    "v6": 35,
-   "v10": 32,
+   "v10": 33,
    "v7": 20,
    "v9": 1
   },
   "largura": {
    "361-430": 47,
-   "768+": 29,
+   "768+": 30,
    "431-767": 8,
    "até 360": 4
   }
@@ -799,6 +777,10 @@
   "2026-11-18": {
    "leitores": 2,
    "eventos": 50
+  },
+  "2026-11-19": {
+   "leitores": 1,
+   "eventos": 2
   }
  },
  "minutos_lidos_por_hora_do_dia": {
@@ -823,11 +805,11 @@
  },
  "erros_js": {},
  "eventos_por_tipo": {
-  "capitulo_chegou": 282,
+  "capitulo_chegou": 283,
   "capitulo_tempo": 206,
   "capitulo_concluido": 127,
   "saiu_do_app": 114,
-  "livro_aberto": 88,
+  "livro_aberto": 89,
   "voltou_ao_app": 52,
   "letra_miuda_vista": 43,
   "sessao_fim": 29,
