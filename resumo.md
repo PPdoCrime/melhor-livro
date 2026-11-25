@@ -1,19 +1,19 @@
-# Leitura do livro — 2026-11-25 05:44 (Brasília)
+# Leitura do livro — 2026-11-25 16:21 (Brasília)
 
-**42 leitores** (fora você e 5 robôs prováveis). 10 voltaram em outro dia.
+**42 leitores** (fora você e 5 robôs prováveis). 11 voltaram em outro dia.
 
-Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 14, leu_algum_trecho 13
+Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 14
 
 ## Agora
 
 - ultimas 3h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
-- ultimas 24h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
+- ultimas 24h: 1 leitores, 1.5 min lidos, chegaram em {'prólogo': 2}, leram de verdade –, último evento 25/11 10:12
 
 ## Até onde chegaram
 
 | trecho | chegaram | leram de verdade | tempo típico (min) | esperado (min) |
 |---|---|---|---|---|
-| prólogo | 31 | 12 | 1.2 | 4.0 |
+| prólogo | 31 | 13 | 2.3 | 4.0 |
 | cap 1 | 19 | 6 | 0.6 | 4.4 |
 | cap 2 | 13 | 5 | 2.5 | 3.8 |
 | cap 3 | 14 | 4 | 3.1 | 3.7 |
@@ -35,7 +35,7 @@ Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 14, leu_algum_trecho 1
 ## Por versão
 
 - v10: 11 leitores, 0 só abriram, 4 leram o prólogo, 4 leram o cap 1
-- v6: 24 leitores, 10 só abriram, 5 leram o prólogo, 1 leram o cap 1
+- v6: 24 leitores, 10 só abriram, 6 leram o prólogo, 1 leram o cap 1
 - v7: 7 leitores, 0 só abriram, 3 leram o prólogo, 1 leram o cap 1
 
 ## Onde pararam
