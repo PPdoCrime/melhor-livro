@@ -1,7 +1,7 @@
 {
- "atualizado": "2026-11-26 00:36 (Brasília)",
+ "atualizado": "2026-11-26 13:59 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 1267,
+ "eventos_lidos": 1268,
  "limite_atingido": false,
  "leitores": 42,
  "recente": {
@@ -15,13 +15,11 @@
   },
   "ultimas_24h": {
    "leitores_ativos": 1,
-   "aberturas": 2,
-   "chegaram_em": {
-    "prólogo": 2
-   },
+   "aberturas": 1,
+   "chegaram_em": {},
    "leram_de_verdade": {},
-   "minutos_lidos": 1.5,
-   "ultimo_evento": "25/11 10:12"
+   "minutos_lidos": 0.0,
+   "ultimo_evento": "26/11 10:02"
   }
  },
  "leitores_que_voltaram_outro_dia": 11,
@@ -508,40 +506,40 @@
  },
  "abertura": {
   "app": {
-   "navegador": 92
+   "navegador": 93
   },
   "tema": {
    "claro": 53,
-   "escuro": 39
+   "escuro": 40
   },
   "toque": {
    "True": 62,
-   "False": 30
+   "False": 31
   },
   "origem": {
-   "direto": 92
+   "direto": 93
   },
   "entrou_por": {
    "inicio": 79,
    "#cap-1": 7,
-   "#cap-2": 3,
+   "#cap-2": 4,
    "#letra-miuda": 1,
    "#cap-7": 1,
    "#cap-4": 1
   },
   "retorno": {
-   "True": 50,
+   "True": 51,
    "False": 42
   },
   "versao": {
-   "v10": 36,
+   "v10": 37,
    "v6": 35,
    "v7": 20,
    "v9": 1
   },
   "largura": {
    "361-430": 50,
-   "768+": 30,
+   "768+": 31,
    "431-767": 8,
    "até 360": 4
   }
@@ -790,6 +788,10 @@
   "2026-11-25": {
    "leitores": 1,
    "eventos": 11
+  },
+  "2026-11-26": {
+   "leitores": 1,
+   "eventos": 1
   }
  },
  "minutos_lidos_por_hora_do_dia": {
@@ -819,7 +821,7 @@
   "capitulo_tempo": 214,
   "capitulo_concluido": 143,
   "saiu_do_app": 117,
-  "livro_aberto": 92,
+  "livro_aberto": 93,
   "voltou_ao_app": 52,
   "letra_miuda_vista": 45,
   "sessao_fim": 29,
