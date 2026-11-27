@@ -1,26 +1,26 @@
-# Leitura do livro — 2026-11-26 13:59 (Brasília)
+# Leitura do livro — 2026-11-26 22:46 (Brasília)
 
-**42 leitores** (fora você e 5 robôs prováveis). 11 voltaram em outro dia.
+**43 leitores** (fora você e 5 robôs prováveis). 11 voltaram em outro dia.
 
-Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 14
+Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 15
 
 ## Agora
 
-- ultimas 3h: 0 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento –
-- ultimas 24h: 1 leitores, 0.0 min lidos, chegaram em –, leram de verdade –, último evento 26/11 10:02
+- ultimas 3h: 1 leitores, 8.0 min lidos, chegaram em {'prólogo': 1, 'cap 1': 1, 'cap 2': 1, 'cap 3': 1, 'cap 4': 1, 'cap 5': 1, 'cap 6': 1, 'cap 7': 1}, leram de verdade {'cap 7': 1}, último evento 26/11 22:02
+- ultimas 24h: 2 leitores, 8.0 min lidos, chegaram em {'prólogo': 1, 'cap 1': 1, 'cap 2': 1, 'cap 3': 1, 'cap 4': 1, 'cap 5': 1, 'cap 6': 1, 'cap 7': 1}, leram de verdade {'cap 7': 1}, último evento 26/11 22:02
 
 ## Até onde chegaram
 
 | trecho | chegaram | leram de verdade | tempo típico (min) | esperado (min) |
 |---|---|---|---|---|
-| prólogo | 31 | 13 | 2.3 | 4.0 |
-| cap 1 | 19 | 6 | 0.6 | 4.4 |
-| cap 2 | 13 | 5 | 2.5 | 3.8 |
-| cap 3 | 14 | 4 | 3.1 | 3.7 |
-| cap 4 | 11 | 3 | 1.5 | 5.9 |
-| cap 5 | 11 | 3 | 1.1 | 3.3 |
-| cap 6 | 11 | 2 | 0.2 | 4.8 |
-| cap 7 | 9 | 2 | 0.3 | 4.4 |
+| prólogo | 32 | 13 | 1.8 | 4.0 |
+| cap 1 | 20 | 6 | 0.6 | 4.4 |
+| cap 2 | 14 | 5 | 2.5 | 3.8 |
+| cap 3 | 15 | 4 | 3.1 | 3.7 |
+| cap 4 | 12 | 3 | 1.5 | 5.9 |
+| cap 5 | 12 | 3 | 1.1 | 3.3 |
+| cap 6 | 12 | 2 | 0.2 | 4.8 |
+| cap 7 | 10 | 3 | 0.5 | 4.4 |
 | cap 8 | 8 | 1 | 0.3 | 5.2 |
 | cap 9 | 10 | 2 | 5.2 | 5.5 |
 | cap 10 | 8 | 2 | 1.5 | 4.0 |
@@ -34,7 +34,7 @@ Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 1
 
 ## Por versão
 
-- v10: 11 leitores, 0 só abriram, 4 leram o prólogo, 4 leram o cap 1
+- v10: 12 leitores, 0 só abriram, 4 leram o prólogo, 4 leram o cap 1
 - v6: 24 leitores, 10 só abriram, 6 leram o prólogo, 1 leram o cap 1
 - v7: 7 leitores, 0 só abriram, 3 leram o prólogo, 1 leram o cap 1
 
@@ -46,13 +46,14 @@ Perfis: robo_provavel 5, so_abriu 10, so_rolou 5, folheou 13, leu_algum_trecho 1
 - cap 2: 1
 - cap 3: 2
 - cap 6: 3
+- cap 7: 1
 - cap 9: 1
 - cap 15: 1
 - fim: 8
 
 ## Convites
 
-- opiniao: 28 leitores, 17 no cap 1, 8 no cap 8, 7 no fim
+- opiniao: 29 leitores, 18 no cap 1, 8 no cap 8, 7 no fim
 - (sem convite): 10 leitores, 0 no cap 1, 0 no cap 8, 0 no fim
 - v10: 2 leitores, 1 no cap 1, 0 no cap 8, 0 no fim
 - aposta: 1 leitores, 1 no cap 1, 0 no cap 8, 1 no fim
