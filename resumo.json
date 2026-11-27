@@ -1,23 +1,21 @@
 {
- "atualizado": "2026-11-27 09:34 (Brasília)",
+ "atualizado": "2026-11-27 20:29 (Brasília)",
  "janela_dias": 180,
  "eventos_lidos": 1331,
  "limite_atingido": false,
  "leitores": 43,
  "recente": {
   "ultimas_3h": {
-   "leitores_ativos": 1,
-   "aberturas": 1,
-   "chegaram_em": {
-    "prólogo": 1
-   },
+   "leitores_ativos": 0,
+   "aberturas": 0,
+   "chegaram_em": {},
    "leram_de_verdade": {},
    "minutos_lidos": 0.0,
-   "ultimo_evento": "27/11 09:05"
+   "ultimo_evento": null
   },
   "ultimas_24h": {
-   "leitores_ativos": 2,
-   "aberturas": 4,
+   "leitores_ativos": 1,
+   "aberturas": 3,
    "chegaram_em": {
     "prólogo": 3,
     "cap 1": 2,
