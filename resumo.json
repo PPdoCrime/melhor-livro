@@ -1,7 +1,7 @@
 {
- "atualizado": "2026-11-26 22:46 (Brasília)",
+ "atualizado": "2026-11-27 09:34 (Brasília)",
  "janela_dias": 180,
- "eventos_lidos": 1313,
+ "eventos_lidos": 1331,
  "limite_atingido": false,
  "leitores": 43,
  "recente": {
@@ -9,42 +9,33 @@
    "leitores_ativos": 1,
    "aberturas": 1,
    "chegaram_em": {
-    "prólogo": 1,
-    "cap 1": 1,
-    "cap 2": 1,
-    "cap 3": 1,
-    "cap 4": 1,
-    "cap 5": 1,
-    "cap 6": 1,
-    "cap 7": 1
+    "prólogo": 1
    },
-   "leram_de_verdade": {
-    "cap 7": 1
-   },
-   "minutos_lidos": 8.0,
-   "ultimo_evento": "26/11 22:02"
+   "leram_de_verdade": {},
+   "minutos_lidos": 0.0,
+   "ultimo_evento": "27/11 09:05"
   },
   "ultimas_24h": {
    "leitores_ativos": 2,
-   "aberturas": 2,
+   "aberturas": 4,
    "chegaram_em": {
-    "prólogo": 1,
-    "cap 1": 1,
-    "cap 2": 1,
-    "cap 3": 1,
-    "cap 4": 1,
-    "cap 5": 1,
-    "cap 6": 1,
-    "cap 7": 1
+    "prólogo": 3,
+    "cap 1": 2,
+    "cap 2": 2,
+    "cap 3": 2,
+    "cap 4": 2,
+    "cap 5": 2,
+    "cap 6": 2,
+    "cap 7": 2
    },
    "leram_de_verdade": {
     "cap 7": 1
    },
    "minutos_lidos": 8.0,
-   "ultimo_evento": "26/11 22:02"
+   "ultimo_evento": "27/11 09:05"
   }
  },
- "leitores_que_voltaram_outro_dia": 11,
+ "leitores_que_voltaram_outro_dia": 12,
  "versoes": {
   "v6": 19,
   "v6,v7,v9": 1,
@@ -530,39 +521,39 @@
  },
  "abertura": {
   "app": {
-   "navegador": 94
+   "navegador": 96
   },
   "tema": {
    "claro": 53,
-   "escuro": 41
+   "escuro": 43
   },
   "toque": {
-   "True": 63,
+   "True": 65,
    "False": 31
   },
   "origem": {
-   "direto": 94
+   "direto": 96
   },
   "entrou_por": {
    "inicio": 80,
    "#cap-1": 7,
    "#cap-2": 4,
+   "#cap-7": 3,
    "#letra-miuda": 1,
-   "#cap-7": 1,
    "#cap-4": 1
   },
   "retorno": {
-   "True": 51,
+   "True": 53,
    "False": 43
   },
   "versao": {
-   "v10": 38,
+   "v10": 40,
    "v6": 35,
    "v7": 20,
    "v9": 1
   },
   "largura": {
-   "361-430": 51,
+   "361-430": 53,
    "768+": 31,
    "431-767": 8,
    "até 360": 4
@@ -572,7 +563,7 @@
   "None": 165.0,
   "apoiado": 142.8,
   "na_mao_parado": 24.2,
-  "veiculo_ou_balanco": 17.4,
+  "veiculo_ou_balanco": 17.5,
   "andando": 2.0
  },
  "saiu_do_app_por_capitulo": {
@@ -586,7 +577,7 @@
   "cap 2": 6,
   "cap 3": 2,
   "cap 8": 1,
-  "cap 7": 8
+  "cap 7": 10
  },
  "motivo_fim_de_trecho_por_capitulo": {
   "prólogo": {
@@ -625,7 +616,7 @@
   },
   "cap 7": {
    "mudou": 6,
-   "saiu_do_app": 8
+   "saiu_do_app": 9
   },
   "cap 8": {
    "mudou": 6,
@@ -660,10 +651,10 @@
   }
  },
  "sessoes": {
-  "n": 29,
+  "n": 31,
   "minutos_mediana": 6.0,
   "cap_final": {
-   "prólogo": 13,
+   "prólogo": 14,
    "capa": 5,
    "fim": 3,
    "cap 1": 2,
@@ -671,7 +662,8 @@
    "cap 15": 1,
    "cap 10": 1,
    "cap 3": 1,
-   "cap 8": 1
+   "cap 8": 1,
+   "cap 7": 1
   }
  },
  "confira": {
@@ -820,10 +812,14 @@
   "2026-11-26": {
    "leitores": 2,
    "eventos": 46
+  },
+  "2026-11-27": {
+   "leitores": 1,
+   "eventos": 18
   }
  },
  "minutos_lidos_por_hora_do_dia": {
-  "00h": 64.0,
+  "00h": 64.1,
   "01h": 31.0,
   "02h": 2.5,
   "05h": 0.7,
@@ -845,14 +841,14 @@
  },
  "erros_js": {},
  "eventos_por_tipo": {
-  "capitulo_chegou": 311,
-  "capitulo_tempo": 224,
+  "capitulo_chegou": 320,
+  "capitulo_tempo": 225,
   "capitulo_concluido": 149,
-  "saiu_do_app": 126,
-  "livro_aberto": 94,
-  "voltou_ao_app": 60,
-  "letra_miuda_vista": 46,
-  "sessao_fim": 29,
+  "saiu_do_app": 128,
+  "livro_aberto": 96,
+  "voltou_ao_app": 61,
+  "letra_miuda_vista": 47,
+  "sessao_fim": 31,
   "confira": 18,
   "aposta_prologo": 13,
   "mapa_aberto": 10,
